@@ -1,0 +1,22 @@
+.body {
+    height: 100vh;
+}
+
+.seccion-busqueda {
+    height: 40vh;
+}
+
+.seccion-preguntas {
+    height: 60vh;
+}
+
+.boton-buscar {
+    background-color: #5628cc;
+    color: white;
+    width: 8rem;
+    transition: background-color .1s ease-in;
+}
+
+.boton-buscar:hover {
+    background-color: #5e33cc;
+}

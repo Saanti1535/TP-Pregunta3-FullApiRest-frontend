@@ -1,0 +1,12 @@
+.login-container {
+    height: 100vh;
+}
+
+.app-logo {
+    font-size: 3rem;
+}
+
+.boton-primario {
+    background-color: #7640ff;
+    color: white;
+}

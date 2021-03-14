@@ -1,0 +1,19 @@
+.site-header {
+    position: fixed;
+    top: 0;
+    background-color: var(--primarioTransparente);
+}
+
+.app-logo {
+    font-size: 1.5rem;
+}
+
+.botones-header a{
+    text-decoration: none;
+    color: rgb(214, 214, 214);
+    transition: color .1s ease-in;
+}
+
+.botones-header a:hover{
+    color: rgb(255, 253, 253);
+}

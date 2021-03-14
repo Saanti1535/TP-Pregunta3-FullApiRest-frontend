@@ -1,0 +1,24 @@
+.site-footer {
+    position: fixed;
+    bottom: 0;
+    background-color: var(--primarioTransparente);
+    color: white;
+}
+
+.site-footer a {
+    color: white;
+    text-decoration: none;
+    transition: color .1s ease-in;
+}
+
+.site-footer a:hover {
+    color: rgb(221, 221, 221);
+}
+
+.site-footer i {
+    font-size: 1.2rem;
+}
+
+p {
+    margin-bottom: 0;
+}
