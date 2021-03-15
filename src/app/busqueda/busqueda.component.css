@@ -9,8 +9,6 @@
 
 .preguntas {
     gap: 2rem;
-    max-height: 20rem;
-    overflow-y: scroll;
 }
 
 .pregunta {

@@ -10,6 +10,7 @@ export class BusquedaComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    document.getElementById('elFooter').style.position='relative';
   }
 
 }
