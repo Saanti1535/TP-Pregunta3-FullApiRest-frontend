@@ -1,9 +1,3 @@
-.site-header {
-    position: fixed;
-    top: 0;
-    background-color: var(--primarioTransparente);
-}
-
 .app-logo {
     font-size: 1.5rem;
 }

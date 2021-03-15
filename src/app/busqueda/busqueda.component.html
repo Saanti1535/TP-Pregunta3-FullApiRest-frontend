@@ -1,20 +1,77 @@
 <!DOCTYPE html>
 <app-header></app-header>
 <div class="fondo-svg body w-100">
-    <main class="seccion-busqueda container d-flex flex-column justify-content-center w-100">
-        <label class="text-light" for="busqueda"><h5>Busque una pregunta</h5></label>
+    <main class="seccion-busqueda container d-flex flex-column justify-content-end w-100 text-light">
+        <label for="busqueda">
+            <h5>Busque una pregunta</h5>
+        </label>
         <div class="busqueda-input-boton d-flex w-100">
             <input class="form-control w-75" type="text" id="busqueda">
-            <div class="w-25 d-flex justify-content-center">
-                <button class="btn boton-buscar">Buscar</button>
-            </div>
-            
+            <button class="ml-3 btn btn-primary btn-sm">Buscar</button>
+        </div>
+        <div class="form-check mt-3">
+            <input class="form-check-input" type="checkbox" value="" id="solo-activas">
+            <label class="form-check-label small" for="solo-activas">
+                Sólo activas
+            </label>
         </div>
     </main>
-    <section class="seccion-preguntas container d-flex align-items-start">
-        <div class="preguntas">
-            <h5 class="text-white">Resultado de la busqueda</h5>
+    <section class="seccion-preguntas container d-flex flex-column justify-content-start mt-4">
+        <div class="header-seccion d-flex justify-content-between mb-3 align-items-center">
+            <h5 class="text-light">Resultados de la búsqueda</h5>
+            <button class="btn btn-sm btn-primary text-light">+ Nueva pregunta</button>
+        </div>
+        <div class="preguntas d-flex flex-wrap ">
+            <div class="pregunta card text-center ">
+                <div class="card-body d-flex flex-column justify-content-center">
+                    <p class="card-text">El concepto de masa efectiva es..</p>
+                    <button class="btn btn-primary btn-sm text-light">Responder</button>
+                </div>
+            </div>
+            <div class="pregunta card text-center">
+                <div class="card-body d-flex flex-column justify-content-center">
+                    <p class="card-text">¿En qué año el hombre pisó la Luna por primera vez?</p>
+                    <button class="btn btn-primary btn-sm text-light">Responder</button>
+                </div>
+            </div>
+            <div class="pregunta card text-center">
+                <div class="card-body d-flex flex-column justify-content-center">
+                    <p class="card-text">¿Qué evento se considera que desencadenó la Primera Guerra Mundial?</p>
+                    <button class="btn btn-info btn-sm text-light">Editar</button>
+                </div>
+            </div>
+            <div class="pregunta card text-center">
+                <div class="card-body d-flex flex-column justify-content-center">
+                    <p class="card-text">¿Quién fue el primer presidente de Estados Unidos?</p>
+                    <button class="btn btn-primary btn-sm text-light">Responder</button>
+                </div>
+            </div>
+            <div class="pregunta card text-center">
+                <div class="card-body d-flex flex-column justify-content-center">
+                    <p class="card-text">¿Quién era el gran ministro británico cuando la India Británica fue sacudida
+                        por la hambruna de Bengala?</p>
+                    <button class="btn btn-primary btn-sm text-light">Responder</button>
+                </div>
+            </div>
+            <div class="pregunta card text-center">
+                <div class="card-body d-flex flex-column justify-content-center">
+                    <p class="card-text">¿En qué año el hombre pisó la Luna por primera vez?</p>
+                    <button class="btn btn-primary btn-sm text-light">Responder</button>
+                </div>
+            </div>
+            <div class="pregunta card text-center">
+                <div class="card-body d-flex flex-column justify-content-center">
+                    <p class="card-text">¿Quién era el gran ministro británico cuando la India Británica fue sacudida
+                        por la hambruna de Bengala?</p>
+                    <button class="btn btn-primary btn-sm text-light">Responder</button>
+                </div>
+            </div>
+            <div class="pregunta card text-center">
+                <div class="card-body d-flex flex-column justify-content-center">
+                    <p class="card-text">¿Qué evento se considera que desencadenó la Primera Guerra Mundial?</p>
+                    <button class="btn btn-primary btn-sm text-light">Responder</button>
+                </div>
+            </div>
         </div>
     </section>
 </div>
-

@@ -1,8 +1,6 @@
 .site-footer {
     position: fixed;
     bottom: 0;
-    background-color: var(--primarioTransparente);
-    color: white;
 }
 
 .site-footer a {

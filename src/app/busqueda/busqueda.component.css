@@ -1,22 +1,26 @@
-.body {
-    height: 100vh;
-}
 
 .seccion-busqueda {
-    height: 40vh;
+    height: 30%;
 }
 
 .seccion-preguntas {
-    height: 60vh;
+    height: 70%;
 }
 
-.boton-buscar {
-    background-color: #5628cc;
-    color: white;
-    width: 8rem;
-    transition: background-color .1s ease-in;
+.preguntas {
+    gap: 2rem;
+    max-height: 20rem;
+    overflow-y: scroll;
 }
 
-.boton-buscar:hover {
-    background-color: #5e33cc;
+.pregunta {
+    background: rgba( 255, 255, 255, 0.25 );
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 4px );
+    -webkit-backdrop-filter: blur( 4px );
+    border-radius: 10px;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+    width: 30%;
+    height: 8rem;
+    font-size: .8rem;
 }
