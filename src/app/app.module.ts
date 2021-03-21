@@ -8,6 +8,8 @@ import { FooterComponent } from './footer/footer.component';
 import { BusquedaComponent } from './busqueda/busqueda.component';
 import { HeaderComponent } from './header/header.component';
 import { EditarPreguntaComponent } from './editar-pregunta/editar-pregunta.component';
+import { ResponderPreguntaComponent } from './responder-pregunta/responder-pregunta.component';
+import { PerfilComponent } from './perfil/perfil.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import { EditarPreguntaComponent } from './editar-pregunta/editar-pregunta.compo
     FooterComponent,
     BusquedaComponent,
     HeaderComponent,
-    EditarPreguntaComponent
+    EditarPreguntaComponent,
+    ResponderPreguntaComponent,
+    PerfilComponent
   ],
   imports: [
     BrowserModule,

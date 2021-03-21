@@ -1,12 +1,8 @@
 .respuestas {
-    max-height: 12rem;
     overflow-y: scroll;
+    max-height: 35rem;
 }
 
-.gap-2{
-    gap: 2rem;
-}
-
-.respuesta:hover {
+.respuesta {
     background-color: rgba(119, 0, 255, 0.158);
 }

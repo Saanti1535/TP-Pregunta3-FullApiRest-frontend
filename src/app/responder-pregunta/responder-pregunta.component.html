@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<app-header></app-header>
+<div class="container">
+    <main class="card w-100 d-flex flex-column card-grande card-fondo">
+        <div class="card-header d-flex justify-content-between">
+            <h4 class="card-title font-weight-500">¿Cual es el verdadero nombre de Freddy Mercury?</h4>
+            <p>Autor: Juan</p>
+        </div>
+        <div class="card-body cuerpo-editar-pregunta d-flex flex-column">
+            
+            <div class="respuestas">
+                <div class="respuesta d-flex justify-content-between align-items-center p-2">
+                    <label for="opcion-rta">Aca va la opcion de respuesta</label>
+                    <div class="botones">
+                        <input type="radio" name="1">
+                        <button class="btn btn-danger ml-3"><i class="far fa-trash-alt"></i></button>
+                    </div>
+                </div>
+                <div class="respuesta d-flex justify-content-between align-items-center p-2">
+                    <label for="opcion-rta">Aca va la opcion de respuesta</label>
+                    <div class="botones">
+                        <input id="opcion-rta" type="radio" name="1">
+                        <button class="btn btn-danger ml-3"><i class="far fa-trash-alt"></i></button>
+                    </div>
+                </div>
+                <div class="respuesta d-flex justify-content-between align-items-center p-2">
+                    <label for="opcion-rta">Aca va la opcion de respuesta</label>
+                    <div class="botones">
+                        <input type="radio" name="1">
+                        <button class="btn btn-danger ml-3"><i class="far fa-trash-alt"></i></button>
+                    </div>
+                </div>
+                <div class="respuesta d-flex justify-content-between align-items-center p-2">
+                    <label for="opcion-rta">Aca va la opcion de respuesta</label>
+                    <div class="botones">
+                        <input id="opcion-rta" type="radio" name="1">
+                        <button class="btn btn-danger ml-3"><i class="far fa-trash-alt"></i></button>
+                    </div>
+                </div>
+                <div class="respuesta d-flex justify-content-between align-items-center p-2">
+                    <label for="opcion-rta">Aca va la opcion de respuesta</label>
+                    <div class="botones">
+                        <input type="radio" name="1">
+                        <button class="btn btn-danger ml-3"><i class="far fa-trash-alt"></i></button>
+                    </div>
+                </div>
+                <div class="respuesta d-flex justify-content-between align-items-center p-2">
+                    <label for="opcion-rta">Aca va la opcion de respuesta</label>
+                    <div class="botones">
+                        <input id="opcion-rta" type="radio" name="1">
+                        <button class="btn btn-danger ml-3"><i class="far fa-trash-alt"></i></button>
+                    </div>
+                </div>
+                <div class="respuesta d-flex justify-content-between align-items-center p-2">
+                    <label for="opcion-rta">Aca va la opcion de respuesta</label>
+                    <div class="botones">
+                        <input type="radio" name="1">
+                        <button class="btn btn-danger ml-3"><i class="far fa-trash-alt"></i></button>
+                    </div>
+                </div>
+                
+
+
+            </div>
+            
+        </div>
+
+
+        <div class="botones-aceptar-cancelar w-100 d-flex justify-content-end p-2">
+            <button class="btn boton-primario" (click)="aceptar()">Aceptar</button>
+            <button class="btn btn-primary ml-3" (click)="cancelar()">Cancelar</button>
+        </div>
+    </main>
+</div>

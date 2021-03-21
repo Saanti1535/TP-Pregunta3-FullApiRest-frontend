@@ -18,4 +18,8 @@ export class BusquedaComponent implements OnInit {
     this.router.navigate(['/editar-pregunta'])
   }
 
+  responder(): void {
+    this.router.navigate(['/responder-pregunta'])
+  }
+
 }

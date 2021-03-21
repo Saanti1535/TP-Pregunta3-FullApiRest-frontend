@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <app-header></app-header>
 <div class="container">
-    <main class="card w-100 d-flex flex-column editar-pregunta card-fondo">
+    <main class="card w-100 d-flex flex-column card-grande card-fondo">
         <div class="card-header d-flex justify-content-between">
-            <h5 class="card-title">¿Cual es el verdadero nombre de Freddy Mercury?</h5>
+            <h4 class="card-title font-weight-500">¿Cual es el verdadero nombre de Freddy Mercury?</h4>
             <p>Autor: Juan</p>
         </div>
         <div class="card-body cuerpo-editar-pregunta d-flex flex-column justify-content-around">
             <div class="select-tipo-pregunta">
-                <label for="tipo-pregunta"><h4>Tipo de pregunta</h4></label>
+                <label for="tipo-pregunta"><h6>Tipo de pregunta</h6></label>
                 <select class="form-control">
                     <option value="">opc2</option>
                     <option value="">opc2</option>
@@ -43,7 +43,7 @@
             </div>
 
             <div class="nueva-opcion">
-                <label for="nueva-opcion"><h5>Nueva opcion</h5></label>
+                <label for="nueva-opcion"><h6>Nueva opcion</h6></label>
                 <div class="gap-2 d-flex align-items-center">
                     <input class="form-control w-50" id="nueva-opcion" type="text">
                     <button class="btn boton-primario">Agregar</button>
@@ -55,8 +55,8 @@
 
 
         <div class="botones-aceptar-cancelar w-100 d-flex justify-content-end p-2">
-            <button class="btn boton-primario">Aceptar</button>
-            <button class="btn btn-primary ml-3">Cancelar</button>
+            <button class="btn boton-primario" (click)="aceptar()">Aceptar</button>
+            <button class="btn btn-primary ml-3" (click)="cancelar()">Cancelar</button>
         </div>
     </main>
 </div>
