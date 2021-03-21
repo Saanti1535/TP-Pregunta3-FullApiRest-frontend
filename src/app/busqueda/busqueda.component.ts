@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-busqueda',
@@ -7,10 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BusquedaComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
     document.getElementById('elFooter').style.position='relative';
+  }
+
+  editar(): void {
+    this.router.navigate(['/editar-pregunta'])
   }
 
 }
