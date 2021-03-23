@@ -28,6 +28,21 @@ export class UsuarioService {
     this.usuarioLogueado = Usuario.fromJson(usuarioJson)
   }
 
+  async buscarUsuarioPorId(id: number): Promise<void> {
+    let usuario = await this.http.get<Usuario>(REST_SERVER_URL+  '/perfil/' + id).toPromise()
+    .catch((err: HttpErrorResponse) => {   
+      this.mostrarError(err)
+    })
+    this.usuarioLogueado = Usuario.fromJson(usuario)
+  }
+  
+  async actualizarUsuario(usuario: Usuario) {
+    await this.http.put(REST_SERVER_URL+  '/perfil/' + usuario.id, usuario.toJson()).toPromise()
+    .catch((err: HttpErrorResponse) => {   
+      this.mostrarError(err)
+    })
+  }
+  
   mostrarError(err: HttpErrorResponse){
     this.hayError =true
     this.codigoError=err.status

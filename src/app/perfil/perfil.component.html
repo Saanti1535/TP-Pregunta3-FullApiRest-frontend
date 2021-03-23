@@ -3,8 +3,34 @@
 <div class="container">
     <main class="card w-100 d-flex flex-column card-grande card-fondo">
         <div class="card-header d-flex justify-content-between">
-            <h4 class="card-title font-weight-500">Juan Perez</h4>
-            <p>150 puntos</p>
+            <h4 class="card-title font-weight-500">{{nombreUsuarioActual}}</h4>
+            <h4> {{puntosUsuarioActual}} Puntos</h4>
         </div>
     </main>
+
+
+<!-- RETOCAR CLASES CSS -->
+    <section class="">
+        <div class="">
+            <div class="">
+                <label class="">Nombre </label>
+                <input class="" [(ngModel)] = "this.usuario.nombre" value="{{this.usuario.nombre}}" type="string">
+            </div>
+            <div class="">
+                <label class="">Apellido </label>
+                <input class="" [(ngModel)] = "this.usuario.apellido" value="{{this.usuario.apellido}}" type="string">
+            </div>
+            <div class="">
+                <label class="">Nacimiento </label>
+                <input class="" type="date" value="{{nacimientoUsuarioActual | date:'yyyy-MM-dd'}}" (change)="cambiarFechaNacimiento()" id="fechaDeNacimiento">
+            </div>
+        </div>
+    </section>
+
+    <div class="">
+        <button class="" (click)="aceptar()">Aceptar</button>
+        <button class="" (click)="cancelar()">Cancelar</button>
+    </div>
+<!-- RETOCAR CLASES CSS -->
+
 </div>
