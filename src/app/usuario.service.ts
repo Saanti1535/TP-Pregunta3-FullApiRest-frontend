@@ -43,10 +43,18 @@ export class UsuarioService {
       })
   }
 
+  ingresarComoInvitado(){
+    console.log("hola aca estoy")
+    this.usuarioLogueado = new Usuario(1, "Juan", "1234")
+    this.usuarioLogueado.apellido = "perez"
+    this.usuarioLogueado.puntaje = 500
+    console.log(this.usuarioLogueado)
+  }
+
   mostrarError(err: HttpErrorResponse) {
     this.hayError = true
     this.codigoError = err.status
-    this.descripcionError = err.error
-    window.alert(err.status + '' + err.message)
+    this.descripcionError = err.message
+    window.alert(err.status + ' ' + err.message)
   }
 }

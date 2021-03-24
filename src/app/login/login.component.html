@@ -1,12 +1,20 @@
 <!DOCTYPE html>
+
 <main class="login-container fondo-svg d-flex justify-content-center align-items-center">
+    <div *ngIf="hayError" class="alert alert-danger alert-dismissible fade show animate__animated animate__fadeIn" data-dismiss="alert" aria-label="Close" role="alert">
+        {{this.mensajeDeError}}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="cerrarAlertError()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
     <div>
         <form class="card card-fondo p-4 text-center" action="#">
             <span class="app-logo">Pregunta3<span>!</span></span>
             <p class="h5 mt-3 mb-2">Iniciar sesión</p>
             <input name="username" [(ngModel)]="contenidoInputUsuario" type="text" class="form-control mb-4" placeholder="Usuario">
             <input name="password" [(ngModel)]="contenidoInputContrasenia" type="password" class="form-control mb-4" placeholder="Contraseña">
-            <button class="btn btn-block boton-primario" type="submit" (click)="ingresar()">Ingresar</button>
+            <button class="btn btn-block boton-primario mb-3" type="submit" (click)="login()">Ingresar</button>
+            <span class="ingresar-invitado" (click)="ingresarComoInvitado()">Ingresar como invitado</span>
         </form>
     </div>
 </main>

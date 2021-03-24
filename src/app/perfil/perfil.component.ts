@@ -13,17 +13,14 @@ export class PerfilComponent implements OnInit {
 
   constructor(public usuariosService: UsuarioService, private router: Router) { }
   ngOnInit(): void { }
-
-
   
   get nombreUsuarioActual(): string {
-    // return this.usuario.nombre
-    return "rodolfo"
+    console.log(this.usuariosService.usuarioLogueado)
+    return this.usuario.nombre
   }
 
   get puntosUsuarioActual(): number {
-    // return this.usuario.puntaje
-    return 200
+    return this.usuario.puntaje
   }
 
   get nacimientoUsuarioActual(): Date{

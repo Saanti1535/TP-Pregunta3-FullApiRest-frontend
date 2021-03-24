@@ -10,26 +10,45 @@ import { UsuarioService } from '../usuario.service';
 
 export class LoginComponent implements OnInit {
   contenidoInputUsuario: string = ''
-  contenidoInputContrasenia: string= '' 
+  contenidoInputContrasenia: string = ''
+  hayError = false
+  mensajeDeError = ''
 
   constructor(private router: Router, public usuarioService: UsuarioService) { }
 
   ngOnInit(): void {
-    document.getElementById('elFooter').style.position='fixed';
+    document.getElementById('elFooter').style.position = 'fixed';
   }
 
-  /*async ingresar(){
-    try{
+  async ingresar() {
+    try {
       await this.usuarioService.asignarUsuario(this.contenidoInputUsuario, this.contenidoInputContrasenia)
       this.router.navigate(['/busqueda'])
-    }catch{
-
+    } catch(e) {
+        this.setError(this.usuarioService.descripcionError)
     }
-    
-  }*/
+  }
 
-  ingresar(){
+  login(): void {
+    this.camposVacios() ? this.setError("Ingrese su usuario y contraseña") : this.ingresar()
+  }
+
+  ingresarComoInvitado() {
+    this.usuarioService.ingresarComoInvitado()
     this.router.navigate(['/busqueda'])
+  }
+
+  camposVacios(): boolean {
+    return (this.contenidoInputContrasenia === '' || this.contenidoInputUsuario === '')
+  }
+
+  setError(mensaje: string): void {
+    this.mensajeDeError = mensaje
+    this.hayError = true
+  }
+
+  cerrarAlertError(): void {
+    this.hayError = false
   }
 
 }
