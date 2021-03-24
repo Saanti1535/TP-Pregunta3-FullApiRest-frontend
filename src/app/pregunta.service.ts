@@ -26,6 +26,7 @@ export class PreguntaService {
   //Ademas para tener en cuenta posibles nuevas preguntas
   async getPreguntasActivas(): Promise<Pregunta[]> {
     const preguntas = await this.http.get<Pregunta[]>(REST_SERVER_URL + '/busqueda/preguntasActivas').toPromise()
+    console.log(preguntas)
     return this.listaDePreguntas = preguntas.map( (pregunta) => Pregunta.fromJSON(pregunta) )
   }
 
