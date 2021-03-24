@@ -15,6 +15,7 @@ import { ResponderPreguntaComponent } from './responder-pregunta/responder-pregu
 import { PerfilComponent } from './perfil/perfil.component';
 import { HttpClientModule } from "@angular/common/http";
 import { UsuarioService } from './usuario.service';
+import { CardPreguntaComponent } from './card-pregunta/card-pregunta.component';
 
 
 
@@ -27,7 +28,8 @@ import { UsuarioService } from './usuario.service';
     HeaderComponent,
     EditarPreguntaComponent,
     ResponderPreguntaComponent,
-    PerfilComponent
+    PerfilComponent,
+    CardPreguntaComponent
   ],
   imports: [
     BrowserModule,

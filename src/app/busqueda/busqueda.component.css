@@ -9,14 +9,13 @@
 
 .preguntas {
     gap: 2rem;
-}
-
-.pregunta {
-    width: 30%;
-    height: 8rem;
-    font-size: .8rem;
+    display: flex;
 }
 
 .boton-buscar {
     width: 8rem;
+}
+
+.contenedorCradReceta{
+    display: inline-block;
 }
