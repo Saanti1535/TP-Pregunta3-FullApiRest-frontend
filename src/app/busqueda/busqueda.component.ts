@@ -9,12 +9,13 @@ import { PreguntaService } from '../pregunta.service';
   styleUrls: ['./busqueda.component.css']
 })
 export class BusquedaComponent implements OnInit {
+  checkBoxActivado: boolean = false
 
   constructor(private router: Router, public preguntaService: PreguntaService) { }
 
   ngOnInit(): void {
     document.getElementById('elFooter').style.position = 'relative';
-    this.preguntaService.traerPreguntas()
+    this.recargarPreguntas()
   }
 
   editar(): void {
@@ -23,6 +24,15 @@ export class BusquedaComponent implements OnInit {
 
   get preguntas(): Pregunta[] {
     return this.preguntaService.listaDePreguntas
+  }
+
+  async buscar(busqueda: HTMLInputElement){
+    this.preguntaService.filtrarPorPregunta(busqueda.value)   
+  }
+
+  async recargarPreguntas(){
+    this.preguntaService.soloActivas = this.checkBoxActivado
+    this.preguntaService.cargarPreguntas()
   }
 
 

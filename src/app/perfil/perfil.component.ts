@@ -34,12 +34,12 @@ export class PerfilComponent implements OnInit {
   }
 
   cancelar() {
-    this.router.navigate(['/home'])
+    this.router.navigate(['/busqueda'])
   }
 
   async aceptar() {
     await this.usuariosService.actualizarUsuario(this.usuario)
-    this.router.navigate(['/home'])
+    this.router.navigate(['/busqueda'])
   }
 
 }

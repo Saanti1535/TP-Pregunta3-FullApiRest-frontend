@@ -6,13 +6,13 @@
             <h5 class="font-weight-600">Busque una pregunta</h5>
         </label>
         <div class="ml-4 busqueda-input-boton d-flex justify-content-center w-100">
-            <input class="form-control w-75" type="text" id="busqueda">
+            <input class="form-control w-75" type="text" id="busqueda" #pregunta>
             <div class="w-25 d-flex justify-content-center">
-                <button class="btn boton-primario btn-sm boton-buscar">Buscar</button>
+                <button class="btn boton-primario btn-sm boton-buscar" (click)="buscar(pregunta)">Buscar</button>
             </div>
         </div>
         <div class="form-check mt-3">
-            <input class="form-check-input" type="checkbox" value="" id="solo-activas">
+            <input class="form-check-input" type="checkbox" id="solo-activas" [(ngModel)]="checkBoxActivado" (change)="recargarPreguntas()">
             <label class="form-check-label small" for="solo-activas">
                 Sólo activas
             </label>
