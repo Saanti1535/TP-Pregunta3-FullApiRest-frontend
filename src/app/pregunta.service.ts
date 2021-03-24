@@ -7,8 +7,8 @@ import { REST_SERVER_URL } from './configuration';
   providedIn: 'root'
 })
 export class PreguntaService {
-
   listaDePreguntas: Pregunta[] 
+  preguntaActual: Pregunta // para que lo vea el responder/editar pregunta.component
   soloActivas: boolean = false;
 
   constructor(private http: HttpClient) { }
@@ -38,6 +38,11 @@ export class PreguntaService {
     } else {
       this.cargarPreguntas()
     }
+  }
+
+  async getPreguntaPorId(id: number){
+    const pregunta = await this.http.get<Pregunta>(REST_SERVER_URL + '/busqueda/pregunta/' + id).toPromise()
+    this.preguntaActual = Pregunta.fromJSON(pregunta)
   }
 
 }

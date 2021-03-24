@@ -3,13 +3,19 @@
 <div class="container">
     <main class="card w-100 d-flex flex-column card-grande card-fondo">
         <div class="card-header d-flex justify-content-between">
-            <h4 class="card-title font-weight-500">¿Cual es el verdadero nombre de Freddy Mercury?</h4>
-            <p>Autor: Juan</p>
+            <h4 class="card-title font-weight-500">{{this.pregunta.pregunta}}</h4>
+            <p>{{this.pregunta.autor}}</p>
         </div>
         <div class="card-body cuerpo-editar-pregunta d-flex flex-column">
             
             <div class="respuestas">
-                <div class="respuesta d-flex justify-content-between align-items-center p-2">
+                <div *ngFor="let opcion of opciones">
+                    <app-card-opcion
+                    [opcion]="opcion"
+                    >
+                    </app-card-opcion>
+                </div> 
+                <!-- <div class="respuesta d-flex justify-content-between align-items-center p-2">
                     <label for="opcion-rta">Aca va la opcion de respuesta</label>
                     <div class="botones">
                         <input type="radio" name="1">
@@ -57,10 +63,7 @@
                         <input type="radio" name="1">
                         <button class="btn btn-danger ml-3"><i class="far fa-trash-alt"></i></button>
                     </div>
-                </div>
-                
-
-
+                </div> -->
             </div>
             
         </div>
