@@ -15,6 +15,7 @@ export class LoginComponent implements OnInit {
   constructor(private router: Router, public usuarioService: UsuarioService) { }
 
   ngOnInit(): void {
+    document.getElementById('elFooter').style.position='fixed';
   }
 
   /*async ingresar(){

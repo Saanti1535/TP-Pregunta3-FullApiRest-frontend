@@ -6,31 +6,97 @@
             <h4 class="card-title font-weight-500">{{nombreUsuarioActual}}</h4>
             <h4> {{puntosUsuarioActual}} Puntos</h4>
         </div>
-    </main>
-
-
-<!-- RETOCAR CLASES CSS -->
-    <section class="">
-        <div class="">
-            <div class="">
-                <label class="">Nombre </label>
-                <input class="" [(ngModel)] = "this.usuario.nombre" value="{{this.usuario.nombre}}" type="string">
+        <div class="d-flex flex-column justify-content-around gap-2 card-body font-weight-500 pl-5 pr-5">
+            <div class="d-flex justify-content-between ">
+                <div class="">
+                    <label for="nombre">Nombre </label>
+                    <input id="nombre" class="form-control" [(ngModel)]="this.usuario.nombre"
+                        value="{{this.usuario.nombre}}" type="string">
+                </div>
+                <div class="">
+                    <label for="apellido">Apellido </label>
+                    <input id="apellido" class="form-control" [(ngModel)]="this.usuario.apellido"
+                        value="{{this.usuario.apellido}}" type="string">
+                </div>
+                <div class="">
+                    <label for="nacimiento">Nacimiento </label>
+                    <input id="nacimiento" class="form-control" type="date"
+                        value="{{nacimientoUsuarioActual | date:'yyyy-MM-dd'}}" (change)="cambiarFechaNacimiento()"
+                        id="fechaDeNacimiento">
+                </div>
             </div>
-            <div class="">
-                <label class="">Apellido </label>
-                <input class="" [(ngModel)] = "this.usuario.apellido" value="{{this.usuario.apellido}}" type="string">
+            <div class="preguntas-respondidas">
+                <label for="">Preguntas respondidas</label>
+                <div class="tabla-preguntas">
+                    <table class="table borderless">
+                        <thead>
+                            <tr>
+                                <th scope="col">Pregunta</th>
+                                <th scope="col">Fecha de respuesta</th>
+                                <th scope="col">Puntos</th>
+                            </tr>
+                        </thead>
+                        <tbody class="">
+                            <tr>
+                                <td>Mark</td>
+                                <td>Otto</td>
+                                <td>@mdo</td>
+                            </tr>
+                            <tr>
+                                <td>Jacob</td>
+                                <td>Thornton</td>
+                                <td>@fat</td>
+                            </tr>
+                            <tr>
+                                <td>Larry</td>
+                                <td>the Bird</td>
+                                <td>@twitter</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
             </div>
-            <div class="">
-                <label class="">Nacimiento </label>
-                <input class="" type="date" value="{{nacimientoUsuarioActual | date:'yyyy-MM-dd'}}" (change)="cambiarFechaNacimiento()" id="fechaDeNacimiento">
+            <div class="lista-de-amigos">
+                <button class="btn boton-primario" data-toggle="modal" data-target="#exampleModalScrollable">Lista de
+                    amigos</button>
+            </div>
+            <div class="w-100 d-flex justify-content-end">
+                <button class="btn boton-primario mr-3" (click)="aceptar()">Aceptar</button>
+                <button class="btn btn-primary" (click)="cancelar()">Cancelar</button>
             </div>
         </div>
-    </section>
 
-    <div class="">
-        <button class="" (click)="aceptar()">Aceptar</button>
-        <button class="" (click)="cancelar()">Cancelar</button>
+
+
+    </main>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header navbar-fondo">
+                <h5 class="modal-title" id="exampleModalScrollableTitle">Lista de amigos</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body p-0">
+                <table class="table borderless table-hover">
+                    <tbody class="">
+                        <tr>
+                            <td>Mark</td>
+                        </tr>
+                        <tr>
+                            <td>Jacob</td>
+                        </tr>
+                        <tr>
+                            <td>Larry</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
-<!-- RETOCAR CLASES CSS -->
-
 </div>

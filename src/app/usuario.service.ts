@@ -9,44 +9,44 @@ import { Usuario } from 'src/dominio/usuario';
 })
 export class UsuarioService {
   /*Varibales para cuando hay un error en el back*/
-  hayError:boolean = false
-  codigoError:number
-  descripcionError:string
+  hayError: boolean = false
+  codigoError: number
+  descripcionError: string
 
-  usuarioLogueado : Usuario
+  usuarioLogueado: Usuario
 
-  constructor(private http: HttpClient) {  }
+  constructor(private http: HttpClient) { }
 
   //Metodos para comunciarse con el server
   //rename: login
   //que valide el back (user/pass)
   async asignarUsuario(unNombreDeUsuario: string, unaContrasenia: string): Promise<void> {
-    let usuarioJson = await this.http.post<Usuario>(REST_SERVER_URL+  '/login/' + unNombreDeUsuario, JSON.stringify({password: unaContrasenia})).toPromise()
-    .catch((err: HttpErrorResponse) => {   
-          this.mostrarError(err)
+    let usuarioJson = await this.http.post<Usuario>(REST_SERVER_URL + '/login/' + unNombreDeUsuario, JSON.stringify({ password: unaContrasenia })).toPromise()
+      .catch((err: HttpErrorResponse) => {
+        this.mostrarError(err)
       })
     this.usuarioLogueado = Usuario.fromJson(usuarioJson)
   }
 
   async buscarUsuarioPorId(id: number): Promise<void> {
-    let usuario = await this.http.get<Usuario>(REST_SERVER_URL+  '/perfil/' + id).toPromise()
-    .catch((err: HttpErrorResponse) => {   
-      this.mostrarError(err)
-    })
+    let usuario = await this.http.get<Usuario>(REST_SERVER_URL + '/perfil/' + id).toPromise()
+      .catch((err: HttpErrorResponse) => {
+        this.mostrarError(err)
+      })
     this.usuarioLogueado = Usuario.fromJson(usuario)
   }
-  
+
   async actualizarUsuario(usuario: Usuario) {
-    await this.http.put(REST_SERVER_URL+  '/perfil/' + usuario.id, usuario.toJson()).toPromise()
-    .catch((err: HttpErrorResponse) => {   
-      this.mostrarError(err)
-    })
+    await this.http.put(REST_SERVER_URL + '/perfil/' + usuario.id, usuario.toJson()).toPromise()
+      .catch((err: HttpErrorResponse) => {
+        this.mostrarError(err)
+      })
   }
-  
-  mostrarError(err: HttpErrorResponse){
-    this.hayError =true
-    this.codigoError=err.status
-    this.descripcionError=err.error
+
+  mostrarError(err: HttpErrorResponse) {
+    this.hayError = true
+    this.codigoError = err.status
+    this.descripcionError = err.error
     window.alert(err.status + '' + err.message)
   }
 }

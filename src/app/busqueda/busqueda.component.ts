@@ -11,7 +11,6 @@ export class BusquedaComponent implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit(): void {
-    document.getElementById('elFooter').style.position='relative';
   }
 
   editar(): void {
