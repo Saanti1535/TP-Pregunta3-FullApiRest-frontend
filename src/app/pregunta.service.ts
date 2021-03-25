@@ -60,5 +60,12 @@ export class PreguntaService {
     return resultado
   }
 
+  async actualizarPregunta(pregunta: Pregunta) {
+    console.log(pregunta)
+    await this.http.put(REST_SERVER_URL + '/busqueda/pregunta/' + pregunta.id, pregunta.toJSON()).toPromise()
+  }
+
+  
+
 
 }

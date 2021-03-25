@@ -27,7 +27,6 @@ export class CardOpcionComponent implements OnInit {
   borrarOpcion(){
     var index = this.pregunta.opciones.indexOf(this.opcion)
     this.pregunta.opciones.splice(index, 1)
-    //tirar put al back 
   }
 
 }

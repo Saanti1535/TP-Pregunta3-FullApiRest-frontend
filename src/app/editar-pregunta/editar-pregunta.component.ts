@@ -25,7 +25,6 @@ export class EditarPreguntaComponent implements OnInit {
     const nuevaOpcion=$('#nueva-opcion').val().toString()
     if(nuevaOpcion!=''){
       this.pregunta.opciones.push(nuevaOpcion)
-      //tirar put al back
     } else{
       window.alert('Debe escribir algo para poder agregar una opcion nueva')
     }  
@@ -33,6 +32,7 @@ export class EditarPreguntaComponent implements OnInit {
   }
   
   async aceptar() {
+    await this.preguntaService.actualizarPregunta(this.pregunta)
     this.router.navigate(['/busqueda'])
   }
 
