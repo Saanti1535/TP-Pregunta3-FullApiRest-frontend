@@ -12,7 +12,7 @@ export class UsuarioService {
   hayError: boolean = false
   codigoError: number
   descripcionError: string
-
+  usuariosParaAgregar
   usuarioLogueado: Usuario
 
   constructor(private http: HttpClient) { }
@@ -43,12 +43,18 @@ export class UsuarioService {
       })
   }
 
+  async buscarUsuariosPorUsername(){
+    let usuarios = await this.http.get<string[]>(REST_SERVER_URL + '/usuarios/').toPromise()
+    .catch((err: HttpErrorResponse) => {
+      this.mostrarError(err)
+    })
+    this.usuariosParaAgregar = usuarios
+  }
+
   ingresarComoInvitado(){
-    console.log("hola aca estoy")
     this.usuarioLogueado = new Usuario(1, "Juan", "1234")
     this.usuarioLogueado.apellido = "perez"
     this.usuarioLogueado.puntaje = 500
-    console.log(this.usuarioLogueado)
   }
 
   mostrarError(err: HttpErrorResponse) {

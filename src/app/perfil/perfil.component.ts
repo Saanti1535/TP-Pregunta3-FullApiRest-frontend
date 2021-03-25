@@ -10,20 +10,20 @@ import { Usuario } from 'src/dominio/usuario';
 })
 export class PerfilComponent implements OnInit {
   usuario: Usuario = this.usuariosService.usuarioLogueado
+  nombre = this.usuariosService.usuarioLogueado.nombre
+  resultadoBusquedaAmigos
+  modoVerAmigos = true
+  modoAgregarAmigos = false
 
   constructor(public usuariosService: UsuarioService, private router: Router) { }
-  ngOnInit(): void { }
-  
-  get nombreUsuarioActual(): string {
-    console.log(this.usuariosService.usuarioLogueado)
-    return this.usuario.nombre
+  ngOnInit(): void {
   }
 
   get puntosUsuarioActual(): number {
     return this.usuario.puntaje
   }
 
-  get nacimientoUsuarioActual(): Date{
+  get nacimientoUsuarioActual(): Date {
     return this.usuario.fechaNacimiento
   }
 
@@ -40,6 +40,27 @@ export class PerfilComponent implements OnInit {
   async aceptar() {
     await this.usuariosService.actualizarUsuario(this.usuario)
     this.router.navigate(['/busqueda'])
+  }
+
+  async verSolapaAgregarAmigos() {
+    this.modoVerAmigos = false
+    this.modoAgregarAmigos = true
+    await this.usuariosService.buscarUsuariosPorUsername()
+    this.resultadoBusquedaAmigos = this.usuariosService.usuariosParaAgregar.filter(usuario => usuario.nombre !== this.usuariosService.usuarioLogueado.nombre)
+  }
+
+  async verSolapaMisAmigos() {
+    this.modoAgregarAmigos = false
+    this.modoVerAmigos = true
+  }
+
+  async filtrarPorUsername(username) {
+    await this.usuariosService.buscarUsuariosPorUsername()
+    this.resultadoBusquedaAmigos = this.usuariosService.usuariosParaAgregar.filter(user => user.match(username))
+  }
+
+  agregarAmigo(amigo) {
+    this.usuariosService.usuarioLogueado.amigos.push(amigo)
   }
 
 }
