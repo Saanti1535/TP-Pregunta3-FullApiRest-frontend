@@ -2,6 +2,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Pregunta } from 'src/dominio/pregunta';
 import { REST_SERVER_URL } from './configuration';
+import { UsuarioService } from './usuario.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class PreguntaService {
   preguntaActual: Pregunta // para que lo vea el responder/editar pregunta.component
   soloActivas: boolean = false;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, public usuarioService: UsuarioService) { }
 
   async cargarPreguntas() {
     !this.soloActivas ? this.listaDePreguntas = await this.getTodasLasPreguntas() : this.listaDePreguntas = await this.getPreguntasActivas()  
@@ -51,6 +52,7 @@ export class PreguntaService {
       .catch((err: HttpErrorResponse) => {
         if( err.status == 200){
           resultado=err.error.text
+          this.usuarioService.buscarUsuarioPorId(idUsuario) // El back actualizó info del usuario, acá la traemos 
         }else{
           resultado='Ocurrió un error'
         }

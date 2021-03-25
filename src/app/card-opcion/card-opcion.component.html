@@ -2,6 +2,6 @@
   <label>{{this.opcion}}</label>
   <div class="botones">
       <input type="radio" name="opciones" value="{{this.opcion}}">
-      <button *ngIf="esEdicion" class="btn btn-danger ml-3"><i class="far fa-trash-alt"></i></button>
+      <button *ngIf="esEdicion" class="btn btn-danger ml-3" (click)="borrarOpcion()"><i class="far fa-trash-alt"></i></button>
   </div>
 </div>
