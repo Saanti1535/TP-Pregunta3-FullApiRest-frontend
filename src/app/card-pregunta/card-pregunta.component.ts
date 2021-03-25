@@ -28,7 +28,6 @@ export class CardPreguntaComponent implements OnInit {
   async responder(): Promise<void> {
     await this.preguntaService.getPreguntaPorId(this.pregunta.id)
     this.router.navigate(['/responder-pregunta'])
-    // this.router.navigate(['/responder-pregunta'])
   }
 
   async editar(){

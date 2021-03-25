@@ -4,16 +4,15 @@
     <main class="card w-100 d-flex flex-column card-grande card-fondo">
         <div class="card-header d-flex justify-content-between">
             <h4 class="card-title font-weight-500">{{this.pregunta.pregunta}}</h4>
-            <p>{{this.pregunta.nombreAutor}}</p>
+            <p>Autor/a: {{this.pregunta.nombreAutor}}</p>
         </div>
         <div class="card-body cuerpo-editar-pregunta d-flex flex-column justify-content-around">
             <div class="select-tipo-pregunta">
                 <label for="tipo-pregunta"><h6>Tipo de pregunta</h6></label>
-                <select class="form-control" disabled>
-                    <option value="">opc2</option>
-                    <option value="">opc2</option>
-                    <option value="">opc2</option>
-                    <option value="">opc2</option>
+                <select class="form-control">
+                    <option value="">Simple</option>
+                    <option value="">De riesgo</option>
+                    <option value="">Solidaria</option>
                 </select>
             </div>
             
