@@ -7,11 +7,17 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class CardOpcionComponent implements OnInit {
   @Input() opcion: string 
-  
+  esEdicion: boolean = false
   constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.revisarSiEsEdicion()
+  }
 
-  
+  revisarSiEsEdicion(){
+    if(window.location.href.indexOf('editar')!=-1) {
+      this.esEdicion = true;
+  }
+  }
 
 }

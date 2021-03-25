@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Pregunta } from 'src/dominio/pregunta';
 import { PreguntaService } from '../pregunta.service';
+import { UsuarioService } from '../usuario.service';
 
 @Component({
   selector: 'app-card-pregunta',
@@ -10,16 +11,29 @@ import { PreguntaService } from '../pregunta.service';
 })
 export class CardPreguntaComponent implements OnInit {
   @Input() pregunta: Pregunta 
+  esDeUsuario: boolean = false
 
-  constructor(private router: Router, public preguntaService: PreguntaService) { }
+  constructor(private router: Router, public preguntaService: PreguntaService, public usuarioService: UsuarioService) { }
 
   ngOnInit(): void {
+    this.esDeUsuarioLogueado()
   }
 
-  async responder(unaPregunta: Pregunta): Promise<void> {
+  esDeUsuarioLogueado(){
+    if(this.pregunta.idAutor == this.usuarioService.usuarioLogueado.id){
+      this.esDeUsuario = true
+    }
+  }
+
+  async responder(): Promise<void> {
     await this.preguntaService.getPreguntaPorId(this.pregunta.id)
     this.router.navigate(['/responder-pregunta'])
     // this.router.navigate(['/responder-pregunta'])
+  }
+
+  async editar(){
+    await this.preguntaService.getPreguntaPorId(this.pregunta.id)
+    this.router.navigate(['/editar-pregunta'])
   }
 
 }

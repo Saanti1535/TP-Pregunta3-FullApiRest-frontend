@@ -13,7 +13,7 @@ export class UsuarioService {
   codigoError: number
   descripcionError: string
 
-  usuarioLogueado: Usuario
+  usuarioLogueado: Usuario = new Usuario(0, "Juan", "1234")
 
   constructor(private http: HttpClient) { }
 
@@ -45,7 +45,7 @@ export class UsuarioService {
 
   ingresarComoInvitado(){
     console.log("hola aca estoy")
-    this.usuarioLogueado = new Usuario(1, "Juan", "1234")
+    this.usuarioLogueado = new Usuario(0, "Juan", "1234")
     this.usuarioLogueado.apellido = "perez"
     this.usuarioLogueado.puntaje = 500
     console.log(this.usuarioLogueado)

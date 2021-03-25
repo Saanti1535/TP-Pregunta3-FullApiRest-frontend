@@ -3,13 +3,13 @@
 <div class="container">
     <main class="card w-100 d-flex flex-column card-grande card-fondo">
         <div class="card-header d-flex justify-content-between">
-            <h4 class="card-title font-weight-500">¿Cual es el verdadero nombre de Freddy Mercury?</h4>
-            <p>Autor: Juan</p>
+            <h4 class="card-title font-weight-500">{{this.pregunta.pregunta}}</h4>
+            <p>{{this.pregunta.nombreAutor}}</p>
         </div>
         <div class="card-body cuerpo-editar-pregunta d-flex flex-column justify-content-around">
             <div class="select-tipo-pregunta">
                 <label for="tipo-pregunta"><h6>Tipo de pregunta</h6></label>
-                <select class="form-control">
+                <select class="form-control" disabled>
                     <option value="">opc2</option>
                     <option value="">opc2</option>
                     <option value="">opc2</option>
@@ -18,35 +18,19 @@
             </div>
             
             <div class="respuestas">
-                <div class="respuesta d-flex justify-content-between align-items-center">
-                    <p>Texto de la respuesta</p>
-                    <div class="botones">
-                        <input type="radio" name="1">
-                        <button class="btn btn-danger ml-3"><i class="far fa-trash-alt"></i></button>
-                    </div>
-                </div>
-                <div class="respuesta d-flex justify-content-between align-items-center">
-                    <p>Texto de la respuesta</p>
-                    <div class="botones">
-                        <input type="radio" name="1">
-                        <button class="btn btn-danger ml-3"><i class="far fa-trash-alt"></i></button>
-                    </div>
-                </div>
-                <div class="respuesta d-flex justify-content-between align-items-center">
-                    <p>Texto de la respuesta</p>
-                    <div class="botones">
-                        <input type="radio" name="1">
-                        <button class="btn btn-danger ml-3"><i class="far fa-trash-alt"></i></button>
-                    </div>
-                </div>
-
+                <div *ngFor="let opcion of opciones">
+                    <app-card-opcion
+                    [opcion]="opcion"
+                    >
+                    </app-card-opcion>
+                </div> 
             </div>
 
             <div class="nueva-opcion">
                 <label for="nueva-opcion"><h6>Nueva opcion</h6></label>
                 <div class="gap-2 d-flex align-items-center">
                     <input class="form-control w-50" id="nueva-opcion" type="text">
-                    <button class="btn boton-primario">Agregar</button>
+                    <button class="btn boton-primario" (click)="agregar()">Agregar</button>
                 </div>
             </div>
             

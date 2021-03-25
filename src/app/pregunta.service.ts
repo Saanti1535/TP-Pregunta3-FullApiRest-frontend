@@ -45,4 +45,19 @@ export class PreguntaService {
     this.preguntaActual = Pregunta.fromJSON(pregunta)
   }
 
+  async revisarRespuesta(respuesta: string, idUsuario: number): Promise<string> {
+    const idPregunta=this.preguntaActual.id
+    var resultado
+    await this.http.post<string>(REST_SERVER_URL + '/revisarRespuesta/' + idPregunta, JSON.stringify({laRespuesta: respuesta, idUsuario: idUsuario})).toPromise()
+      .catch((err: HttpErrorResponse) => {
+        if( err.status == 200){
+          resultado=err.error.text
+        }else{
+          resultado='Ocurrió un error'
+        }
+      })
+    return resultado
+  }
+
+
 }

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PreguntaService } from '../pregunta.service';
+import * as $ from 'jquery';
+import { UsuarioService } from '../usuario.service';
 
 @Component({
   selector: 'app-responder-pregunta',
@@ -10,7 +12,7 @@ import { PreguntaService } from '../pregunta.service';
 export class ResponderPreguntaComponent implements OnInit {
   pregunta = this.preguntaService.preguntaActual
 
-  constructor(private router: Router, public preguntaService: PreguntaService) { }
+  constructor(private router: Router, public preguntaService: PreguntaService, public usuarioService: UsuarioService) { }
 
   ngOnInit(): void {
   }
@@ -19,8 +21,16 @@ export class ResponderPreguntaComponent implements OnInit {
     return this.pregunta.opciones;
   }
 
-  aceptar() {
-    this.router.navigate(['/busqueda'])
+  async aceptar() {
+    const respuesta=$('input:radio[name=opciones]:checked').val()
+    if(respuesta != undefined) {
+      const idUsuario=this.usuarioService.usuarioLogueado.id
+      const resultado = await this.preguntaService.revisarRespuesta(respuesta.toString(), idUsuario)
+      window.alert(resultado)
+      this.router.navigate(['/busqueda'])
+    }else{
+      window.alert('Debe seleccionar una respuesta')
+    }
   }
 
   cancelar() {
