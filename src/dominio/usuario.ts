@@ -1,11 +1,10 @@
 export class Usuario {
     public id: number
-    // public username = ''
-    // public password = ''
     public nombre = ''
     public apellido = ''
     public puntaje: number
     public fechaNacimiento: Date
+    amigos = []
 
     //Podríamos dejar el constructor vacio tranquilamente
     constructor(id?: number, nombre?: string, password?: string) {
@@ -17,12 +16,11 @@ export class Usuario {
     static fromJson(usuarioJSON): Usuario {
         let usuario = new Usuario()
         usuario.id = usuarioJSON.id
-        // usuario.username = usuarioJSON.username 
-        // usuario.password = usuarioJSON.password
         usuario.nombre = usuarioJSON.nombre
         usuario.apellido = usuarioJSON.apellido
         usuario.puntaje = usuarioJSON.puntaje
         usuario.fechaNacimiento = new Date(usuarioJSON.fechaNacimiento + "T00:00:00")
+        usuarioJSON.amigos.forEach(amigo => usuario.amigos.push(amigo.nombre))
 
         return usuario
     }
