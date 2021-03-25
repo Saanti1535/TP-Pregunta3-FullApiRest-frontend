@@ -52,9 +52,10 @@ export class UsuarioService {
   }
 
   mostrarError(err: HttpErrorResponse) {
+    console.log(err)
     this.hayError = true
     this.codigoError = err.status
-    this.descripcionError = err.message
-    window.alert(err.status + ' ' + err.message)
+    this.descripcionError = err.error
+    window.alert(err.status + ' ' + err.error)
   }
 }

@@ -85,14 +85,8 @@
             <div class="modal-body p-0">
                 <table class="table borderless table-hover">
                     <tbody class="">
-                        <tr>
-                            <td>Mark</td>
-                        </tr>
-                        <tr>
-                            <td>Jacob</td>
-                        </tr>
-                        <tr>
-                            <td>Larry</td>
+                        <tr *ngFor="let amigo of usuario.amigos">
+                            <td>{{amigo}}</td>
                         </tr>
                     </tbody>
                 </table>
