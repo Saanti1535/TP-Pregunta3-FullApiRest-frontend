@@ -43,8 +43,8 @@ export class UsuarioService {
       })
   }
 
-  async buscarUsuariosPorUsername(){
-    let usuarios = await this.http.get<string[]>(REST_SERVER_URL + '/usuarios/').toPromise()
+  async buscarUsuariosParaAgregar(busqueda: String){
+    let usuarios = await this.http.post(REST_SERVER_URL + '/usuarios/' + this.usuarioLogueado.id, JSON.stringify({ busqueda: busqueda })).toPromise()
     .catch((err: HttpErrorResponse) => {
       this.mostrarError(err)
     })

@@ -88,14 +88,15 @@
                 <table class="table borderless table-hover">
                     <tbody class="">
                         <div class="lista-de-amigos" *ngIf="modoVerAmigos">
-                            <tr *ngFor="let amigo of usuario.amigos" >
-                                <td>{{amigo}}</td>
+                            <tr *ngFor="let amigo of usuario.amigos" class="d-flex justify-content-around p-2">
+                                <td #amigo>{{amigo}}</td>
+                                <button class="btn btn-sm btn btn-outline-danger" (click)="eliminarAmigo(amigo)"><i class="fas fa-user-times"></i></button>
                             </tr>
                         </div>
                         <div class="busqueda-amigos" *ngIf="modoAgregarAmigos">
                             <div class="ml-2 d-flex">
                                 <input #username type="text" class="form-control form-control-sm mt-2 w-75" placeholder="Ingrese un nombre de usuario a buscar">
-                                <button class="btn btn-sm boton-primario ml-3 mt-2" (click)="filtrarPorUsername(username.value)">Buscar</button>
+                                <button class="btn btn-sm boton-primario ml-3 mt-2" (click)="cargarAmigosParaAgregarPorUsername(username.value)">Buscar</button>
                             </div>
                             <tr class="d-flex justify-content-around p-2 mt-2" *ngFor="let resultado of resultadoBusquedaAmigos">
                                 <span #resultado>{{resultado}}</span>

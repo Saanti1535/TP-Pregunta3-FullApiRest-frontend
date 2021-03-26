@@ -1,5 +1,6 @@
 export class Usuario {
     public id: number
+    public username: String
     public nombre = ''
     public apellido = ''
     public puntaje: number
@@ -16,11 +17,12 @@ export class Usuario {
     static fromJson(usuarioJSON): Usuario {
         let usuario = new Usuario()
         usuario.id = usuarioJSON.id
+        usuario.username = usuarioJSON.username
         usuario.nombre = usuarioJSON.nombre
         usuario.apellido = usuarioJSON.apellido
         usuario.puntaje = usuarioJSON.puntaje
         usuario.fechaNacimiento = new Date(usuarioJSON.fechaNacimiento + "T00:00:00")
-        usuarioJSON.amigos.forEach(amigo => usuario.amigos.push(amigo.nombre))
+        usuarioJSON.amigos.forEach(amigo => usuario.amigos.push(amigo.username))
 
         return usuario
     }
@@ -34,6 +36,7 @@ export class Usuario {
                 apellido: this.apellido,
                 puntaje: this.puntaje,
                 fechaNacimiento: fechaNac,
+                amigos: this.amigos
             }
         )
 

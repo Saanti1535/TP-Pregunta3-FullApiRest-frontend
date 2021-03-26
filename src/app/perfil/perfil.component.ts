@@ -45,8 +45,7 @@ export class PerfilComponent implements OnInit {
   async verSolapaAgregarAmigos() {
     this.modoVerAmigos = false
     this.modoAgregarAmigos = true
-    await this.usuariosService.buscarUsuariosPorUsername()
-    this.resultadoBusquedaAmigos = this.usuariosService.usuariosParaAgregar.filter(usuario => usuario.nombre !== this.usuariosService.usuarioLogueado.nombre)
+    this.cargarAmigosParaAgregar()
   }
 
   async verSolapaMisAmigos() {
@@ -54,13 +53,25 @@ export class PerfilComponent implements OnInit {
     this.modoVerAmigos = true
   }
 
-  async filtrarPorUsername(username) {
-    await this.usuariosService.buscarUsuariosPorUsername()
-    this.resultadoBusquedaAmigos = this.usuariosService.usuariosParaAgregar.filter(user => user.match(username))
+  async agregarAmigo(amigo) {
+    this.usuariosService.usuarioLogueado.amigos.push(amigo)
+    await this.usuariosService.actualizarUsuario(this.usuario)
+    this.resultadoBusquedaAmigos = this.resultadoBusquedaAmigos.filter(resultado => resultado !== amigo)
   }
 
-  agregarAmigo(amigo) {
-    this.usuariosService.usuarioLogueado.amigos.push(amigo)
+  async eliminarAmigo(amigoAEliminar) {
+    this.usuariosService.usuarioLogueado.amigos = this.usuariosService.usuarioLogueado.amigos.filter(amigo => amigo !== amigoAEliminar)
+    await this.usuariosService.actualizarUsuario(this.usuario)
+  }
+
+  async cargarAmigosParaAgregar() {
+    await this.usuariosService.buscarUsuariosParaAgregar('')
+    this.resultadoBusquedaAmigos = this.usuariosService.usuariosParaAgregar
+  }
+
+  async cargarAmigosParaAgregarPorUsername(busqueda) {
+    await this.usuariosService.buscarUsuariosParaAgregar(busqueda)
+    this.resultadoBusquedaAmigos = this.usuariosService.usuariosParaAgregar
   }
 
 }
