@@ -21,7 +21,7 @@ import { CardOpcionComponent } from './card-opcion/card-opcion.component';
 
 
 @NgModule({
-  declarations: [	
+  declarations: [		
     AppComponent,
     LoginComponent,
     FooterComponent,
@@ -31,7 +31,7 @@ import { CardOpcionComponent } from './card-opcion/card-opcion.component';
     ResponderPreguntaComponent,
     PerfilComponent,
     CardPreguntaComponent,
-      CardOpcionComponent
+    CardOpcionComponent,
    ],
   imports: [
     BrowserModule,

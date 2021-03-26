@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UsuarioService } from './../usuario.service';
 import { Router } from '@angular/router';
 import { Usuario } from 'src/dominio/usuario';
+import { RegistroRespuestas } from '../../dominio/usuario';
 
 @Component({
   selector: 'app-perfil',
@@ -16,8 +17,8 @@ export class PerfilComponent implements OnInit {
   modoAgregarAmigos = false
 
   constructor(public usuariosService: UsuarioService, private router: Router) { }
-  ngOnInit(): void {
-  }
+
+  ngOnInit(): void {}
 
   get puntosUsuarioActual(): number {
     return this.usuario.puntaje
@@ -72,6 +73,10 @@ export class PerfilComponent implements OnInit {
   async cargarAmigosParaAgregarPorUsername(busqueda) {
     await this.usuariosService.buscarUsuariosParaAgregar(busqueda)
     this.resultadoBusquedaAmigos = this.usuariosService.usuariosParaAgregar
+  }
+
+  get historial(): RegistroRespuestas[] {
+    return this.usuario.historial
   }
 
 }
