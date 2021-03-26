@@ -24,8 +24,9 @@ export class Usuario {
         usuario.puntaje = usuarioJSON.puntaje
         usuario.fechaNacimiento = new Date(usuarioJSON.fechaNacimiento + "T00:00:00")
         usuarioJSON.amigos.forEach(amigo => usuario.amigos.push(amigo.username))
-        usuarioJSON.historial.forEach(registro => usuario.historial.push(registro.fromJSON()))
-
+        if( usuarioJSON.historial !== null){
+            usuarioJSON.historial.forEach(registro => usuario.historial.push(RegistroRespuestas.fromJson(registro)))
+        }
         return usuario
     }
 
@@ -55,10 +56,10 @@ export class RegistroRespuestas{
     public puntosOtorgados: number
 
     static fromJson(json): RegistroRespuestas {
-        let registro: RegistroRespuestas
+        let registro = new  RegistroRespuestas()
         registro.pregunta = json.pregunta
         registro.fechaRespuesta = new Date(json.fechaRespuesta + "T00:00:00") 
-        registro.puntosOtorgados = json.puntaje
+        registro.puntosOtorgados = json.puntosOtorgados
         
         return registro
     }
