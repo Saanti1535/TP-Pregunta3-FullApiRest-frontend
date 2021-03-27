@@ -15,7 +15,7 @@ export class BusquedaComponent implements OnInit {
 
   ngOnInit(): void {
     document.getElementById('elFooter').style.position = 'relative';
-    this.recargarPreguntas()
+    this.preguntaService.cargarPreguntas(this.checkBoxActivado)
   }
 
   editar(): void {
@@ -27,13 +27,13 @@ export class BusquedaComponent implements OnInit {
   }
 
   async buscar(busqueda: HTMLInputElement){
-    this.preguntaService.filtrarPorPregunta(busqueda.value)   
+    this.preguntaService.filtrarPreguntas(busqueda.value, this.checkBoxActivado)   
   }
 
-  async recargarPreguntas(){
-    this.preguntaService.soloActivas = this.checkBoxActivado
-    this.preguntaService.cargarPreguntas()
-  }
+  // async recargarPreguntas(){
+  //   this.preguntaService.soloActivas = this.checkBoxActivado
+  //   this.preguntaService.cargarPreguntas()
+  // }
 
 
 }
