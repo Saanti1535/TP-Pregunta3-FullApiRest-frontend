@@ -18,7 +18,9 @@ export class PerfilComponent implements OnInit {
 
   constructor(public usuariosService: UsuarioService, private router: Router) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.usuariosService.buscarUsuarioPorId(this.usuario.id) // Por su hubieron cambios que se cancelaron en el front, se trae de nuevo la info del back
+  }
 
   get puntosUsuarioActual(): number {
     return this.usuario.puntaje

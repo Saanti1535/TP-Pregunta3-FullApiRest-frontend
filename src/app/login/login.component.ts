@@ -9,8 +9,8 @@ import { UsuarioService } from '../usuario.service';
 })
 
 export class LoginComponent implements OnInit {
-  contenidoInputUsuario: string = ''
-  contenidoInputContrasenia: string = ''
+  contenidoInputUsuario: string = 'pep'//''
+  contenidoInputContrasenia: string = '123456'
   hayError = false
   mensajeDeError = ''
 
