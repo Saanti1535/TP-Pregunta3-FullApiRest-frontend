@@ -13,7 +13,7 @@
 
       <div class="select-tipo-pregunta">
           <label for="tipo-pregunta"><h6>Ingrese un tipo de pregunta</h6></label>
-          <select class="form-control" [(ngModel)]="tipoDePregunta" (change)="revisarTipoPregunta()" required>
+          <select class="form-control" [(ngModel)]="tipoDePregunta" required>
               <option value="Simple">Simple</option>
               <option value="Riesgosa">De riesgo</option>
               <option value="Solidaria">Solidaria</option>
@@ -31,7 +31,7 @@
           <label for="nueva-opcion"><h6>Agregar opción</h6></label>
           <div class="gap-2 d-flex align-items-center">
               <input class="form-control w-50" id="nueva-opcion" type="text">
-              <button class="btn boton-primario" (click)="agregar()">Agregar</button>
+              <button class="btn boton-primario" (click)="agregarOpcion()">Agregar</button>
           </div>
       </div>
 

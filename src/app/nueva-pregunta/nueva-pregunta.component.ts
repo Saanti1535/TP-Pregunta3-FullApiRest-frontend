@@ -11,15 +11,17 @@ import { generarCartelDeAlerta } from '../configuration';
   templateUrl: './nueva-pregunta.component.html',
   styleUrls: ['./nueva-pregunta.component.css']
 })
+
 export class NuevaPreguntaComponent implements OnInit {
 
   nuevaPregunta: Pregunta = new Pregunta()
   tipoDePregunta: string
   laPregunta: string
-  esSolidaria: boolean = false
+
   //Solo van a ser utilizados cuando sea solidaria
   puntos: number = 0
   puntajeSolidario: number
+
   //Bandera para ver si la pregunta es o no válida
   esValida: boolean = true
   mensajeAlerta = ""
@@ -28,29 +30,73 @@ export class NuevaPreguntaComponent implements OnInit {
 
   ngOnInit() {}
 
-  
-  agregar(){
+
+  /************************************************************************************************ BOTONES */
+  agregarOpcion(){
     const nuevaOpcion=$('#nueva-opcion').val().toString()
-    if(nuevaOpcion!='' && !this.nuevaPregunta.opciones.includes(nuevaOpcion)){
+    if(this.esOpcionValida(nuevaOpcion)){
       this.nuevaPregunta.opciones.push(nuevaOpcion)
     } else{
       generarCartelDeAlerta('El campo no puede estar vacio ni ser igual a una opción ya existente')
     }  
+  }
+  
+  aceptar() {
+    this.validarNuevaPregunta()
 
+    if(this.esValida){
+        this.mandarPreguntaNueva()
+    }else{
+      generarCartelDeAlerta(this.mensajeAlerta) 
+      this.mensajeAlerta = ""
+      this.esValida = true    
+    }
+  }
+  
+  cancelar() {
+    this.nuevaPregunta = new Pregunta()
+    this.router.navigate(['/busqueda'])
   }
 
-  revisarTipoPregunta(){
+
+/************************************************************************************************ AUXILIARES */
+  generarNuevaPregunta(){
+    //En el back se pisa este ID por el correspondiente (el repositorio se encarga)
+    this.nuevaPregunta.id=0
+    this.nuevaPregunta.pregunta = this.laPregunta
+    this.nuevaPregunta.type = this.nuevaPreguntaType
+    this.nuevaPregunta.respuestaCorrecta = this.respuestaCorrecta
+  }
+
+  async mandarPreguntaNueva(){
+    this.generarNuevaPregunta()
     if(this.tipoDePregunta == 'Solidaria'){
-      this.esSolidaria = true
+      this.puntos = this.puntajeSolidario
     }
+    await this.preguntaService.crearPregunta(this.nuevaPregunta, this.usuarioService.usuarioLogueado.id, this.puntos)
+    this.router.navigate(['/busqueda'])
+  }
+
+/************************************************************************************************ GETTERS */
+  get respuestaCorrecta(): string {
+    return $('input:radio[name=opciones]:checked').val().toString()
+  }
+
+  get nuevaPreguntaType(): string{
+    return "pregunta"+this.tipoDePregunta
+  }
+
+  get esSolidaria(): boolean {
+    return this.tipoDePregunta == 'Solidaria' 
   }
 
   get opciones(): String[] {
     return this.nuevaPregunta.opciones;
   }
-  
-  aceptar() {
-    //Validaciones previas a generar la pregunta
+
+
+/************************************************************************************************ VALIDACIONES */
+  validarNuevaPregunta() {
     if(this.laPregunta == undefined){
       this.mensajeAlerta += "La pregunta no puede estar vacía. "
       this.esValida = false
@@ -67,43 +113,15 @@ export class NuevaPreguntaComponent implements OnInit {
       this.mensajeAlerta += "Debe seleccionar un tipo de pregunta. "
       this.esValida = false
     }
-    if(this.tipoDePregunta == 'Solidaria' && this.puntajeSolidario == undefined){
+    if(this.esSolidaria && this.puntajeSolidario == undefined){
       this.mensajeAlerta += "Para la pregunta solidaria, debe seleccionar cantidad de puntos a donar. "
       this.esValida = false
     }
-
-    if(this.esValida){
-        this.mandarPreguntaNueva()
-    }else{
-      generarCartelDeAlerta(this.mensajeAlerta) 
-      this.mensajeAlerta = ""
-      this.esValida = true    
-    }
   }
 
-  async mandarPreguntaNueva(){
-    this.generarNuevaPregunta()
-    if(this.tipoDePregunta == 'Solidaria'){
-      this.puntos = this.puntajeSolidario
-    }
-    await this.preguntaService.crearPregunta(this.nuevaPregunta, this.usuarioService.usuarioLogueado.id, this.puntos)
-    this.router.navigate(['/busqueda'])
+  esOpcionValida(nuevaOpcion: string): boolean {
+    return nuevaOpcion!='' && !this.nuevaPregunta.opciones.includes(nuevaOpcion)
   }
-
-  cancelar() {
-    this.nuevaPregunta = new Pregunta()
-    this.router.navigate(['/busqueda'])
-  }
-
-  generarNuevaPregunta(){
-    //El id debe ser reemplazado en el back (ya lo hace)
-    this.nuevaPregunta.id=0
-    this.nuevaPregunta.pregunta = this.laPregunta
-    this.nuevaPregunta.type = "pregunta"+this.tipoDePregunta
-    this.nuevaPregunta.respuestaCorrecta=$('input:radio[name=opciones]:checked').val().toString()
-  }
-
-
 
 
 
