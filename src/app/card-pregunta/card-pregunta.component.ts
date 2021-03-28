@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Pregunta } from 'src/dominio/pregunta';
+import { generarCartelDeAlerta } from '../configuration';
 import { PreguntaService } from '../pregunta.service';
 import { UsuarioService } from '../usuario.service';
 
@@ -26,8 +27,12 @@ export class CardPreguntaComponent implements OnInit {
   }
 
   async responder(): Promise<void> {
-    await this.preguntaService.getPreguntaPorId(this.pregunta.id)
-    this.router.navigate(['/responder-pregunta'])
+    try{
+      await this.preguntaService.getPreguntaPorId(this.pregunta.id)
+      this.router.navigate(['/responder-pregunta'])
+    }catch(e){
+      generarCartelDeAlerta(e.error)
+    }
   }
 
   async editar(){

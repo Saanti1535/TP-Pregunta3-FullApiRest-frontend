@@ -73,8 +73,12 @@ export class NuevaPreguntaComponent implements OnInit {
     if(this.tipoDePregunta == 'Solidaria'){
       this.puntos = this.puntajeSolidario
     }
-    await this.preguntaService.crearPregunta(this.nuevaPregunta, this.usuarioService.usuarioLogueado.id, this.puntos)
-    this.router.navigate(['/busqueda'])
+    try{
+      await this.preguntaService.crearPregunta(this.nuevaPregunta, this.usuarioService.usuarioLogueado.id, this.puntos)
+      this.router.navigate(['/busqueda'])
+    }catch(e){
+      generarCartelDeAlerta(e.error)
+    }
   }
 
 /************************************************************************************************ GETTERS */

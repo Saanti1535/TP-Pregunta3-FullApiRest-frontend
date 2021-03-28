@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Pregunta } from 'src/dominio/pregunta';
-import { REST_SERVER_URL } from './configuration';
+import { generarCartelDeAlerta, REST_SERVER_URL } from './configuration';
 import { UsuarioService } from './usuario.service';
 
 @Injectable({
@@ -37,7 +37,7 @@ export class PreguntaService {
   }
 
   async getPreguntaPorId(id: number){
-    const pregunta = await this.http.get<Pregunta>(REST_SERVER_URL + '/busqueda/pregunta/' + id).toPromise()
+    const pregunta = await this.http.get<Pregunta>(REST_SERVER_URL + '/busqueda/pregunta/' + id +'/'+this.usuarioService.usuarioLogueado.id).toPromise()
     this.preguntaActual = Pregunta.fromJSON(pregunta)
   }
 

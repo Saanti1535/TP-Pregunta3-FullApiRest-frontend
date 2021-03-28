@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { PreguntaService } from '../pregunta.service';
 import * as $ from 'jquery';
 import { UsuarioService } from '../usuario.service';
+import { generarCartelDeAlerta } from '../configuration';
 
 @Component({
   selector: 'app-responder-pregunta',
@@ -26,7 +27,7 @@ export class ResponderPreguntaComponent implements OnInit {
     if(respuesta != undefined) {
       const idUsuario=this.usuarioService.usuarioLogueado.id
       const resultado = await this.preguntaService.revisarRespuesta(respuesta.toString(), idUsuario)
-      window.alert(resultado)
+      generarCartelDeAlerta(resultado)
       this.router.navigate(['/busqueda'])
     }else{
       window.alert('Debe seleccionar una respuesta')
