@@ -30,6 +30,9 @@ export class BusquedaComponent implements OnInit {
     this.preguntaService.filtrarPreguntas(busqueda.value, this.checkBoxActivado)   
   }
 
+  nuevaPregunta(){
+    this.router.navigate(['/nueva-pregunta'])
+  }
   // async recargarPreguntas(){
   //   this.preguntaService.soloActivas = this.checkBoxActivado
   //   this.preguntaService.cargarPreguntas()

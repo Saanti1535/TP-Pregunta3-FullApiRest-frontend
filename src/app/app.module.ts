@@ -17,11 +17,12 @@ import { HttpClientModule } from "@angular/common/http";
 import { UsuarioService } from './usuario.service';
 import { CardPreguntaComponent } from './card-pregunta/card-pregunta.component';
 import { CardOpcionComponent } from './card-opcion/card-opcion.component';
+import { NuevaPreguntaComponent } from './nueva-pregunta/nueva-pregunta.component';
 
 
 
 @NgModule({
-  declarations: [		
+  declarations: [			
     AppComponent,
     LoginComponent,
     FooterComponent,
@@ -32,6 +33,7 @@ import { CardOpcionComponent } from './card-opcion/card-opcion.component';
     PerfilComponent,
     CardPreguntaComponent,
     CardOpcionComponent,
+      NuevaPreguntaComponent
    ],
   imports: [
     BrowserModule,
