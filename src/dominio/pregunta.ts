@@ -4,6 +4,7 @@ export class Pregunta {
     public opciones: string[] = []
     public idAutor: number
     public nombreAutor: string
+    public type: string
 
     static fromJSON(preguntaJSON): Pregunta {
         let pregunta = new Pregunta()
@@ -12,6 +13,7 @@ export class Pregunta {
         pregunta.opciones = preguntaJSON.opciones
         pregunta.idAutor = preguntaJSON.idAutor
         pregunta.nombreAutor = preguntaJSON.nombreAutor
+        pregunta.type = preguntaJSON.type
         return pregunta
     }
 
@@ -23,6 +25,7 @@ export class Pregunta {
                 opciones: this.opciones,
                 idAutor: this.idAutor,
                 nombreAutor: this.nombreAutor,
+                type: this.type
             }
         )
 

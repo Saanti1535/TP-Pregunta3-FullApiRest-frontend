@@ -22,7 +22,7 @@
 
         <div class="header-seccion d-flex justify-content-between mb-3 align-items-center">
             <h5 class="font-weight-600">Resultados de la búsqueda</h5>
-            <button class="btn btn-sm boton-primario text-light">+ Nueva pregunta</button>
+            <button class="btn btn-sm boton-primario text-light" (click)="nuevaPregunta()">+ Nueva pregunta</button>
         </div>
         <div class="preguntas d-flex flex-wrap justify-content-between">
             <div *ngFor="let pregunta of preguntas">

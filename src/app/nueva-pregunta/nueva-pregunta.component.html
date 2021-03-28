@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<app-header></app-header>
+<div class="container">
+  <main class="card w-100 d-flex flex-column card-grande card-fondo">
+    <div class="card-body cuerpo-editar-pregunta d-flex flex-column justify-content-around">
+
+      <div class="nueva-opcion">
+        <label for="nueva-opcion"><h6>Nueva pregunta</h6></label>
+        <div class="gap-2 d-flex align-items-center">
+            <input class="form-control w-50" id="nueva-pregunta" type="text">
+        </div>
+      </div>
+
+      <div class="select-tipo-pregunta">
+          <label for="tipo-pregunta"><h6>Ingrese un tipo de pregunta</h6></label>
+          <select class="form-control" [(ngModel)]="tipoDePregunta" required>
+              <option value="Simple">Simple</option>
+              <option value="Riesgosa">De riesgo</option>
+              <option value="Solidaria">Solidaria</option>
+          </select>
+      </div>
+
+      <div class="nueva-opcion" *ngIf="esSolidaria">
+        <label for="nueva-opcion"><h6>Indicar un puntaje</h6></label>
+        <div class="gap-2 d-flex align-items-center">
+            <input class="form-control w-50" id="puntaje-indicado" type="text">
+        </div>
+      </div>
+
+      <div class="nueva-opcion">
+          <label for="nueva-opcion"><h6>Agregar opción</h6></label>
+          <div class="gap-2 d-flex align-items-center">
+              <input class="form-control w-50" id="nueva-opcion" type="text">
+              <button class="btn boton-primario" (click)="agregar()">Agregar</button>
+          </div>
+      </div>
+
+      <div class="respuestas">
+        <div *ngFor="let opcion of opciones">
+            <app-card-opcion
+            [opcion]="opcion"
+            >
+            </app-card-opcion>
+        </div> 
+    </div>
+
+    </div>
+
+    <div class="botones-aceptar-cancelar w-100 d-flex justify-content-end p-2">
+      <button class="btn boton-primario" (click)="aceptar()">Aceptar</button>
+      <button class="btn btn-primary ml-3" (click)="cancelar()">Cancelar</button>
+    </div>
+
+</main>
+</div>
