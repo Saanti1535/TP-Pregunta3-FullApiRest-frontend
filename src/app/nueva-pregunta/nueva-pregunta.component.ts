@@ -14,6 +14,11 @@ export class NuevaPreguntaComponent implements OnInit {
 
   nuevaPregunta: Pregunta = new Pregunta()
   tipoDePregunta: string
+  laPregunta: string
+  esSolidaria: boolean = false
+  //Solo van a ser utilizados cuando sea solidaria
+  puntos: number = 0
+  puntajeSolidario: number
 
   constructor(private router: Router, public preguntaService: PreguntaService, public usuarioService: UsuarioService) { }
 
@@ -30,17 +35,22 @@ export class NuevaPreguntaComponent implements OnInit {
 
   }
 
+  revisarTipoPregunta(){
+    if(this.tipoDePregunta == 'Solidaria'){
+      this.esSolidaria = true
+    }
+  }
+
   get opciones(): String[] {
     return this.nuevaPregunta.opciones;
   }
-
-  get esSolidaria(): boolean {
-    return this.tipoDePregunta == 'Solidaria' 
-  }
   
   async aceptar() {
-    await this.preguntaService.crearPregunta(this.nuevaPregunta)
     this.generarNuevaPregunta()
+    if(this.tipoDePregunta == 'Solidaria'){
+      this.puntos = this.puntajeSolidario
+    }
+    await this.preguntaService.crearPregunta(this.nuevaPregunta, this.usuarioService.usuarioLogueado.id, this.puntos)
     this.router.navigate(['/busqueda'])
   }
 
@@ -49,10 +59,11 @@ export class NuevaPreguntaComponent implements OnInit {
   }
 
   generarNuevaPregunta(){
-    this.nuevaPregunta.pregunta = $('#nueva-pregunta').val().toString()
-    this.nuevaPregunta.idAutor = this.usuarioService.usuarioLogueado.id
-    this.nuevaPregunta.nombreAutor = this.usuarioService.usuarioLogueado.nombre
+    //El id debe ser reemplazado en el back (ya lo hace)
+    this.nuevaPregunta.id=0
+    this.nuevaPregunta.pregunta = this.laPregunta
     this.nuevaPregunta.type = "pregunta"+this.tipoDePregunta
+    this.nuevaPregunta.respuestaCorrecta=$('input:radio[name=opciones]:checked').val().toString()
   }
 
 

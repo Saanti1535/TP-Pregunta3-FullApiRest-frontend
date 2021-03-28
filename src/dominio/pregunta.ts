@@ -5,6 +5,8 @@ export class Pregunta {
     public idAutor: number
     public nombreAutor: string
     public type: string
+    //Solo se utiliza para enviar del front al back, cuando viene del back la respuesta correcta no se trae.
+    public respuestaCorrecta: string
 
     static fromJSON(preguntaJSON): Pregunta {
         let pregunta = new Pregunta()
@@ -23,9 +25,8 @@ export class Pregunta {
                 id: this.id,
                 pregunta: this.pregunta,
                 opciones: this.opciones,
-                idAutor: this.idAutor,
-                nombreAutor: this.nombreAutor,
-                type: this.type
+                type: this.type,
+                respuestaCorrecta: this.respuestaCorrecta
             }
         )
 

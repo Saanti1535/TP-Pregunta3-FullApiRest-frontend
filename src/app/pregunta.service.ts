@@ -60,8 +60,8 @@ export class PreguntaService {
     await this.http.put(REST_SERVER_URL + '/busqueda/pregunta/' + pregunta.id, pregunta.toJSON()).toPromise()
   }
 
-  async crearPregunta(nuevaPregunta: Pregunta) {
-    await this.http.put(REST_SERVER_URL + '/crearPregunta', nuevaPregunta.toJSON()).toPromise()
+  async crearPregunta(nuevaPregunta: Pregunta, idAutor: number, puntos: number) {
+    await this.http.put(REST_SERVER_URL + '/crearPregunta/'+ idAutor +'/'+ puntos, nuevaPregunta.toJSON()).toPromise()
   }
 
 
