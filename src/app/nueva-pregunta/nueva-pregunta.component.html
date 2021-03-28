@@ -23,7 +23,7 @@
       <div class="nueva-opcion" *ngIf="esSolidaria">
         <label for="nueva-opcion"><h6>Indicar un puntaje</h6></label>
         <div class="gap-2 d-flex align-items-center">
-            <input [(ngModel)]="puntajeSolidario" class="form-control w-50" id="puntaje-indicado" type="text">
+            <input [(ngModel)]="puntajeSolidario" class="form-control w-50" id="puntaje-indicado" type="number" min="0" step="1">
         </div>
       </div>
 

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { REST_SERVER_URL } from './configuration';
+import { generarCartelDeAlerta, REST_SERVER_URL } from './configuration';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { RegistroRespuestas, Usuario } from 'src/dominio/usuario';
 
@@ -23,7 +23,7 @@ export class UsuarioService {
   async asignarUsuario(unNombreDeUsuario: string, unaContrasenia: string): Promise<void> {
     let usuarioJson = await this.http.post<Usuario>(REST_SERVER_URL + '/login/' + unNombreDeUsuario, JSON.stringify({ password: unaContrasenia })).toPromise()
       .catch((err: HttpErrorResponse) => {
-        this.mostrarError(err)
+        generarCartelDeAlerta(err.error)
       })
     this.usuarioLogueado = Usuario.fromJson(usuarioJson)
   }
@@ -31,7 +31,7 @@ export class UsuarioService {
   async buscarUsuarioPorId(id: number): Promise<void> {
     let usuario = await this.http.get<Usuario>(REST_SERVER_URL + '/perfil/' + id).toPromise()
       .catch((err: HttpErrorResponse) => {
-        this.mostrarError(err)
+        generarCartelDeAlerta(err.error)
       })
     this.usuarioLogueado = Usuario.fromJson(usuario)
   }

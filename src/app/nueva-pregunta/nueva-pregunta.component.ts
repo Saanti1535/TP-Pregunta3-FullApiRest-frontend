@@ -4,6 +4,7 @@ import { Pregunta } from 'src/dominio/pregunta';
 import { PreguntaService } from '../pregunta.service';
 import * as $ from 'jquery';
 import { UsuarioService } from '../usuario.service';
+import { generarCartelDeAlerta } from '../configuration';
 
 @Component({
   selector: 'app-nueva-pregunta',
@@ -19,6 +20,9 @@ export class NuevaPreguntaComponent implements OnInit {
   //Solo van a ser utilizados cuando sea solidaria
   puntos: number = 0
   puntajeSolidario: number
+  //Bandera para ver si la pregunta es o no válida
+  esValida: boolean = true
+  mensajeAlerta = ""
 
   constructor(private router: Router, public preguntaService: PreguntaService, public usuarioService: UsuarioService) { }
 
@@ -27,10 +31,10 @@ export class NuevaPreguntaComponent implements OnInit {
   
   agregar(){
     const nuevaOpcion=$('#nueva-opcion').val().toString()
-    if(nuevaOpcion!=''){
+    if(nuevaOpcion!='' && !this.nuevaPregunta.opciones.includes(nuevaOpcion)){
       this.nuevaPregunta.opciones.push(nuevaOpcion)
     } else{
-      window.alert('Debe escribir algo para poder agregar una opcion nueva')
+      generarCartelDeAlerta('El campo no puede estar vacio ni ser igual a una opción ya existente')
     }  
 
   }
@@ -45,7 +49,39 @@ export class NuevaPreguntaComponent implements OnInit {
     return this.nuevaPregunta.opciones;
   }
   
-  async aceptar() {
+  aceptar() {
+    //Validaciones previas a generar la pregunta
+    if(this.laPregunta == undefined){
+      this.mensajeAlerta += "La pregunta no puede estar vacía. "
+      this.esValida = false
+    }
+    if(this.nuevaPregunta.opciones.length < 2){
+      this.mensajeAlerta += "La pregunta debe tener al menos dos opciones. "
+      this.esValida = false
+    }
+    if($('input:radio[name=opciones]:checked').val() == undefined){
+      this.mensajeAlerta += "Debe seleccionar una respuesta correcta. "
+      this.esValida = false
+    }
+    if(this.tipoDePregunta == undefined){
+      this.mensajeAlerta += "Debe seleccionar un tipo de pregunta. "
+      this.esValida = false
+    }
+    if(this.tipoDePregunta == 'Solidaria' && this.puntajeSolidario == undefined){
+      this.mensajeAlerta += "Para la pregunta solidaria, debe seleccionar cantidad de puntos a donar. "
+      this.esValida = false
+    }
+
+    if(this.esValida){
+        this.mandarPreguntaNueva()
+    }else{
+      generarCartelDeAlerta(this.mensajeAlerta) 
+      this.mensajeAlerta = ""
+      this.esValida = true    
+    }
+  }
+
+  async mandarPreguntaNueva(){
     this.generarNuevaPregunta()
     if(this.tipoDePregunta == 'Solidaria'){
       this.puntos = this.puntajeSolidario
@@ -55,6 +91,7 @@ export class NuevaPreguntaComponent implements OnInit {
   }
 
   cancelar() {
+    this.nuevaPregunta = new Pregunta()
     this.router.navigate(['/busqueda'])
   }
 

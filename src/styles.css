@@ -123,4 +123,43 @@ input[type="radio"] {
     box-shadow: inset 7px 6px 12px #ffffff00;
    }
 
-   /* ------------------------------- */
+   /* --------------Alerta----------------- */
+
+   #fondoPantallaCompleta{
+        position: fixed;
+        display: block;
+        width: 100vw;
+        height: 100vh;
+        z-index: 10;
+        top: 0vh;
+        left: 0vw;
+   }
+
+   #cuerpoCartelAlerta{
+       min-height: 30vh;
+       width: 30vw;
+       display: block;
+       position: fixed;
+       background-color: rgba(206, 31, 31, 0.959);
+       top: 25vh;
+       left: 35vw;
+   }
+
+   #textoDeAlerta{
+       text-align: center;
+       color: black;
+       display: block;
+       margin-top: 5vh;
+       width: 90%;
+       margin-left: 5%;
+   }
+
+   #botonDeAlerta{
+       display: block;
+       position: relative;
+       margin-top: 2vh;
+       margin-bottom: 2vh;
+       margin-left: 10vw;
+       width: 6rem;
+       height: 2rem;
+   }
