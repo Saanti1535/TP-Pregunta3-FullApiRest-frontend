@@ -22,25 +22,26 @@ export class Usuario {
         usuario.nombre = usuarioJSON.nombre
         usuario.apellido = usuarioJSON.apellido
         usuario.puntaje = usuarioJSON.puntaje
-        usuario.fechaNacimiento = new Date(usuarioJSON.fechaNacimiento + "T00:00:00")
+        usuario.fechaNacimiento = new Date(usuarioJSON.fechaNacimiento)
         usuarioJSON.amigos.forEach(amigo => usuario.amigos.push(amigo.username))
         if( usuarioJSON.historial !== null){
             usuarioJSON.historial.forEach(registro => usuario.historial.push(RegistroRespuestas.fromJson(registro)))
         }
+        console.log(usuario.fechaNacimiento)
         return usuario
     }
+    
 
     toJson() {
-        let fechaNac = this.fechaNacimiento.toJSON().substring(0, 10)
         let usuarioJson = JSON.stringify(
             {
                 id: this.id,
                 nombre: this.nombre,
                 apellido: this.apellido,
                 puntaje: this.puntaje,
-                fechaNacimiento: fechaNac,
+                fechaNacimiento: this.fechaNacimiento.toISOString().slice(0, -1)+"-03:00",
                 amigos: this.amigos,
-                historial: this.historial.map(registro => registro.toJson()),
+                historial: this.historial
             }
         )
 
@@ -48,8 +49,6 @@ export class Usuario {
     }
 
 }
-
-
 export class RegistroRespuestas{
     public pregunta: string 
     public fechaRespuesta: Date 
@@ -58,17 +57,16 @@ export class RegistroRespuestas{
     static fromJson(json): RegistroRespuestas {
         let registro = new  RegistroRespuestas()
         registro.pregunta = json.pregunta
-        registro.fechaRespuesta = new Date(json.fechaRespuesta + "T00:00:00") 
+        registro.fechaRespuesta = new Date(json.fechaRespuesta) 
         registro.puntosOtorgados = json.puntosOtorgados
         
         return registro
     }
 
     toJson(){
-        let fechaRta = this.fechaRespuesta.toJSON().substring(0, 10)
         let registroJson = JSON.stringify({
             pregunta: this.pregunta,
-            fechaRespuesta: fechaRta,
+            fechaRespuesta: this.fechaRespuesta.toISOString().slice(0, -1)+"-03:00",
             puntaje: this.puntosOtorgados,    
         })
 

@@ -27,7 +27,7 @@ export class PerfilComponent implements OnInit {
   }
 
   get nacimientoUsuarioActual(): Date {
-    return this.usuario.fechaNacimiento
+    return this.usuariosService.usuarioLogueado.fechaNacimiento
   }
 
   cambiarFechaNacimiento(): void {
