@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<main class="login-container fondo-svg d-flex justify-content-center align-items-center">
+<main class="login-container fondo-svg d-flex justify-content-center align-items-center animate__animated animate__fadeIn">
     <div *ngIf="hayError" class="alert alert-danger alert-dismissible fade show animate__animated animate__fadeIn" data-dismiss="alert" aria-label="Close" role="alert">
         {{this.mensajeDeError}}
         <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="cerrarAlertError()">
@@ -14,7 +14,6 @@
             <input name="username" [(ngModel)]="contenidoInputUsuario" type="text" class="form-control mb-4" placeholder="Usuario" autoComplete="off">
             <input name="password" [(ngModel)]="contenidoInputContrasenia" type="password" class="form-control mb-4" placeholder="Contraseña">
             <button class="btn btn-block boton-primario mb-3" type="submit" (click)="login()">Ingresar</button>
-            <span class="ingresar-invitado" (click)="ingresarComoInvitado()">Ingresar como invitado</span>
         </form>
     </div>
 </main>

@@ -7,7 +7,7 @@ export function generarCartelDeAlerta(mensajeAlerta: string){
 
   var nuevoDiv = document.createElement("div");
   nuevoDiv.setAttribute('id', "cuerpoCartelAlerta");
-  nuevoDiv.setAttribute('class', "card bg-light animated animate__animated animate__fadeIn d-flex flex-column justify-content-center align-items-center p-2");
+  nuevoDiv.setAttribute('class', "card bg-light animate__animated animate__fadeIn d-flex flex-column justify-content-center align-items-center p-2");
   fondoPantallaCompleta.appendChild(nuevoDiv);
 
   var nuevoTexto = document.createElement("p");

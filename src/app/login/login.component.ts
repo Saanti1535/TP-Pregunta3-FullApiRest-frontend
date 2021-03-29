@@ -24,18 +24,13 @@ export class LoginComponent implements OnInit {
     try {
       await this.usuarioService.asignarUsuario(this.contenidoInputUsuario, this.contenidoInputContrasenia)
       this.router.navigate(['/busqueda'])
-    } catch(e) {
-        this.setError(this.usuarioService.descripcionError)
+    } catch (e) {
+      this.setError(this.usuarioService.descripcionError)
     }
   }
 
   login(): void {
     this.camposVacios() ? this.setError("Ingrese su usuario y contraseña") : this.ingresar()
-  }
-
-  ingresarComoInvitado() {
-    this.usuarioService.ingresarComoInvitado()
-    this.router.navigate(['/busqueda'])
   }
 
   camposVacios(): boolean {

@@ -10,12 +10,3 @@
     position: fixed;
     top: 14%;
 }
-
-.ingresar-invitado {
-    cursor: pointer;
-    transition: color .1s ease-in;
-}
-
-.ingresar-invitado:hover {
-    color: grey;
-}
