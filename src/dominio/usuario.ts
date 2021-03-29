@@ -27,7 +27,6 @@ export class Usuario {
         if( usuarioJSON.historial !== null){
             usuarioJSON.historial.forEach(registro => usuario.historial.push(RegistroRespuestas.fromJson(registro)))
         }
-        console.log(usuario.fechaNacimiento)
         return usuario
     }
     

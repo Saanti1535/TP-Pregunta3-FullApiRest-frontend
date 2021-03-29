@@ -39,7 +39,7 @@
                         <tbody class="" *ngFor="let registro of historial">
                             <tr>
                                 <td>{{registro.pregunta}}</td>
-                                <td>{{registro.fechaRespuesta}}</td>
+                                <td>{{registro.fechaRespuesta.toLocaleString()}}</td>
                                 <td>{{registro.puntosOtorgados}}</td>
                             </tr>
                         </tbody>

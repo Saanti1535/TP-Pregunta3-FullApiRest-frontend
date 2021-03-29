@@ -7,6 +7,7 @@ export function generarCartelDeAlerta(mensajeAlerta: string){
 
   var nuevoDiv = document.createElement("div");
   nuevoDiv.setAttribute('id', "cuerpoCartelAlerta");
+  nuevoDiv.setAttribute('class', "card bg-light animated animate__animated animate__fadeIn d-flex flex-column justify-content-center align-items-center p-2");
   fondoPantallaCompleta.appendChild(nuevoDiv);
 
   var nuevoTexto = document.createElement("p");
@@ -17,6 +18,7 @@ export function generarCartelDeAlerta(mensajeAlerta: string){
 
   var nuevoBoton = document.createElement("button");
   nuevoBoton.setAttribute('id', "botonDeAlerta");
+  nuevoBoton.setAttribute('class', "btn boton-primario")
   var textoBoton = document.createTextNode("Aceptar");
   nuevoBoton.appendChild(textoBoton); //añade texto al div creado.
   nuevoBoton.setAttribute('onClick', "body.removeChild(document.getElementById('fondoPantallaCompleta'))");

@@ -23,6 +23,7 @@ export class UsuarioService {
   async asignarUsuario(unNombreDeUsuario: string, unaContrasenia: string): Promise<void> {
     let usuarioJson = await this.http.post<Usuario>(REST_SERVER_URL + '/login/' + unNombreDeUsuario, JSON.stringify({ password: unaContrasenia })).toPromise()
       .catch((err: HttpErrorResponse) => {
+        this.hayError = true
         generarCartelDeAlerta(err.error)
       })
     this.usuarioLogueado = Usuario.fromJson(usuarioJson)
@@ -31,6 +32,7 @@ export class UsuarioService {
   async buscarUsuarioPorId(id: number): Promise<void> {
     let usuario = await this.http.get<Usuario>(REST_SERVER_URL + '/perfil/' + id).toPromise()
       .catch((err: HttpErrorResponse) => {
+        this.hayError = true
         generarCartelDeAlerta(err.error)
       })
     this.usuarioLogueado = Usuario.fromJson(usuario)
@@ -38,21 +40,27 @@ export class UsuarioService {
 
   async actualizarUsuario(usuario: Usuario) {
     await this.http.put(REST_SERVER_URL + '/perfil/' + usuario.id, usuario.toJson()).toPromise()
-      .catch((err: HttpErrorResponse) => {
-        this.mostrarError(err)
+      .then(() => {
+        this.hayError = false
       })
+      .catch((err: HttpErrorResponse) => {
+        this.hayError = true
+        generarCartelDeAlerta(err.error)
+      })
+
   }
 
-  async buscarUsuariosParaAgregar(busqueda: String){
+  async buscarUsuariosParaAgregar(busqueda: String) {
     let usuarios = await this.http.post(REST_SERVER_URL + '/usuarios/' + this.usuarioLogueado.id, JSON.stringify({ busqueda: busqueda })).toPromise()
-    .catch((err: HttpErrorResponse) => {
-      this.mostrarError(err)
-    })
+      .catch((err: HttpErrorResponse) => {
+        this.hayError = true
+        generarCartelDeAlerta(err.error)
+      })
+
     this.usuariosParaAgregar = usuarios
   }
 
-  ingresarComoInvitado(){
-    console.log("hola aca estoy")
+  ingresarComoInvitado() {
     this.usuarioLogueado = new Usuario(0, "Juan", "1234")
     this.usuarioLogueado.apellido = "perez"
     this.usuarioLogueado.puntaje = 500
@@ -69,7 +77,6 @@ export class UsuarioService {
   }
 
   mostrarError(err: HttpErrorResponse) {
-    console.log(err)
     this.hayError = true
     this.codigoError = err.status
     this.descripcionError = err.error
