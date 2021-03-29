@@ -23,7 +23,7 @@ export class Usuario {
         usuario.apellido = usuarioJSON.apellido
         usuario.puntaje = usuarioJSON.puntaje
         usuario.fechaNacimiento = new Date(usuarioJSON.fechaNacimiento)
-        usuarioJSON.amigos.forEach(amigo => usuario.amigos.push(amigo.username))
+        usuario.amigos = usuarioJSON.amigos
         if( usuarioJSON.historial !== null){
             usuarioJSON.historial.forEach(registro => usuario.historial.push(RegistroRespuestas.fromJson(registro)))
         }

@@ -54,6 +54,7 @@ export class PerfilComponent implements OnInit {
   async verSolapaMisAmigos() {
     this.modoAgregarAmigos = false
     this.modoVerAmigos = true
+    this.usuario = this.usuariosService.usuarioLogueado
   }
 
   async agregarAmigo(amigo) {

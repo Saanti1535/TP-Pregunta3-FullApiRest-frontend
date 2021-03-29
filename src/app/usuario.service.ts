@@ -10,7 +10,7 @@ export class UsuarioService {
   /* Varibales para cuando hay un error en el back */
   hayError: boolean = false
   codigoError: number
-  descripcionError: string
+  descripcionError: string = ''
 
   usuariosParaAgregar
   usuarioLogueado: Usuario
@@ -20,11 +20,10 @@ export class UsuarioService {
   async asignarUsuario(unNombreDeUsuario: string, unaContrasenia: string): Promise<void> {
     let usuarioJson = await this.http.post<Usuario>(REST_SERVER_URL + '/login/' + unNombreDeUsuario, JSON.stringify({ password: unaContrasenia })).toPromise()
       .catch((err: HttpErrorResponse) => {
+        (err.status === 0) ? this.descripcionError = 'El servidor se encuentra inactivo' : this.descripcionError = err.error
         this.hayError = true
-        generarCartelDeAlerta(err.error)
-        console.log(err)
       })
-
+    this.hayError = false
     this.usuarioLogueado = Usuario.fromJson(usuarioJson)
   }
 
