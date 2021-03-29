@@ -6,14 +6,15 @@ import { LoginComponent } from './login/login.component';
 import { NuevaPreguntaComponent } from './nueva-pregunta/nueva-pregunta.component';
 import { PerfilComponent } from './perfil/perfil.component';
 import { ResponderPreguntaComponent } from './responder-pregunta/responder-pregunta.component';
+import { SinUsuarioGuard } from './sin-usuario.guard';
 
 const routes: Routes = [
-  { path: 'login', component: LoginComponent },
-  { path: 'busqueda', component: BusquedaComponent },
-  { path: 'editar-pregunta', component: EditarPreguntaComponent },
-  { path: 'responder-pregunta', component: ResponderPreguntaComponent },
-  { path: 'perfil', component: PerfilComponent },
-  { path: 'nueva-pregunta', component: NuevaPreguntaComponent },
+  { path: 'login', component: LoginComponent},
+  { path: 'busqueda', component: BusquedaComponent,  canActivate: [SinUsuarioGuard] },
+  { path: 'editar-pregunta', component: EditarPreguntaComponent,  canActivate: [SinUsuarioGuard] },
+  { path: 'responder-pregunta', component: ResponderPreguntaComponent,  canActivate: [SinUsuarioGuard] },
+  { path: 'perfil', component: PerfilComponent,  canActivate: [SinUsuarioGuard] },
+  { path: 'nueva-pregunta', component: NuevaPreguntaComponent,  canActivate: [SinUsuarioGuard] },
   { path: '**', redirectTo: 'login' }
 ];
 

@@ -22,7 +22,9 @@ export class UsuarioService {
       .catch((err: HttpErrorResponse) => {
         this.hayError = true
         generarCartelDeAlerta(err.error)
+        console.log(err)
       })
+
     this.usuarioLogueado = Usuario.fromJson(usuarioJson)
   }
 
@@ -60,5 +62,9 @@ export class UsuarioService {
     this.codigoError = err.status
     this.descripcionError = err.error
     window.alert(err.status + ' ' + err.error)
+  }
+
+  estaLogueado(): boolean{
+    return this.usuarioLogueado !== undefined
   }
 }
