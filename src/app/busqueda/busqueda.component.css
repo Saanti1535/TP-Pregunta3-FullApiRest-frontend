@@ -1,0 +1,28 @@
+
+.seccion-busqueda {
+    height: 30%;
+}
+
+.seccion-preguntas {
+    height: 70%;
+}
+
+.preguntas {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(auto-fill, 145px);
+    grid-gap: 20px;
+    grid-auto-columns: 1fr;
+    grid-auto-rows: 145px;
+    justify-content: center;
+    align-content: center;
+    min-height: 58vh;
+}
+
+.boton-buscar {
+    width: 8rem;
+}
+
+.contenedorCradReceta{
+    display: inline-block;
+}

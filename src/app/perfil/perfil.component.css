@@ -1,0 +1,28 @@
+.tabla-preguntas {
+    max-height: 15rem;
+    overflow-y: scroll;
+}
+
+.fila-amigo {
+    background-color: var(--colorPrimarioOscuro)
+}
+
+.borderless td, .borderless th {
+    border: none;
+}
+
+.tabla-preguntas th {
+    background-color: var(--colorPrimarioOscuro);
+}
+
+.tabla-preguntas td {
+    background-color: var(--primarioTransparente);
+}
+
+.modal-header {
+    background-color: var(--colorPrimarioOscuro);
+}
+
+.modal-body, .modal-footer {
+    background-color: var(--primarioTransparente);
+}

@@ -1,0 +1,12 @@
+.login-container {
+    height: 100vh;
+}
+
+.app-logo {
+    font-size: 3rem;
+}
+
+.alert {
+    position: fixed;
+    top: 14%;
+}

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<app-header></app-header>
+<div class="container">
+    <main class="card w-100 d-flex flex-column card-grande card-fondo animate__animated animate__fadeIn">
+        <div class="card-header d-flex justify-content-between">
+            <h4 class="card-title font-weight-500">{{this.pregunta.pregunta}}</h4>
+            <p>Autor/a: {{this.pregunta.nombreAutor}}</p>
+        </div>
+        <div class="card-body cuerpo-editar-pregunta d-flex flex-column justify-content-around">
+            <div class="select-tipo-pregunta">
+                <label for="tipo-pregunta"><h6>Tipo de pregunta</h6></label>
+                <select class="form-control" selector="disabled">
+                    <option value="">Simple</option>
+                    <!-- <option value="">De riesgo</option>
+                    <option value="">Solidaria</option> -->
+                </select>
+            </div>
+            
+            <div class="respuestas">
+                <div *ngFor="let opcion of opciones">
+                    <app-card-opcion
+                    [opcion]="opcion"
+                    >
+                    </app-card-opcion>
+                </div> 
+            </div>
+
+            <div class="nueva-opcion">
+                <label for="nueva-opcion"><h6>Nueva opcion</h6></label>
+                <div class="gap-2 d-flex align-items-center">
+                    <input class="form-control w-50" id="nueva-opcion" type="text">
+                    <button class="btn boton-primario" (click)="agregar()">Agregar</button>
+                </div>
+            </div>
+            
+            
+        </div>
+
+
+        <div class="botones-aceptar-cancelar w-100 d-flex justify-content-end p-2">
+            <button class="btn boton-primario" (click)="aceptar()">Aceptar</button>
+            <button class="btn btn-primary ml-3" (click)="cancelar()">Cancelar</button>
+        </div>
+    </main>
+</div>

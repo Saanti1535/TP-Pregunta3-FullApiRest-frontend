@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<app-header></app-header>
+<div class="container animate__animated animate__fadeIn">
+    <main class="card w-100 d-flex flex-column card-grande card-fondo">
+        <div class="card-header d-flex justify-content-between">
+            <h4 class="card-title font-weight-500">{{nombre}}</h4>
+            <h4> {{puntosUsuarioActual}} Puntos</h4>
+        </div>
+        <div class="d-flex flex-column justify-content-around gap-2 card-body font-weight-500 pl-5 pr-5">
+            <div class="d-flex justify-content-between ">
+                <div class="">
+                    <label for="nombre">Nombre </label>
+                    <input id="nombre" class="form-control" [(ngModel)]="this.usuario.nombre"
+                        value="{{this.usuario.nombre}}" type="string">
+                </div>
+                <div class="">
+                    <label for="apellido">Apellido </label>
+                    <input id="apellido" class="form-control" [(ngModel)]="this.usuario.apellido"
+                        value="{{this.usuario.apellido}}" type="string">
+                </div>
+                <div class="">
+                    <label for="nacimiento">Nacimiento </label>
+                    <input id="nacimiento" class="form-control" type="date"
+                        value="{{nacimientoUsuarioActual | date:'yyyy-MM-dd'}}" (change)="cambiarFechaNacimiento()"
+                        id="fechaDeNacimiento">
+                </div>
+            </div>
+            <div class="preguntas-respondidas">
+                <label for="">Preguntas respondidas</label>
+                <div class="tabla-preguntas">
+                    <table class="table borderless">
+                        <thead>
+                            <tr>
+                                <th scope="col">Pregunta</th>
+                                <th scope="col">Fecha de respuesta</th>
+                                <th scope="col">Puntos</th>
+                            </tr>
+                        </thead>
+                        <tbody class="" *ngFor="let registro of historial">
+                            <tr>
+                                <td>{{registro.pregunta}}</td>
+                                <td>{{registro.fechaRespuesta.toLocaleString()}}</td>
+                                <td>{{registro.puntosOtorgados}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+            <div class="lista-de-amigos">
+                <button class="btn boton-primario" data-toggle="modal" data-target="#exampleModalScrollable">Lista de
+                    amigos</button>
+            </div>
+            <div class="w-100 d-flex justify-content-end">
+                <button class="btn boton-primario mr-3" (click)="aceptar()">Aceptar</button>
+                <button class="btn btn-primary" (click)="cancelar()">Cancelar</button>
+            </div>
+        </div>
+
+
+
+    </main>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header navbar-fondo">
+                <h5 class="modal-title" id="exampleModalScrollableTitle">Lista de amigos</h5>
+                <button class="btn btn-sm btn-secondary ml-3" *ngIf="modoAgregarAmigos" (click)="verSolapaMisAmigos()">Mis amigos</button>
+                <button class="btn btn-sm btn-dark ml-3" *ngIf="modoVerAmigos" (click)="verSolapaAgregarAmigos()">+ Agregar</button>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body p-2">
+                <table class="table borderless table-hover">
+                    <tbody class="">
+                        <div class="lista-de-amigos" *ngIf="modoVerAmigos">
+                            <tr *ngFor="let amigo of usuario.amigos" class="d-flex justify-content-around p-2">
+                                <td #amigo>{{amigo}}</td>
+                                <button class="btn btn-sm btn btn-outline-danger" (click)="eliminarAmigo(amigo)"><i class="fas fa-user-times"></i></button>
+                            </tr>
+                        </div>
+                        <div class="busqueda-amigos" *ngIf="modoAgregarAmigos">
+                            <div class="ml-2 d-flex">
+                                <input #username type="text" class="form-control form-control-sm mt-2 w-75" placeholder="Ingrese un nombre de usuario a buscar">
+                                <button class="btn btn-sm boton-primario ml-3 mt-2" (click)="cargarAmigosParaAgregarPorUsername(username.value)">Buscar</button>
+                            </div>
+                            <tr class="d-flex justify-content-around p-2 mt-2" *ngFor="let resultado of resultadoBusquedaAmigos">
+                                <span #resultado>{{resultado}}</span>
+                                <button class="btn btn-sm boton-primario" (click)="agregarAmigo(resultado)">Agregar amigo</button>
+                            </tr>
+                        </div> 
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

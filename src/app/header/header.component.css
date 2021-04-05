@@ -1,0 +1,17 @@
+.app-logo {
+    font-size: 1.5rem;
+}
+
+.botones-header span, a{
+    text-decoration: none;
+    color: rgb(214, 214, 214);
+    transition: color .1s ease-in;
+}
+
+.botones-header span:hover, a:hover{
+    color: rgb(255, 253, 253);
+}
+
+.botones-header span {
+    cursor: pointer;
+}

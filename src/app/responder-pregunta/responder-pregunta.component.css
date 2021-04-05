@@ -1,0 +1,5 @@
+.respuestas {
+    overflow-y: scroll;
+    max-height: 35rem;
+}
+
