@@ -34,4 +34,13 @@ export class Pregunta {
 
         return preguntaJSON
     }
+
+    opcionesUpdateToJSON() {
+        let preguntaJSON = JSON.stringify(
+            {
+                opciones: this.opciones,
+            }
+        )
+        return preguntaJSON
+    }
 }
