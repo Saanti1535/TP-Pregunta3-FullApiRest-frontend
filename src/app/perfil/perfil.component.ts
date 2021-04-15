@@ -58,7 +58,7 @@ export class PerfilComponent implements OnInit {
   }
 
   async agregarAmigo(amigo) {
-    this.usuariosService.usuarioLogueado.amigos.push(amigo)
+    this.usuario.amigos.push(amigo)
     await this.usuariosService.actualizarUsuario(this.usuario)
     this.usuario.amigos = this.usuariosService.usuarioLogueado.amigos
     this.resultadoBusquedaAmigos = this.resultadoBusquedaAmigos.filter(resultado => resultado !== amigo)

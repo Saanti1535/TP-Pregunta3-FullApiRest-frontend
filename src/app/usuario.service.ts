@@ -54,6 +54,7 @@ export class UsuarioService {
       .catch((err: HttpErrorResponse) => {
         this.hayError = true
         generarCartelDeAlerta(err.error)
+        this.buscarUsuarioPorId(this.usuarioLogueado.id)
       })
     this.usuariosParaAgregar = usuarios
   }
