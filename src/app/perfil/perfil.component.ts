@@ -42,7 +42,7 @@ export class PerfilComponent implements OnInit {
 
   async aceptar() {
     await this.usuariosService.actualizarUsuario(this.usuario)
-    if (!this.usuariosService.hayError) { this.router.navigate(['/busqueda']); this.usuario = this.usuariosService.usuarioLogueado }
+    if (!this.usuariosService.hayError) { this.router.navigate(['/busqueda']); }
   }
 
   async verSolapaAgregarAmigos() {
@@ -60,6 +60,7 @@ export class PerfilComponent implements OnInit {
   async agregarAmigo(amigo) {
     this.usuariosService.usuarioLogueado.amigos.push(amigo)
     await this.usuariosService.actualizarUsuario(this.usuario)
+    this.usuario.amigos = this.usuariosService.usuarioLogueado.amigos
     this.resultadoBusquedaAmigos = this.resultadoBusquedaAmigos.filter(resultado => resultado !== amigo)
   }
 

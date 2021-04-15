@@ -41,20 +41,23 @@ export class Usuario {
                 fechaNacimiento: this.fechaNacimiento.toISOString().slice(0, -1)+"-03:00",
                 amigos: this.amigos,
                 historial: this.historial
+                
             }
+            
         )
-
         return usuarioJson
     }
 
 }
 export class RegistroRespuestas{
+    private id: number
     public pregunta: string 
     public fechaRespuesta: Date 
     public puntosOtorgados: number
 
     static fromJson(json): RegistroRespuestas {
         let registro = new  RegistroRespuestas()
+        registro.id = json.id
         registro.pregunta = json.pregunta
         registro.fechaRespuesta = new Date(json.fechaRespuesta) 
         registro.puntosOtorgados = json.puntosOtorgados
@@ -64,10 +67,12 @@ export class RegistroRespuestas{
 
     toJson(){
         let registroJson = JSON.stringify({
+            id: this.id,
             pregunta: this.pregunta,
             fechaRespuesta: this.fechaRespuesta.toISOString().slice(0, -1)+"-03:00",
             puntaje: this.puntosOtorgados,    
         })
+        
 
         return registroJson
     }

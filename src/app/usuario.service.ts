@@ -40,11 +40,13 @@ export class UsuarioService {
     await this.http.put(REST_SERVER_URL + '/perfil/' + usuario.id, usuario.toJson()).toPromise()
       .then(() => {
         this.hayError = false
+        this.buscarUsuarioPorId(usuario.id) // Para que actualice en el front tambien
       })
       .catch((err: HttpErrorResponse) => {
         this.hayError = true
         generarCartelDeAlerta(err.error)
       })
+      
   }
 
   async buscarUsuariosParaAgregar(busqueda: String) {
