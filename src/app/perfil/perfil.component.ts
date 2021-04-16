@@ -71,13 +71,13 @@ export class PerfilComponent implements OnInit {
   }
 
   async cargarAmigosParaAgregar() {
-    await this.usuariosService.buscarUsuariosParaAgregar('')
-    this.resultadoBusquedaAmigos = this.usuariosService.usuariosParaAgregar
+    this.resultadoBusquedaAmigos = await this.usuariosService.buscarAmigosParaAgregar('')
+    // this.resultadoBusquedaAmigos = this.usuariosService.usuariosParaAgregar
   }
 
-  async cargarAmigosParaAgregarPorUsername(busqueda) {
-    await this.usuariosService.buscarUsuariosParaAgregar(busqueda)
-    this.resultadoBusquedaAmigos = this.usuariosService.usuariosParaAgregar
+  async cargarAmigosParaAgregarPorUsername(usernameABuscar) {
+    this.resultadoBusquedaAmigos = await this.usuariosService.buscarAmigosParaAgregar(usernameABuscar)
+    // this.resultadoBusquedaAmigos = this.usuariosService.usuariosParaAgregar
   }
 
   get historial(): RegistroRespuestas[] {

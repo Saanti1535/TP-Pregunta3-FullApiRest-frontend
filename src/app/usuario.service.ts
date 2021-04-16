@@ -49,14 +49,15 @@ export class UsuarioService {
       
   }
 
-  async buscarUsuariosParaAgregar(busqueda: String) {
-    let usuarios = await this.http.post(REST_SERVER_URL + '/usuarios/' + this.usuarioLogueado.id, JSON.stringify({ busqueda: busqueda })).toPromise()
+  async buscarAmigosParaAgregar(usernameABuscar: String) {
+    let usuarios = await this.http.post(REST_SERVER_URL + '/usuarios/' + this.usuarioLogueado.id, JSON.stringify({ usernameABuscar: usernameABuscar })).toPromise()
       .catch((err: HttpErrorResponse) => {
         this.hayError = true
         generarCartelDeAlerta(err.error)
         this.buscarUsuarioPorId(this.usuarioLogueado.id)
       })
-    this.usuariosParaAgregar = usuarios
+    // this.usuariosParaAgregar = usuarios
+    return usuarios
   }
 
   mostrarError(err: HttpErrorResponse) {
