@@ -58,7 +58,7 @@ export class PreguntaService {
 
   //Como sólo se pueden actualizar las opciones, mandamos únicamente eso (en 'pregunta.opcionesUpdateToJSON()')
   async actualizarPregunta(pregunta: Pregunta) {
-    await this.http.put(REST_SERVER_URL + '/busqueda/pregunta/' + pregunta.id, pregunta.toJSON()).toPromise()
+    await this.http.put(REST_SERVER_URL + '/busqueda/pregunta/' + pregunta.id, pregunta.opcionesUpdateToJSON()).toPromise()
   }
 
   async crearPregunta(nuevaPregunta: Pregunta, idAutor: number, puntos: number) {
