@@ -34,6 +34,7 @@ export class UsuarioService {
         generarCartelDeAlerta(err.error)
       })
     this.usuarioLogueado = Usuario.fromJson(usuario)
+    
   }
 
   async actualizarUsuario(usuario: Usuario) {

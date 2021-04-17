@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { UsuarioService } from '../usuario.service';
 
 @Component({
   selector: 'app-header',
@@ -8,12 +9,13 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(public usuariosService: UsuarioService, private router: Router) { }
 
   ngOnInit(): void {
   }
 
-  perfil() {
+  async perfil() {
+    await this.usuariosService.buscarUsuarioPorId(this.usuariosService.usuarioLogueado.id)
     this.router.navigate(['/perfil'])
   }
 

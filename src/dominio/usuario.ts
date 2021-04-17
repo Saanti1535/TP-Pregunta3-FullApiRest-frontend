@@ -19,12 +19,12 @@ export class Usuario {
         let usuario = new Usuario()
         usuario.id = usuarioJSON.id
         usuario.username = usuarioJSON.username
-        usuario.nombre = usuarioJSON.nombre
-        usuario.apellido = usuarioJSON.apellido
-        usuario.puntaje = usuarioJSON.puntaje
-        usuario.fechaNacimiento = new Date(usuarioJSON.fechaNacimiento)
-        usuario.amigos = usuarioJSON.amigos
-        if( usuarioJSON.historial !== null){
+        usuario.nombre = usuarioJSON.nombre 
+        usuario.apellido = usuarioJSON.apellido 
+        usuario.puntaje = usuarioJSON.puntaje 
+        usuario.fechaNacimiento = new Date(usuarioJSON.fechaNacimiento) 
+        usuario.amigos = usuarioJSON.amigos 
+        if( usuarioJSON.historial != null){
             usuarioJSON.historial.forEach(registro => usuario.historial.push(RegistroRespuestas.fromJson(registro)))
         }
         return usuario
