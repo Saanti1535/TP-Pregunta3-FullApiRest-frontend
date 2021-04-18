@@ -28,7 +28,7 @@ export class UsuarioService {
   }
 
   async buscarUsuarioPorId(id: number): Promise<void> {
-    let usuario = await this.http.get<Usuario>(REST_SERVER_URL + '/perfil/' + id).toPromise()
+    let usuario = await this.http.get<Usuario>(REST_SERVER_URL + '/usuario/' + id).toPromise()
       .catch((err: HttpErrorResponse) => {
         this.hayError = true
         generarCartelDeAlerta(err.error)
@@ -38,7 +38,7 @@ export class UsuarioService {
   }
 
   async actualizarUsuario(usuario: Usuario) {
-    await this.http.put(REST_SERVER_URL + '/perfil/' + usuario.id, usuario.toJson()).toPromise()
+    await this.http.put(REST_SERVER_URL + '/actualizar/' + usuario.id, usuario.toJson()).toPromise()
       .then(() => {
         this.hayError = false
         this.buscarUsuarioPorId(usuario.id) // Para que actualice en el front tambien
@@ -51,7 +51,7 @@ export class UsuarioService {
   }
 
   async buscarAmigosParaAgregar(usernameABuscar: String) {
-    let usuarios = await this.http.post(REST_SERVER_URL + '/usuarios/' + this.usuarioLogueado.id, JSON.stringify({ usernameABuscar: usernameABuscar })).toPromise()
+    let usuarios = await this.http.get(REST_SERVER_URL + '/usuarios/' + this.usuarioLogueado.id + ',' + usernameABuscar).toPromise()
       .catch((err: HttpErrorResponse) => {
         this.hayError = true
         generarCartelDeAlerta(err.error)
