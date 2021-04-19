@@ -6,6 +6,7 @@ export class Pregunta {
     public nombreAutor: string
     public type: string
     public puntos: number
+    public activa: boolean
     //Solo se utiliza para enviar del front al back, cuando viene del back la respuesta correcta no se trae.
     public respuestaCorrecta: string
 
@@ -18,6 +19,7 @@ export class Pregunta {
         pregunta.nombreAutor = preguntaJSON.nombreAutor
         pregunta.type = preguntaJSON.type
         pregunta.puntos = preguntaJSON.puntos
+        pregunta.activa = preguntaJSON.activa
         return pregunta
     }
 
