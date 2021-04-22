@@ -26,3 +26,14 @@
 .modal-body, .modal-footer {
     background-color: var(--primarioTransparente);
 }
+
+.listado-amigos {
+    font-size: 1.1em;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.listado-amigos_titulo {
+    color: rgb(214, 214, 214);
+    font-weight: bold;
+}

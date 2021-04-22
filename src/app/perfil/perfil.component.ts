@@ -3,6 +3,7 @@ import { UsuarioService } from './../usuario.service';
 import { Router } from '@angular/router';
 import { Usuario } from 'src/dominio/usuario';
 import { RegistroRespuestas } from '../../dominio/usuario';
+import { generarCartelDeAlerta } from '../configuration';
 
 @Component({
   selector: 'app-perfil',
@@ -33,7 +34,13 @@ export class PerfilComponent implements OnInit {
   cambiarFechaNacimiento(): void {
     let inputFecha = document.getElementById('fechaDeNacimiento') as HTMLInputElement;
     let nuevaFecha = new Date(inputFecha.value)
-    this.usuario.fechaNacimiento = nuevaFecha
+    if (this.esFechaValida(nuevaFecha)) {
+      this.usuario.fechaNacimiento = nuevaFecha
+    } else generarCartelDeAlerta('Si deja la fecha de nacimiento vacía, se mantendrá la última ingresada')
+  }
+
+  esFechaValida(nuevaFecha): boolean {
+    return nuevaFecha.getTime() === nuevaFecha.getTime()
   }
 
   cancelar() {
@@ -44,6 +51,7 @@ export class PerfilComponent implements OnInit {
     await this.usuariosService.actualizarUsuario(this.usuario)
     if (!this.usuariosService.hayError) { this.router.navigate(['/busqueda']); }
   }
+
 
   async verSolapaAgregarAmigos() {
     this.modoVerAmigos = false
@@ -70,12 +78,10 @@ export class PerfilComponent implements OnInit {
 
   async cargarAmigosParaAgregar() {
     this.resultadoBusquedaAmigos = await this.usuariosService.buscarAmigosParaAgregar('')
-    // this.resultadoBusquedaAmigos = this.usuariosService.usuariosParaAgregar
   }
 
   async cargarAmigosParaAgregarPorUsername(usernameABuscar) {
     this.resultadoBusquedaAmigos = await this.usuariosService.buscarAmigosParaAgregar(usernameABuscar)
-    // this.resultadoBusquedaAmigos = this.usuariosService.usuariosParaAgregar
   }
 
   get historial(): RegistroRespuestas[] {
