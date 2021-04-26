@@ -63,6 +63,7 @@ export class PreguntaService {
 
   async crearPregunta(nuevaPregunta: Pregunta, idAutor: number, puntos: number) {
     await this.http.put(REST_SERVER_URL + '/crearPregunta/'+ idAutor +'/'+ puntos, nuevaPregunta.toJSON()).toPromise()
+    
   }
 
 

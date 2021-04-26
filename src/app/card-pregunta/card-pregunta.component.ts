@@ -26,6 +26,10 @@ export class CardPreguntaComponent implements OnInit {
     }
   }
 
+  get yaRespondio() {
+    return this.usuarioService.usuarioLogueado.historial.some(registro => registro.pregunta == this.pregunta.pregunta)
+  }
+
   async responder(): Promise<void> {
     try{
       await this.preguntaService.getPreguntaPorId(this.pregunta.id)

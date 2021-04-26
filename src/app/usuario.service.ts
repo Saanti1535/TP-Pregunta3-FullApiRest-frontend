@@ -61,6 +61,10 @@ export class UsuarioService {
     return usuarios
   }
 
+  async getRespondida(pregunta) {
+    let respondida = await this.http.get(REST_SERVER_URL + '/respondida/' + pregunta + ", " + this.usuarioLogueado.id)
+  }
+
   mostrarError(err: HttpErrorResponse) {
     this.hayError = true
     this.codigoError = err.status

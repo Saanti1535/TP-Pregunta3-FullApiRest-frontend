@@ -3,3 +3,24 @@
     min-height: 8rem;
     font-size: .9rem;
 }
+
+.inactiva {
+    position: relative;
+    top: 1rem;
+    color: rgba(105, 0, 0, 0.815);
+}
+
+.inactiva i {
+    margin-right: .2rem;
+} 
+
+.respondida {
+    position: relative;
+    top: 1rem;
+    color: rgba(2, 88, 9, 0.815);
+}
+
+.respondida i {
+    margin-right: .2rem;
+}
+
