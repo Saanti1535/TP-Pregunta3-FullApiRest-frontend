@@ -20,6 +20,7 @@
                 <div *ngFor="let opcion of opciones">
                     <app-card-opcion
                     [opcion]="opcion"
+                    (opcionActualizada)="actualizarOpcionCorrecta($event)"
                     >
                     </app-card-opcion>
                 </div> 

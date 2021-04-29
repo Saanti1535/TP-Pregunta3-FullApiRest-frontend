@@ -11,6 +11,7 @@ import * as $ from 'jquery';
 })
 export class EditarPreguntaComponent implements OnInit {
   pregunta = this.preguntaService.preguntaActual
+  respuestaCorrecta: string = this.preguntaService.preguntaActual.respuestaCorrecta
 
   constructor(private router: Router, public preguntaService: PreguntaService) { }
 
@@ -19,6 +20,10 @@ export class EditarPreguntaComponent implements OnInit {
 
   get opciones(): String[] {
     return this.pregunta.opciones;
+  }
+
+  actualizarOpcionCorrecta(nuevaOpcionCorrecta){
+    this.preguntaService.preguntaActual.respuestaCorrecta = nuevaOpcionCorrecta
   }
 
   agregar(){

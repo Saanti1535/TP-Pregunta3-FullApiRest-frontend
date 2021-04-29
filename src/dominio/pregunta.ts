@@ -41,6 +41,7 @@ export class Pregunta {
         let preguntaJSON = JSON.stringify(
             {
                 opciones: this.opciones,
+                respuestaCorrecta: this.respuestaCorrecta
             }
         )
         return preguntaJSON

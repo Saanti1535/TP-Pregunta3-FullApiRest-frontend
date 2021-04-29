@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { PreguntaService } from '../pregunta.service';
 
@@ -9,6 +9,7 @@ import { PreguntaService } from '../pregunta.service';
 })
 export class CardOpcionComponent implements OnInit {
   @Input() opcion: string 
+  @Output() opcionActualizada = new EventEmitter<string>();
   esEdicion: boolean = false
   pregunta = this.preguntaService.preguntaActual
 
@@ -16,6 +17,10 @@ export class CardOpcionComponent implements OnInit {
 
   ngOnInit() {
     this.revisarSiEsEdicion()
+  }
+
+  actualizarOpcion(nuevaOpcion: string){
+    this.opcionActualizada.emit(nuevaOpcion)
   }
 
   revisarSiEsEdicion(){
