@@ -38,10 +38,11 @@ export class Pregunta {
     }
 
     opcionesUpdateToJSON() {
+        
         let preguntaJSON = JSON.stringify(
             {
                 opciones: this.opciones,
-                respuestaCorrecta: this.respuestaCorrecta
+                respuestaCorrecta: this.respuestaCorrecta !== null ? this.respuestaCorrecta : null
             }
         )
         return preguntaJSON

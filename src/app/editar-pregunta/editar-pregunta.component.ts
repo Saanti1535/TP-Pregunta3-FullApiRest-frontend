@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PreguntaService } from '../pregunta.service';
+import { generarCartelDeAlerta } from '../configuration';
 import * as $ from 'jquery';
 
 
@@ -37,8 +38,13 @@ export class EditarPreguntaComponent implements OnInit {
   }
   
   async aceptar() {
-    await this.preguntaService.actualizarPregunta(this.pregunta)
-    this.router.navigate(['/busqueda'])
+    try{
+      await this.preguntaService.actualizarPregunta(this.pregunta)
+      this.router.navigate(['/busqueda'])
+    } catch(e) {
+      generarCartelDeAlerta(e.error)
+    }
+    
   }
 
   cancelar() {
