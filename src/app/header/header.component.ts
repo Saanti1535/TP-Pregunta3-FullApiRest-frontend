@@ -15,7 +15,6 @@ export class HeaderComponent implements OnInit {
   }
 
   async perfil() {
-    await this.usuariosService.buscarUsuarioPorId(this.usuariosService.usuarioLogueado.id)
     this.router.navigate(['/perfil'])
   }
 
