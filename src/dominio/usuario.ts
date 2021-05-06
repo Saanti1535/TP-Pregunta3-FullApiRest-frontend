@@ -45,6 +45,7 @@ export class Usuario {
             }
             
         )
+        console.log(usuarioJson)
         return usuarioJson
     }
 

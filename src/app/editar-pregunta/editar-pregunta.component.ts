@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PreguntaService } from '../pregunta.service';
 import { generarCartelDeAlerta } from '../configuration';
 import * as $ from 'jquery';
@@ -12,13 +12,16 @@ import { Pregunta } from 'src/dominio/pregunta';
   styleUrls: ['./editar-pregunta.component.css']
 })
 export class EditarPreguntaComponent implements OnInit {
-  pregunta = new Pregunta()
-  respuestaCorrecta: string = this.preguntaService.preguntaActual.respuestaCorrecta
+  pregunta: Pregunta
+  respuestaCorrecta: string 
 
-  constructor(private router: Router, public preguntaService: PreguntaService) { }
+  constructor(private router: Router, private route: ActivatedRoute, public preguntaService: PreguntaService) { }
 
   async ngOnInit() {
-    this.pregunta = await this.preguntaService.getPreguntaPorId(this.preguntaService.preguntaActual.id)
+    const id = Number(this.route.snapshot.paramMap.get('id'));
+    console.log(id)
+    this.pregunta = await this.preguntaService.getPreguntaPorId(id)
+    this.respuestaCorrecta = this.pregunta.respuestaCorrecta
   }
 
   get opciones(): String[] {

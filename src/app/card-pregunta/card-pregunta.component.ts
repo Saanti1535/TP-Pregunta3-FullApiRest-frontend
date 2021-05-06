@@ -14,12 +14,11 @@ import { UsuarioService } from '../usuario.service';
 export class CardPreguntaComponent implements OnInit {
   @Input() pregunta: Pregunta 
   esDeUsuario: boolean = false
-  usuario: Usuario = new Usuario()
+  @Input() usuario: Usuario 
 
   constructor(private router: Router, public preguntaService: PreguntaService, public usuarioService: UsuarioService) { }
 
   async ngOnInit() {
-    this.usuario = await this.usuarioService.buscarUsuarioPorId(this.usuarioService.usuarioLogueadoId)
     this.esDeUsuarioLogueado()
   }
 
@@ -33,18 +32,12 @@ export class CardPreguntaComponent implements OnInit {
     return this.usuario.historial.some(registro => registro.pregunta == this.pregunta.pregunta)
   }
 
-  async responder(): Promise<void> {
-    try{
-      await this.preguntaService.getPreguntaPorId(this.pregunta.id)
-      this.router.navigate(['/responder-pregunta'])
-    }catch(e){
-      generarCartelDeAlerta(e.error)
-    }
+  responder(){
+      this.router.navigate(['/responder-pregunta',this.pregunta.id])
   }
 
-  async editar(){
-    await this.preguntaService.getPreguntaPorId(this.pregunta.id)
-    this.router.navigate(['/editar-pregunta'])
+  editar(){
+    this.router.navigate(['/editar-pregunta',this.pregunta.id])
   }
 
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PreguntaService } from '../pregunta.service';
 import * as $ from 'jquery';
 import { UsuarioService } from '../usuario.service';
@@ -13,10 +13,11 @@ import { Pregunta } from 'src/dominio/pregunta';
 })
 export class ResponderPreguntaComponent implements OnInit {
   pregunta = new Pregunta()
-  constructor(private router: Router, public preguntaService: PreguntaService, public usuarioService: UsuarioService) { }
+  constructor(private router: Router, private route: ActivatedRoute, public preguntaService: PreguntaService, public usuarioService: UsuarioService) { }
 
   async ngOnInit() {
-    this.pregunta = await this.preguntaService.getPreguntaPorId(this.preguntaService.preguntaActual.id)
+    const id = Number(this.route.snapshot.paramMap.get('id'));
+    this.pregunta = await this.preguntaService.getPreguntaPorId(id)
   }
 
   get opciones(): String[] {

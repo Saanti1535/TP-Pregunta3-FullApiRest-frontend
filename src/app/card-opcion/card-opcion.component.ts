@@ -12,12 +12,11 @@ export class CardOpcionComponent implements OnInit {
   @Input() opcion: string 
   @Output() opcionActualizada = new EventEmitter<string>();
   esEdicion: boolean = false
-  pregunta = new Pregunta()
+  @Input() pregunta: Pregunta
 
   constructor(private router: Router, public preguntaService: PreguntaService) { }
 
   async ngOnInit() {
-    this.pregunta = await this.preguntaService.getPreguntaPorId(this.preguntaService.preguntaActual.id)
     this.revisarSiEsEdicion()
   }
 

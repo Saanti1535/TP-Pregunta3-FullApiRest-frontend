@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <app-header></app-header>
-<div class="container">
+<div class="container" *ngIf="pregunta">
     <main class="card w-100 d-flex flex-column card-grande card-fondo animate__animated animate__fadeIn">
         <div class="card-header d-flex justify-content-between">
             <h4 class="card-title font-weight-500">{{this.pregunta.pregunta}}</h4>
@@ -20,6 +20,7 @@
                 <div *ngFor="let opcion of opciones">
                     <app-card-opcion
                     [opcion]="opcion"
+                    [pregunta]="pregunta"
                     (opcionActualizada)="actualizarOpcionCorrecta($event)"
                     >
                     </app-card-opcion>
