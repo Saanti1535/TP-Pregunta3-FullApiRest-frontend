@@ -11,16 +11,19 @@ import { generarCartelDeAlerta } from '../configuration';
   styleUrls: ['./perfil.component.css']
 })
 export class PerfilComponent implements OnInit {
-  usuario: Usuario = this.usuariosService.usuarioLogueado
-  nombre = this.usuariosService.usuarioLogueado.nombre
+  usuario: Usuario = new Usuario()
+  nombre: String
+  historial: RegistroRespuestas[]
   resultadoBusquedaAmigos
   modoVerAmigos = true
   modoAgregarAmigos = false
 
   constructor(public usuariosService: UsuarioService, private router: Router) { }
 
-  ngOnInit(): void {
-    this.usuariosService.buscarUsuarioPorId(this.usuario.id) // Por su hubieron cambios que se cancelaron en el front, se trae de nuevo la info del back
+  async ngOnInit() {
+    this.usuario = await this.usuariosService.buscarUsuarioPorId(this.usuariosService.usuarioLogueadoId) // Por su hubieron cambios que se cancelaron en el front, se trae de nuevo la info del back
+    this.nombre = this.usuario.nombre
+    this.historial = this.usuario.historial
   }
 
   get puntosUsuarioActual(): number {
@@ -28,7 +31,7 @@ export class PerfilComponent implements OnInit {
   }
 
   get nacimientoUsuarioActual(): Date {
-    return this.usuariosService.usuarioLogueado.fechaNacimiento
+    return this.usuario.fechaNacimiento
   }
 
   cambiarFechaNacimiento(): void {
@@ -48,7 +51,7 @@ export class PerfilComponent implements OnInit {
   }
 
   async aceptar() {
-    await this.usuariosService.actualizarUsuario(this.usuario)
+    this.usuario = await this.usuariosService.actualizarUsuario(this.usuario)
     if (!this.usuariosService.hayError) { this.router.navigate(['/busqueda']); }
   }
 
@@ -62,18 +65,17 @@ export class PerfilComponent implements OnInit {
   async verSolapaMisAmigos() {
     this.modoAgregarAmigos = false
     this.modoVerAmigos = true
-    this.usuario = this.usuariosService.usuarioLogueado
   }
 
   async agregarAmigo(amigo) {
     this.usuario.amigos.push(amigo)
-    await this.usuariosService.actualizarUsuario(this.usuario)
+    this.usuario = await this.usuariosService.actualizarUsuario(this.usuario)
     this.resultadoBusquedaAmigos = this.resultadoBusquedaAmigos.filter(resultado => resultado !== amigo)
   }
 
   async eliminarAmigo(amigoAEliminar) {
     this.usuario.amigos = this.usuario.amigos.filter(amigo => amigo !== amigoAEliminar)
-    await this.usuariosService.actualizarUsuario(this.usuario)
+    this.usuario = await this.usuariosService.actualizarUsuario(this.usuario)
   }
 
   async cargarAmigosParaAgregar() {
@@ -82,10 +84,6 @@ export class PerfilComponent implements OnInit {
 
   async cargarAmigosParaAgregarPorUsername(usernameABuscar) {
     this.resultadoBusquedaAmigos = await this.usuariosService.buscarAmigosParaAgregar(usernameABuscar)
-  }
-
-  get historial(): RegistroRespuestas[] {
-    return this.usuario.historial
   }
 
 }

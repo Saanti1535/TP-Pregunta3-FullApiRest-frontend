@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { PreguntaService } from '../pregunta.service';
 import { generarCartelDeAlerta } from '../configuration';
 import * as $ from 'jquery';
+import { Pregunta } from 'src/dominio/pregunta';
 
 
 @Component({
@@ -11,12 +12,13 @@ import * as $ from 'jquery';
   styleUrls: ['./editar-pregunta.component.css']
 })
 export class EditarPreguntaComponent implements OnInit {
-  pregunta = this.preguntaService.preguntaActual
+  pregunta = new Pregunta()
   respuestaCorrecta: string = this.preguntaService.preguntaActual.respuestaCorrecta
 
   constructor(private router: Router, public preguntaService: PreguntaService) { }
 
-  ngOnInit(): void {
+  async ngOnInit() {
+    this.pregunta = await this.preguntaService.getPreguntaPorId(this.preguntaService.preguntaActual.id)
   }
 
   get opciones(): String[] {
@@ -24,7 +26,7 @@ export class EditarPreguntaComponent implements OnInit {
   }
 
   actualizarOpcionCorrecta(nuevaOpcionCorrecta){
-    this.preguntaService.preguntaActual.respuestaCorrecta = nuevaOpcionCorrecta
+    this.pregunta.respuestaCorrecta = nuevaOpcionCorrecta
   }
 
   agregar(){

@@ -37,8 +37,9 @@ export class PreguntaService {
   }
 
   async getPreguntaPorId(id: number){
-    const pregunta = await this.http.get<Pregunta>(REST_SERVER_URL + '/busqueda/pregunta/' + id +'/'+this.usuarioService.usuarioLogueado.id).toPromise()
+    const pregunta = await this.http.get<Pregunta>(REST_SERVER_URL + '/busqueda/pregunta/' + id +'/'+this.usuarioService.usuarioLogueadoId).toPromise()
     this.preguntaActual = Pregunta.fromJSON(pregunta)
+    return Pregunta.fromJSON(pregunta)
   }
 
   async revisarRespuesta(respuesta: string, idUsuario: number): Promise<string> {

@@ -74,7 +74,7 @@ export class NuevaPreguntaComponent implements OnInit {
       this.puntos = this.puntajeSolidario
     }
     try{
-      await this.preguntaService.crearPregunta(this.nuevaPregunta, this.usuarioService.usuarioLogueado.id, this.puntos)
+      await this.preguntaService.crearPregunta(this.nuevaPregunta, this.usuarioService.usuarioLogueadoId, this.puntos)
       this.router.navigate(['/busqueda'])
     }catch(e){
       generarCartelDeAlerta(e.error)
