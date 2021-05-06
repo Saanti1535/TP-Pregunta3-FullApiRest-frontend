@@ -76,6 +76,7 @@ export class NuevaPreguntaComponent implements OnInit {
     try{
       await this.preguntaService.crearPregunta(this.nuevaPregunta, this.usuarioService.usuarioLogueadoId, this.puntos)
       this.router.navigate(['/busqueda'])
+      generarCartelDeAlerta("Se creó la pregunta")
     }catch(e){
       generarCartelDeAlerta(e.error)
     }

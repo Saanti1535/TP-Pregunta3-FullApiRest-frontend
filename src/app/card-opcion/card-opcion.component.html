@@ -1,7 +1,7 @@
 <div class="respuesta d-flex justify-content-between align-items-center p-2">
   <label>{{this.opcion}}</label>
   <div class="botones">
-      <input type="radio" name="opciones" value="{{this.opcion}}" (click)="actualizarOpcion(opcionCorrecta.value)" #opcionCorrecta>
+      <input type="radio" name="opciones" [checked]="esRespuestaCorrecta" value="{{this.opcion}}" (click)="actualizarOpcion(opcionCorrecta.value)" #opcionCorrecta>
       <button *ngIf="esEdicion" class="btn btn-danger ml-3" (click)="borrarOpcion()"><i class="far fa-trash-alt"></i></button>
   </div>
 </div>

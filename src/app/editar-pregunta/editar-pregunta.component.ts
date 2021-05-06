@@ -43,6 +43,7 @@ export class EditarPreguntaComponent implements OnInit {
     try{
       await this.preguntaService.actualizarPregunta(this.pregunta)
       this.router.navigate(['/busqueda'])
+      generarCartelDeAlerta("Se modificó la pregunta")
     } catch(e) {
       generarCartelDeAlerta(e.error)
     }

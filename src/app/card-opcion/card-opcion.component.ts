@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
+import { Pregunta } from 'src/dominio/pregunta';
 import { PreguntaService } from '../pregunta.service';
 
 @Component({
@@ -11,16 +12,21 @@ export class CardOpcionComponent implements OnInit {
   @Input() opcion: string 
   @Output() opcionActualizada = new EventEmitter<string>();
   esEdicion: boolean = false
-  pregunta = this.preguntaService.preguntaActual
+  pregunta = new Pregunta()
 
   constructor(private router: Router, public preguntaService: PreguntaService) { }
 
-  ngOnInit() {
+  async ngOnInit() {
+    this.pregunta = await this.preguntaService.getPreguntaPorId(this.preguntaService.preguntaActual.id)
     this.revisarSiEsEdicion()
   }
 
   actualizarOpcion(nuevaOpcion: string){
     this.opcionActualizada.emit(nuevaOpcion)
+  }
+
+  get esRespuestaCorrecta() {
+    return this.opcion === this.pregunta.respuestaCorrecta
   }
 
   revisarSiEsEdicion(){

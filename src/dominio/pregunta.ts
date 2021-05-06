@@ -20,6 +20,7 @@ export class Pregunta {
         pregunta.type = preguntaJSON.type
         pregunta.puntos = preguntaJSON.puntos
         pregunta.activa = preguntaJSON.activa
+        pregunta.respuestaCorrecta = preguntaJSON.respuestaCorrecta
         return pregunta
     }
 
