@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { generarCartelDeAlerta, REST_SERVER_URL } from './configuration';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { RegistroRespuestas, Usuario } from 'src/dominio/usuario';
+import { Usuario } from 'src/dominio/usuario';
 @Injectable({
   providedIn: 'root'
 })
@@ -11,49 +11,52 @@ export class UsuarioService {
   hayError: boolean = false
   codigoError: number
   descripcionError: string = ''
-
+  idUsuario: number
   usuariosParaAgregar
-  usuarioLogueado: Usuario
+  usuarioLogueadoId
 
   constructor(private http: HttpClient) { }
 
   async asignarUsuario(unNombreDeUsuario: string, unaContrasenia: string): Promise<void> {
-    let usuarioJson = await this.http.post<Usuario>(REST_SERVER_URL + '/login/' + unNombreDeUsuario, JSON.stringify({ password: unaContrasenia })).toPromise()
+    let id = await this.http.post<Usuario>(REST_SERVER_URL + '/login/' + unNombreDeUsuario, JSON.stringify({ password: unaContrasenia })).toPromise()
       .catch((err: HttpErrorResponse) => {
         (err.status === 0) ? this.descripcionError = 'El servidor se encuentra inactivo' : this.descripcionError = err.error
         this.hayError = true
       })
     this.hayError = false
-    this.usuarioLogueado = Usuario.fromJson(usuarioJson)
+    this.usuarioLogueadoId = id
   }
 
-  async buscarUsuarioPorId(id: number): Promise<void> {
-    let usuario = await this.http.get<Usuario>(REST_SERVER_URL + '/perfil/' + id).toPromise()
+  async buscarUsuarioPorId(id: number): Promise<Usuario> {
+    let usuario = await this.http.get<Usuario>(REST_SERVER_URL + '/usuario/' + id).toPromise()
       .catch((err: HttpErrorResponse) => {
         this.hayError = true
         generarCartelDeAlerta(err.error)
       })
-    this.usuarioLogueado = Usuario.fromJson(usuario)
+    return Usuario.fromJson(usuario)
   }
 
   async actualizarUsuario(usuario: Usuario) {
-    await this.http.put(REST_SERVER_URL + '/perfil/' + usuario.id, usuario.toJson()).toPromise()
-      .then(() => {
-        this.hayError = false
-      })
+    let usuarioActualizado = await this.http.put(REST_SERVER_URL + '/actualizar/' + usuario.id, usuario.toJson()).toPromise()
       .catch((err: HttpErrorResponse) => {
         this.hayError = true
         generarCartelDeAlerta(err.error)
       })
+    return Usuario.fromJson(usuarioActualizado)
   }
 
-  async buscarUsuariosParaAgregar(busqueda: String) {
-    let usuarios = await this.http.post(REST_SERVER_URL + '/usuarios/' + this.usuarioLogueado.id, JSON.stringify({ busqueda: busqueda })).toPromise()
+  async buscarAmigosParaAgregar(usernameABuscar: String) {
+    let usuarios = await this.http.get(REST_SERVER_URL + '/usuarios/' + this.usuarioLogueadoId + ',' + usernameABuscar).toPromise()
       .catch((err: HttpErrorResponse) => {
         this.hayError = true
         generarCartelDeAlerta(err.error)
       })
-    this.usuariosParaAgregar = usuarios
+    // this.usuariosParaAgregar = usuarios
+    return usuarios
+  }
+
+  async getRespondida(pregunta) {
+    let respondida = await this.http.get(REST_SERVER_URL + '/respondida/' + pregunta + ", " + this.usuarioLogueadoId)
   }
 
   mostrarError(err: HttpErrorResponse) {
@@ -63,7 +66,7 @@ export class UsuarioService {
     window.alert(err.status + ' ' + err.error)
   }
 
-  estaLogueado(): boolean{
-    return this.usuarioLogueado !== undefined
+  estaLogueado(): boolean {
+    return this.usuarioLogueadoId !== undefined
   }
 }

@@ -67,9 +67,9 @@
     <div class="modal-dialog modal-dialog-scrollable" role="document">
         <div class="modal-content">
             <div class="modal-header navbar-fondo">
-                <h5 class="modal-title" id="exampleModalScrollableTitle">Lista de amigos</h5>
-                <button class="btn btn-sm btn-secondary ml-3" *ngIf="modoAgregarAmigos" (click)="verSolapaMisAmigos()">Mis amigos</button>
-                <button class="btn btn-sm btn-dark ml-3" *ngIf="modoVerAmigos" (click)="verSolapaAgregarAmigos()">+ Agregar</button>
+                <h5 class="modal-title listado-amigos_titulo" id="exampleModalScrollableTitle">Lista de amigos</h5>
+                <button class="btn btn-sm btn-outline-light ml-3" *ngIf="modoAgregarAmigos" (click)="verSolapaMisAmigos()">Click para ver mis amigos</button>
+                <button class="btn btn-sm btn-outline-light ml-3" *ngIf="modoVerAmigos" (click)="verSolapaAgregarAmigos()">Click para agregar amigos</button>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -79,8 +79,8 @@
                     <tbody class="">
                         <div class="lista-de-amigos" *ngIf="modoVerAmigos">
                             <tr *ngFor="let amigo of usuario.amigos" class="d-flex justify-content-around p-2">
-                                <td #amigo>{{amigo}}</td>
-                                <button class="btn btn-sm btn btn-outline-danger" (click)="eliminarAmigo(amigo)"><i class="fas fa-user-times"></i></button>
+                                <td #amigo class="listado-amigos w-50 p-2">{{amigo}}</td>
+                                <button class="btn btn-sm btn-danger w-50 p-2" (click)="eliminarAmigo(amigo)"><i class="fas fa-user-times"></i></button>
                             </tr>
                         </div>
                         <div class="busqueda-amigos" *ngIf="modoAgregarAmigos">
@@ -89,8 +89,8 @@
                                 <button class="btn btn-sm boton-primario ml-3 mt-2" (click)="cargarAmigosParaAgregarPorUsername(username.value)">Buscar</button>
                             </div>
                             <tr class="d-flex justify-content-around p-2 mt-2" *ngFor="let resultado of resultadoBusquedaAmigos">
-                                <span #resultado>{{resultado}}</span>
-                                <button class="btn btn-sm boton-primario" (click)="agregarAmigo(resultado)">Agregar amigo</button>
+                                <span #resultado class="listado-amigos w-50 p-2">{{resultado}}</span>
+                                <button class="btn btn-sm boton-primario w-50 p-2" (click)="agregarAmigo(resultado)">Agregar amigo</button>
                             </tr>
                         </div> 
                     </tbody>

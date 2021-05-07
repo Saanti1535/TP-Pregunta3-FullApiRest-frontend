@@ -37,8 +37,9 @@ export class PreguntaService {
   }
 
   async getPreguntaPorId(id: number){
-    const pregunta = await this.http.get<Pregunta>(REST_SERVER_URL + '/busqueda/pregunta/' + id +'/'+this.usuarioService.usuarioLogueado.id).toPromise()
+    const pregunta = await this.http.get<Pregunta>(REST_SERVER_URL + '/busqueda/pregunta/' + id +'/'+this.usuarioService.usuarioLogueadoId).toPromise()
     this.preguntaActual = Pregunta.fromJSON(pregunta)
+    return Pregunta.fromJSON(pregunta)
   }
 
   async revisarRespuesta(respuesta: string, idUsuario: number): Promise<string> {
@@ -50,18 +51,20 @@ export class PreguntaService {
           resultado=err.error.text
           this.usuarioService.buscarUsuarioPorId(idUsuario) // El back actualizó info del usuario, acá la traemos 
         }else{
-          resultado='Ocurrió un error'
+          resultado=err.error.text
         }
       })
     return resultado
   }
 
+  //Como sólo se pueden actualizar las opciones, mandamos únicamente eso (en 'pregunta.opcionesUpdateToJSON()')
   async actualizarPregunta(pregunta: Pregunta) {
-    await this.http.put(REST_SERVER_URL + '/busqueda/pregunta/' + pregunta.id, pregunta.toJSON()).toPromise()
+    await this.http.put(REST_SERVER_URL + '/busqueda/pregunta/' + pregunta.id, pregunta.opcionesUpdateToJSON()).toPromise()
   }
 
   async crearPregunta(nuevaPregunta: Pregunta, idAutor: number, puntos: number) {
     await this.http.put(REST_SERVER_URL + '/crearPregunta/'+ idAutor +'/'+ puntos, nuevaPregunta.toJSON()).toPromise()
+    
   }
 
 

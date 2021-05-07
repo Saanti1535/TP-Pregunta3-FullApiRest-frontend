@@ -11,8 +11,8 @@ import { SinUsuarioGuard } from './sin-usuario.guard';
 const routes: Routes = [
   { path: 'login', component: LoginComponent},
   { path: 'busqueda', component: BusquedaComponent,  canActivate: [SinUsuarioGuard] },
-  { path: 'editar-pregunta', component: EditarPreguntaComponent,  canActivate: [SinUsuarioGuard] },
-  { path: 'responder-pregunta', component: ResponderPreguntaComponent,  canActivate: [SinUsuarioGuard] },
+  { path: 'editar-pregunta/:id', component: EditarPreguntaComponent,  canActivate: [SinUsuarioGuard] },
+  { path: 'responder-pregunta/:id', component: ResponderPreguntaComponent,  canActivate: [SinUsuarioGuard] },
   { path: 'perfil', component: PerfilComponent,  canActivate: [SinUsuarioGuard] },
   { path: 'nueva-pregunta', component: NuevaPreguntaComponent,  canActivate: [SinUsuarioGuard] },
   { path: '**', redirectTo: 'login' }

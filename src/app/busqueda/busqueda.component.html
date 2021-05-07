@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <app-header></app-header>
-<div class="body w-100">
+<div class="body w-100" *ngIf="usuarioLogueado">
     <main class="seccion-busqueda container d-flex flex-column justify-content-end w-100">
         <label for="busqueda">
             <h5 class="font-weight-600">Busque una pregunta</h5>
@@ -26,7 +26,7 @@
         </div>
         <div class="preguntas d-flex flex-wrap justify-content-between">
             <div *ngFor="let pregunta of preguntas">
-                <app-card-pregunta [pregunta]="pregunta">
+                <app-card-pregunta [pregunta]="pregunta" [usuario]="usuarioLogueado">
                 </app-card-pregunta>
             </div>
         </div>

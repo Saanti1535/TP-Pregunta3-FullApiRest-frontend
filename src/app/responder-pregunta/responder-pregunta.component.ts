@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PreguntaService } from '../pregunta.service';
 import * as $ from 'jquery';
 import { UsuarioService } from '../usuario.service';
 import { generarCartelDeAlerta } from '../configuration';
+import { Pregunta } from 'src/dominio/pregunta';
 
 @Component({
   selector: 'app-responder-pregunta',
@@ -11,11 +12,12 @@ import { generarCartelDeAlerta } from '../configuration';
   styleUrls: ['./responder-pregunta.component.css']
 })
 export class ResponderPreguntaComponent implements OnInit {
-  pregunta = this.preguntaService.preguntaActual
+  pregunta = new Pregunta()
+  constructor(private router: Router, private route: ActivatedRoute, public preguntaService: PreguntaService, public usuarioService: UsuarioService) { }
 
-  constructor(private router: Router, public preguntaService: PreguntaService, public usuarioService: UsuarioService) { }
-
-  ngOnInit(): void {
+  async ngOnInit() {
+    const id = Number(this.route.snapshot.paramMap.get('id'));
+    this.pregunta = await this.preguntaService.getPreguntaPorId(id)
   }
 
   get opciones(): String[] {
@@ -25,7 +27,7 @@ export class ResponderPreguntaComponent implements OnInit {
   async aceptar() {
     const respuesta=$('input:radio[name=opciones]:checked').val()
     if(respuesta != undefined) {
-      const idUsuario=this.usuarioService.usuarioLogueado.id
+      const idUsuario=this.usuarioService.usuarioLogueadoId
       const resultado = await this.preguntaService.revisarRespuesta(respuesta.toString(), idUsuario)
       generarCartelDeAlerta(resultado)
       this.router.navigate(['/busqueda'])

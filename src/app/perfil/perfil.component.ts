@@ -3,6 +3,7 @@ import { UsuarioService } from './../usuario.service';
 import { Router } from '@angular/router';
 import { Usuario } from 'src/dominio/usuario';
 import { RegistroRespuestas } from '../../dominio/usuario';
+import { generarCartelDeAlerta } from '../configuration';
 
 @Component({
   selector: 'app-perfil',
@@ -10,16 +11,19 @@ import { RegistroRespuestas } from '../../dominio/usuario';
   styleUrls: ['./perfil.component.css']
 })
 export class PerfilComponent implements OnInit {
-  usuario: Usuario = this.usuariosService.usuarioLogueado
-  nombre = this.usuariosService.usuarioLogueado.nombre
+  usuario: Usuario = new Usuario()
+  nombre: String
+  historial: RegistroRespuestas[]
   resultadoBusquedaAmigos
   modoVerAmigos = true
   modoAgregarAmigos = false
 
   constructor(public usuariosService: UsuarioService, private router: Router) { }
 
-  ngOnInit(): void {
-    this.usuariosService.buscarUsuarioPorId(this.usuario.id) // Por su hubieron cambios que se cancelaron en el front, se trae de nuevo la info del back
+  async ngOnInit() {
+    this.usuario = await this.usuariosService.buscarUsuarioPorId(this.usuariosService.usuarioLogueadoId) // Por su hubieron cambios que se cancelaron en el front, se trae de nuevo la info del back
+    this.nombre = this.usuario.nombre
+    this.historial = this.usuario.historial
   }
 
   get puntosUsuarioActual(): number {
@@ -27,13 +31,19 @@ export class PerfilComponent implements OnInit {
   }
 
   get nacimientoUsuarioActual(): Date {
-    return this.usuariosService.usuarioLogueado.fechaNacimiento
+    return this.usuario.fechaNacimiento
   }
 
   cambiarFechaNacimiento(): void {
     let inputFecha = document.getElementById('fechaDeNacimiento') as HTMLInputElement;
     let nuevaFecha = new Date(inputFecha.value)
-    this.usuario.fechaNacimiento = nuevaFecha
+    if (this.esFechaValida(nuevaFecha)) {
+      this.usuario.fechaNacimiento = nuevaFecha
+    } else generarCartelDeAlerta('Si deja la fecha de nacimiento vacía, se mantendrá la última ingresada')
+  }
+
+  esFechaValida(nuevaFecha): boolean {
+    return nuevaFecha.getTime() === nuevaFecha.getTime()
   }
 
   cancelar() {
@@ -41,9 +51,10 @@ export class PerfilComponent implements OnInit {
   }
 
   async aceptar() {
-    await this.usuariosService.actualizarUsuario(this.usuario)
-    if (!this.usuariosService.hayError) { this.router.navigate(['/busqueda']); this.usuario = this.usuariosService.usuarioLogueado }
+    this.usuario = await this.usuariosService.actualizarUsuario(this.usuario)
+    if (!this.usuariosService.hayError) { this.router.navigate(['/busqueda']); }
   }
+
 
   async verSolapaAgregarAmigos() {
     this.modoVerAmigos = false
@@ -54,33 +65,25 @@ export class PerfilComponent implements OnInit {
   async verSolapaMisAmigos() {
     this.modoAgregarAmigos = false
     this.modoVerAmigos = true
-    this.usuario = this.usuariosService.usuarioLogueado
   }
 
   async agregarAmigo(amigo) {
-    this.usuariosService.usuarioLogueado.amigos.push(amigo)
-    await this.usuariosService.actualizarUsuario(this.usuario)
+    this.usuario.amigos.push(amigo)
+    this.usuario = await this.usuariosService.actualizarUsuario(this.usuario)
     this.resultadoBusquedaAmigos = this.resultadoBusquedaAmigos.filter(resultado => resultado !== amigo)
   }
 
   async eliminarAmigo(amigoAEliminar) {
-    this.usuariosService.usuarioLogueado.amigos = this.usuariosService.usuarioLogueado.amigos.filter(amigo => amigo !== amigoAEliminar)
-    this.usuario = this.usuariosService.usuarioLogueado
-    await this.usuariosService.actualizarUsuario(this.usuariosService.usuarioLogueado)
+    this.usuario.amigos = this.usuario.amigos.filter(amigo => amigo !== amigoAEliminar)
+    this.usuario = await this.usuariosService.actualizarUsuario(this.usuario)
   }
 
   async cargarAmigosParaAgregar() {
-    await this.usuariosService.buscarUsuariosParaAgregar('')
-    this.resultadoBusquedaAmigos = this.usuariosService.usuariosParaAgregar
+    this.resultadoBusquedaAmigos = await this.usuariosService.buscarAmigosParaAgregar('')
   }
 
-  async cargarAmigosParaAgregarPorUsername(busqueda) {
-    await this.usuariosService.buscarUsuariosParaAgregar(busqueda)
-    this.resultadoBusquedaAmigos = this.usuariosService.usuariosParaAgregar
-  }
-
-  get historial(): RegistroRespuestas[] {
-    return this.usuario.historial
+  async cargarAmigosParaAgregarPorUsername(usernameABuscar) {
+    this.resultadoBusquedaAmigos = await this.usuariosService.buscarAmigosParaAgregar(usernameABuscar)
   }
 
 }

@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Pregunta } from 'src/dominio/pregunta';
+import { Usuario } from 'src/dominio/usuario';
 import { generarCartelDeAlerta } from '../configuration';
 import { PreguntaService } from '../pregunta.service';
 import { UsuarioService } from '../usuario.service';
@@ -13,31 +14,30 @@ import { UsuarioService } from '../usuario.service';
 export class CardPreguntaComponent implements OnInit {
   @Input() pregunta: Pregunta 
   esDeUsuario: boolean = false
+  @Input() usuario: Usuario 
 
   constructor(private router: Router, public preguntaService: PreguntaService, public usuarioService: UsuarioService) { }
 
-  ngOnInit(): void {
+  async ngOnInit() {
     this.esDeUsuarioLogueado()
   }
 
   esDeUsuarioLogueado(){
-    if(this.pregunta.idAutor == this.usuarioService.usuarioLogueado.id){
+    if(this.pregunta.idAutor == this.usuario.id){
       this.esDeUsuario = true
     }
   }
 
-  async responder(): Promise<void> {
-    try{
-      await this.preguntaService.getPreguntaPorId(this.pregunta.id)
-      this.router.navigate(['/responder-pregunta'])
-    }catch(e){
-      generarCartelDeAlerta(e.error)
-    }
+  get yaRespondio() {
+    return this.usuario.historial.some(registro => registro.pregunta == this.pregunta.pregunta)
   }
 
-  async editar(){
-    await this.preguntaService.getPreguntaPorId(this.pregunta.id)
-    this.router.navigate(['/editar-pregunta'])
+  responder(){
+      this.router.navigate(['/responder-pregunta',this.pregunta.id])
+  }
+
+  editar(){
+    this.router.navigate(['/editar-pregunta',this.pregunta.id])
   }
 
 }
