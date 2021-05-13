@@ -9,7 +9,7 @@ import { PreguntaService } from '../pregunta.service';
   styleUrls: ['./card-opcion.component.css']
 })
 export class CardOpcionComponent implements OnInit {
-  @Input() opcion: string 
+  @Input() opcion: string
   @Output() opcionActualizada = new EventEmitter<string>();
   esEdicion: boolean = false
   @Input() pregunta: Pregunta
@@ -20,7 +20,7 @@ export class CardOpcionComponent implements OnInit {
     this.revisarSiEsEdicion()
   }
 
-  actualizarOpcion(nuevaOpcion: string){
+  actualizarOpcion(nuevaOpcion: string) {
     this.opcionActualizada.emit(nuevaOpcion)
   }
 
@@ -28,13 +28,13 @@ export class CardOpcionComponent implements OnInit {
     return this.opcion === this.pregunta.respuestaCorrecta
   }
 
-  revisarSiEsEdicion(){
-    if(window.location.href.indexOf('editar')!=-1) {
+  revisarSiEsEdicion() {
+    if (window.location.href.indexOf('editar') != -1) {
       this.esEdicion = true;
     }
   }
 
-  borrarOpcion(){
+  borrarOpcion() {
     var index = this.pregunta.opciones.indexOf(this.opcion)
     this.pregunta.opciones.splice(index, 1)
   }

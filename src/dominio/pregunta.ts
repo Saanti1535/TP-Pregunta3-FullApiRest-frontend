@@ -1,5 +1,5 @@
 export class Pregunta {
-    public id: number
+    public id: string
     public pregunta = ""
     public opciones: string[] = []
     public idAutor: number
@@ -31,7 +31,8 @@ export class Pregunta {
                 pregunta: this.pregunta,
                 opciones: this.opciones,
                 type: this.type,
-                respuestaCorrecta: this.respuestaCorrecta
+                respuestaCorrecta: this.respuestaCorrecta,
+                idAutor: this.idAutor
             }
         )
 
