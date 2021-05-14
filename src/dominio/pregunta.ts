@@ -12,7 +12,7 @@ export class Pregunta {
 
     static fromJSON(preguntaJSON): Pregunta {
         let pregunta = new Pregunta()
-        pregunta.id = preguntaJSON.id
+        pregunta.id = preguntaJSON._id
         pregunta.pregunta = preguntaJSON.pregunta     
         pregunta.opciones = preguntaJSON.opciones
         pregunta.idAutor = preguntaJSON.idAutor
@@ -27,7 +27,7 @@ export class Pregunta {
     toJSON() {
         let preguntaJSON = JSON.stringify(
             {
-                id: this.id,
+                _id: this.id,
                 pregunta: this.pregunta,
                 opciones: this.opciones,
                 type: this.type,

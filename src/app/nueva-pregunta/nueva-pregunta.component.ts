@@ -85,8 +85,6 @@ export class NuevaPreguntaComponent implements OnInit {
 
 /************************************************************************************************ GETTERS */
   get respuestaCorrecta(): string {
-    console.log($('input:radio[name=opciones]:checked'))
-    console.log($('input:radio[name=opciones]:checked').val())
     return $('input:radio[name=opciones]:checked').val().toString()
   }
 
