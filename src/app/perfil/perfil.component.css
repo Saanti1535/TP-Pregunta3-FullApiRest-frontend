@@ -37,3 +37,8 @@
     color: rgb(214, 214, 214);
     font-weight: bold;
 }
+
+#modalModificaciones .modal-dialog {
+    max-width: none;
+    width: 90rem;
+}
