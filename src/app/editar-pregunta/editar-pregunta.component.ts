@@ -18,8 +18,7 @@ export class EditarPreguntaComponent implements OnInit {
   constructor(private router: Router, private route: ActivatedRoute, public preguntaService: PreguntaService) { }
 
   async ngOnInit() {
-    const id = Number(this.route.snapshot.paramMap.get('id'));
-    console.log(id)
+    const id = this.route.snapshot.paramMap.get('id');
     this.pregunta = await this.preguntaService.getPreguntaPorId(id)
     this.respuestaCorrecta = this.pregunta.respuestaCorrecta
   }

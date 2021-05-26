@@ -36,7 +36,7 @@ export class PreguntaService {
       this.listaDePreguntas = preguntas.map((pregunta) => Pregunta.fromJSON(pregunta))
   }
 
-  async getPreguntaPorId(id: number){
+  async getPreguntaPorId(id: string){
     const pregunta = await this.http.get<Pregunta>(REST_SERVER_URL + '/busqueda/pregunta/' + id +'/'+this.usuarioService.usuarioLogueadoId).toPromise()
     this.preguntaActual = Pregunta.fromJSON(pregunta)
     return Pregunta.fromJSON(pregunta)
@@ -63,7 +63,7 @@ export class PreguntaService {
   }
 
   async crearPregunta(nuevaPregunta: Pregunta, idAutor: number, puntos: number) {
-    await this.http.put(REST_SERVER_URL + '/crearPregunta/'+ idAutor +'/'+ puntos, nuevaPregunta.toJSON()).toPromise()
+    await this.http.put(REST_SERVER_URL + '/crearPregunta/'+ puntos, nuevaPregunta.toJSON()).toPromise()
     
   }
 

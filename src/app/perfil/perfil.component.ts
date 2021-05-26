@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { Usuario } from 'src/dominio/usuario';
 import { RegistroRespuestas } from '../../dominio/usuario';
 import { generarCartelDeAlerta } from '../configuration';
+import { LogModificacionesService } from '../log-modificaciones.service';
+import { LogModificaciones } from 'src/dominio/logModificaciones';
 
 @Component({
   selector: 'app-perfil',
@@ -17,13 +19,15 @@ export class PerfilComponent implements OnInit {
   resultadoBusquedaAmigos
   modoVerAmigos = true
   modoAgregarAmigos = false
+  modificaciones: LogModificaciones[] = []
 
-  constructor(public usuariosService: UsuarioService, private router: Router) { }
+  constructor(private logModificacionesService: LogModificacionesService, public usuariosService: UsuarioService, private router: Router) { }
 
   async ngOnInit() {
     this.usuario = await this.usuariosService.buscarUsuarioPorId(this.usuariosService.usuarioLogueadoId) // Por su hubieron cambios que se cancelaron en el front, se trae de nuevo la info del back
     this.nombre = this.usuario.nombre
     this.historial = this.usuario.historial
+    this.mostrarLogModificaciones()
   }
 
   get puntosUsuarioActual(): number {
@@ -84,6 +88,10 @@ export class PerfilComponent implements OnInit {
 
   async cargarAmigosParaAgregarPorUsername(usernameABuscar) {
     this.resultadoBusquedaAmigos = await this.usuariosService.buscarAmigosParaAgregar(usernameABuscar)
+  }
+
+  async mostrarLogModificaciones() {
+    this.modificaciones = await this.logModificacionesService.obtener(this.usuario.id)
   }
 
 }

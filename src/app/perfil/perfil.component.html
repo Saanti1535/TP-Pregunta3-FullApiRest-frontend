@@ -48,8 +48,9 @@
 
             </div>
             <div class="lista-de-amigos">
-                <button class="btn boton-primario" data-toggle="modal" data-target="#exampleModalScrollable">Lista de
+                <button class="btn boton-primario mr-2" data-toggle="modal" data-target="#exampleModalScrollable">Lista de
                     amigos</button>
+                <button class="btn boton-primario" data-toggle="modal" data-target="#modalModificaciones">Ver modificaciones</button>
             </div>
             <div class="w-100 d-flex justify-content-end">
                 <button class="btn boton-primario mr-3" (click)="aceptar()">Aceptar</button>
@@ -61,15 +62,17 @@
 
     </main>
 </div>
-<!-- Modal -->
+<!-- Modal amigos-->
 <div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog"
     aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable" role="document">
         <div class="modal-content">
             <div class="modal-header navbar-fondo">
                 <h5 class="modal-title listado-amigos_titulo" id="exampleModalScrollableTitle">Lista de amigos</h5>
-                <button class="btn btn-sm btn-outline-light ml-3" *ngIf="modoAgregarAmigos" (click)="verSolapaMisAmigos()">Click para ver mis amigos</button>
-                <button class="btn btn-sm btn-outline-light ml-3" *ngIf="modoVerAmigos" (click)="verSolapaAgregarAmigos()">Click para agregar amigos</button>
+                <button class="btn btn-sm btn-outline-light ml-3" *ngIf="modoAgregarAmigos"
+                    (click)="verSolapaMisAmigos()">Click para ver mis amigos</button>
+                <button class="btn btn-sm btn-outline-light ml-3" *ngIf="modoVerAmigos"
+                    (click)="verSolapaAgregarAmigos()">Click para agregar amigos</button>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -80,19 +83,83 @@
                         <div class="lista-de-amigos" *ngIf="modoVerAmigos">
                             <tr *ngFor="let amigo of usuario.amigos" class="d-flex justify-content-around p-2">
                                 <td #amigo class="listado-amigos w-50 p-2">{{amigo}}</td>
-                                <button class="btn btn-sm btn-danger w-50 p-2" (click)="eliminarAmigo(amigo)"><i class="fas fa-user-times"></i></button>
+                                <button class="btn btn-sm btn-danger w-50 p-2" (click)="eliminarAmigo(amigo)"><i
+                                        class="fas fa-user-times"></i></button>
                             </tr>
                         </div>
                         <div class="busqueda-amigos" *ngIf="modoAgregarAmigos">
                             <div class="ml-2 d-flex">
-                                <input #username type="text" class="form-control form-control-sm mt-2 w-75" placeholder="Ingrese un nombre de usuario a buscar">
-                                <button class="btn btn-sm boton-primario ml-3 mt-2" (click)="cargarAmigosParaAgregarPorUsername(username.value)">Buscar</button>
+                                <input #username type="text" class="form-control form-control-sm mt-2 w-75"
+                                    placeholder="Ingrese un nombre de usuario a buscar">
+                                <button class="btn btn-sm boton-primario ml-3 mt-2"
+                                    (click)="cargarAmigosParaAgregarPorUsername(username.value)">Buscar</button>
                             </div>
-                            <tr class="d-flex justify-content-around p-2 mt-2" *ngFor="let resultado of resultadoBusquedaAmigos">
+                            <tr class="d-flex justify-content-around p-2 mt-2"
+                                *ngFor="let resultado of resultadoBusquedaAmigos">
                                 <span #resultado class="listado-amigos w-50 p-2">{{resultado}}</span>
-                                <button class="btn btn-sm boton-primario w-50 p-2" (click)="agregarAmigo(resultado)">Agregar amigo</button>
+                                <button class="btn btn-sm boton-primario w-50 p-2"
+                                    (click)="agregarAmigo(resultado)">Agregar amigo</button>
                             </tr>
-                        </div> 
+                        </div>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal modificaciones-->
+<div class="modal fade" id="modalModificaciones" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header navbar-fondo">
+                <h5 class="modal-title listado-amigos_titulo" id="exampleModalScrollableTitle">Modificaciones en mis preguntas</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body p-2">
+                <table class="table table-striped borderless">
+                    <tbody class="">
+                        <th>
+                            Pregunta
+                        </th>
+                        <th>
+                            Opciones anteriores
+                        </th>
+                        <th>
+                            Opciones actuales
+                        </th>
+                        <th>
+                            Opcion correcta anterior
+                        </th>
+                        <th>
+                            Opcion correcta actual
+                        </th>
+                        <th>
+                            Fecna y hora de modificacion
+                        </th>
+                        <tr *ngFor="let modificacion of modificaciones">
+                            <td>
+                                {{modificacion.pregunta}}
+                            </td>
+                            <td>
+                                {{modificacion.opcionesAnteriores}}
+                            </td>
+                            <td>
+                                {{modificacion.opcionesNuevas}}
+                            </td>
+                            <td>
+                                {{modificacion.opcionCorrectaAnterior}}
+                            </td>
+                            <td>
+                                {{modificacion.opcionCorrectaActual}}
+                            </td>
+                            <td>
+                                {{modificacion.fechaHoraDeModificacion | date:'yyyy-MM-dd hh:mm:ss'}}
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
             </div>

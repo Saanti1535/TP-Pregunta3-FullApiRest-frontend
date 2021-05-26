@@ -63,6 +63,7 @@ export class NuevaPreguntaComponent implements OnInit {
   generarNuevaPregunta(){
     //En el back se pisa este ID por el correspondiente (el repositorio se encarga)
     //this.nuevaPregunta.id=0
+    this.nuevaPregunta.idAutor = this.usuarioService.usuarioLogueadoId
     this.nuevaPregunta.pregunta = this.laPregunta
     this.nuevaPregunta.type = this.nuevaPreguntaType
     this.nuevaPregunta.respuestaCorrecta = this.respuestaCorrecta

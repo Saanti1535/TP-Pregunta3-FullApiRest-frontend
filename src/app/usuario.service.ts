@@ -42,6 +42,7 @@ export class UsuarioService {
         this.hayError = true
         generarCartelDeAlerta(err.error)
       })
+      this.hayError = false
     return Usuario.fromJson(usuarioActualizado)
   }
 

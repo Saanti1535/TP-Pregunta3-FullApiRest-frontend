@@ -1,5 +1,5 @@
 export class Pregunta {
-    public id: number
+    public id: string
     public pregunta = ""
     public opciones: string[] = []
     public idAutor: number
@@ -12,7 +12,7 @@ export class Pregunta {
 
     static fromJSON(preguntaJSON): Pregunta {
         let pregunta = new Pregunta()
-        pregunta.id = preguntaJSON.id
+        pregunta.id = preguntaJSON._id
         pregunta.pregunta = preguntaJSON.pregunta     
         pregunta.opciones = preguntaJSON.opciones
         pregunta.idAutor = preguntaJSON.idAutor
@@ -27,11 +27,12 @@ export class Pregunta {
     toJSON() {
         let preguntaJSON = JSON.stringify(
             {
-                id: this.id,
+                _id: this.id,
                 pregunta: this.pregunta,
                 opciones: this.opciones,
                 type: this.type,
-                respuestaCorrecta: this.respuestaCorrecta
+                respuestaCorrecta: this.respuestaCorrecta,
+                idAutor: this.idAutor
             }
         )
 
