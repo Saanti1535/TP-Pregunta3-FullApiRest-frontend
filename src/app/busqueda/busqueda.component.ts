@@ -1,7 +1,9 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Pregunta } from 'src/dominio/pregunta';
 import { Usuario } from 'src/dominio/usuario';
+import { generarCartelDeAlerta } from '../configuration';
 import { PreguntaService } from '../pregunta.service';
 import { UsuarioService } from '../usuario.service';
 
@@ -31,6 +33,9 @@ export class BusquedaComponent implements OnInit {
 
   async buscar(busqueda: HTMLInputElement){
     this.preguntaService.filtrarPreguntas(busqueda.value, this.checkBoxActivado)   
+    .catch((err: HttpErrorResponse) => {
+      generarCartelDeAlerta(err.error.message)
+    })
   }
 
   nuevaPregunta(){
