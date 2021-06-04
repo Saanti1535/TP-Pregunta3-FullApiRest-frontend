@@ -34,7 +34,8 @@ export class BusquedaComponent implements OnInit {
   async buscar(busqueda: HTMLInputElement){
     this.preguntaService.filtrarPreguntas(busqueda.value, this.checkBoxActivado)   
     .catch((err: HttpErrorResponse) => {
-      generarCartelDeAlerta(err.error.message)
+      console.log(err)
+      generarCartelDeAlerta(err.error)
     })
   }
 

@@ -47,11 +47,10 @@ export class PreguntaService {
     var resultado
     await this.http.post<string>(REST_SERVER_URL + '/revisarRespuesta/' + idPregunta, JSON.stringify({laRespuesta: respuesta, idUsuario: idUsuario})).toPromise()
       .catch((err: HttpErrorResponse) => {
+        resultado=err.error.text
+        console.log(err)
         if( err.status == 200){
-          resultado=err.error.text
           this.usuarioService.buscarUsuarioPorId(idUsuario) // El back actualizó info del usuario, acá la traemos 
-        }else{
-          resultado=err.error.text
         }
       })
     return resultado
