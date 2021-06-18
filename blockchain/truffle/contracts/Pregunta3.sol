@@ -1,8 +1,14 @@
-pragma solidity >=0.6.8;
+// pragma solidity >=0.6.8;
+pragma solidity >= 0.5.16;
+pragma experimental ABIEncoderV2;
 
 contract Pregunta3 {
-    address public usuario;
-    address public duenio;
+        
+    address owner;
+    
+    constructor() public{
+        owner = msg.sender; 
+    }
 
     struct Pregunta {
         int8 id;
@@ -16,85 +22,102 @@ contract Pregunta3 {
     Pregunta[] public preguntas;
 
     struct Respuesta {
-        address usuario;
+        // address usuario;
         int8 idPregunta;
         string textoRespuesta;
         int8 puntaje;
     }
 
-    enum Estado {Activo , Lectura , Responder , Bootstrap };
-    Estado public estado;
+    mapping(address => int256[]) public puntaje;
 
-    modifier esDuenio(address usuarioQueEjecuta) {
-        require(usuarioQueEjecuta == duenio, "No tiene permiso");
+    Respuesta[] public respuestas;
+
+
+    enum Estado {Activo , Lectura , Responder , Bootstrap } Estado public estado;
+
+    int8 contadorIds = 0;
+
+    modifier esDuenio() {
+        require(msg.sender == owner, "No tiene permisos");
         _;
     }
 
-    function cambiarEstado(Estado nuevoEstado) public esDuenio(msg.sender){
-         estado = nuevoEstado;
-    }
-
     modifier puedeConsultar() {
-        require(estado == Activo || estado == Lectura || estado == Responder, "No puede realizarse");
+        require(estado == Estado.Activo || estado == Estado.Lectura || estado == Estado.Responder, "No puede realizarse");
         _;
     }
     
     modifier puedeResponder() {
-        require(estado == Activo || estado == Responder, "No puede realizarse");
+        require(estado == Estado.Activo || estado == Estado.Responder, "No puede realizarse");
         _;
     }
 
     modifier puedeCrear() {
-        require(estado == Activo || estado == Bootstrap, "No puede realizarse");
+        require(estado == Estado.Activo || estado == Estado.Bootstrap, "No puede realizarse");
         _;
     }
 
-    modifier noEsAutor(int8 idPregunta, address usuarioQueResponde){
-        require(obtenerPregunta(idPregunta).autor != usuarioQueResponde, "No puede responder una pregunta propia");
+    modifier noEsAutor(int8 idPregunta){
+        require(obtenerPregunta(idPregunta).autor != msg.sender, "No puede responder una pregunta propia");
         _;
+    }
+
+
+
+    /* FUNCIONES */
+
+    function cambiarEstado(Estado nuevoEstado) public esDuenio{
+        estado = nuevoEstado;
+    }
+
+    function getEstado() public returns (Estado){
+        return estado;
     }
 
     // No está probado
-    function obtenerPregunta(int8 idPregunta) public puedeConsultar() returns (Pregunta pregunta) {
-        for(int8 i = 0; i < preguntas.length; i++) {
+    // Si es un mapa... guiño guiño mapping(id, pregunta)
+    // preguntas[idPregunta]
+    function obtenerPregunta(int8 idPregunta) public puedeConsultar() returns (Pregunta memory) {
+        for(uint256 i = 0; i < preguntas.length; i++) {
             if(preguntas[i].id == idPregunta){
-                pregunta = preguntas[i];
+                return preguntas[i];
             }
         }
     }
 
     // No está probado
-    function nuevaPregunta(string texto, string[] _opciones, string respueta, int8 puntos) public puedeCrear() returns (Pregunta pregunta){
-        pregunta.id = preguntas.length + 1;
+    function nuevaPregunta(string memory texto, string[] memory _opciones, string memory respuesta, int8 puntos) public puedeCrear{
+        contadorIds++;
+        pregunta.id = contadorIds;
         pregunta.autor = msg.sender;
         pregunta.textoPregunta = texto;
         pregunta.opciones = _opciones;
-        pregunta.respuestaCorrecta = repsuesta;
+        pregunta.respuestaCorrecta = respuesta;
         pregunta.puntaje = puntos;
+        preguntas.push(pregunta);
     }
 
-    function responderPregunta(int8 idPregunta, string respuesta) public puedeResponder() noEsAutor(int8 idPregunta, msg.sender) return (Respuesta){
+    // Si es un mapa... guiño guiño mapping(id, respuesta)
+    // Ver mapas/listas respuestas
+    function responderPregunta(int8 idPregunta, string memory respuesta) public puedeResponder noEsAutor(idPregunta){
         int8 puntosObtenidos;
-        Pregunta laPregunta = obtenerPregunta(idPregunta);
-        if (laPregunta.respuestaCorrecta == respuesta){
-            puntosObtenidos = laPregunta.puntos;
+        Pregunta memory laPregunta = obtenerPregunta(idPregunta);
+        if (keccak256(abi.encodePacked((laPregunta.respuestaCorrecta))) == keccak256(abi.encodePacked((respuesta)))){
+            puntosObtenidos = laPregunta.puntaje;
         }else{
             puntosObtenidos = 0;
         }
-        return Respuesta(msg.sender, idPregunta, respuesta, puntosObtenidos);
+        respuestas.push(Respuesta(msg.sender, idPregunta, respuesta, puntosObtenidos));
     }
 
-    /*
-    function promedioRespuestas() return (int8){
-        int16 acumulador=0;
-        int8 cuenta=0;
-        for(int8 i = 0; i < preguntas.length; i++) {
-            if( lalistaderespuestas[i].usuario == msg.sender){
-                acumulador += lalistaderespuestas[i].puntaje
-                cuenta ++;
-            }
+    
+    function promedioRespuestas() returns (int8){
+        int256 acumulador=0;
+        for(int256 i = 0; i < puntaje[msg.sender].length; i++) {
+            acumulador += puntaje[msg.sender][i]
         }
-        return acumulador/cuenta
+        }
+        return acumulador/puntaje[msg.sender].length
     } 
-    */
+    
 }

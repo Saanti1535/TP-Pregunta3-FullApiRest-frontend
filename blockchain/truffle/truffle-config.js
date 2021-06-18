@@ -44,12 +44,19 @@ module.exports = {
 
     development: {
       host: "localhost", //our network is running on localhost
-      port: 8545, // port where your blockchain is running
+      port: 8547, // port where your blockchain is running
+      network_id: '*',
+      from: '0xa3791d7bFDA0d5F28F4929101d8a73b8B43C1489', // use the account-id generated during the setup process
+      gas: 2000000
+    },
+
+    test: {
+      host: "localhost", //our network is running on localhost
+      port: 8548, // port where your blockchain is running
       network_id: '*',
       from: '0x588B0E2A70011691AbFa84022e9D302420898113', // use the account-id generated during the setup process
       gas: 2000000
     },
-
     // Another network with more advanced options...
     live: {
       host: "localhost",
