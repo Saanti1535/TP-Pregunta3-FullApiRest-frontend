@@ -4,39 +4,53 @@ const assert = require('assert')
 let smartContract
 
 contract('Falopa', async (usuarios) => {
-    let pregunta;
-    let estado; //= "Activo" //Estados.Activo
-
 
     beforeEach('Inicialización', async () => {
-        smartContract = await Pregunta3.new();  // vs. deployed() que devuelve un singleton
-        // await smartContract.duenio = 0x0E15d9b5fC43d66B5981ef9f247c6d51b3cECaFa
-        // await smartContract.cambiarEstado("Activo");
-        // pregunta = await smartContract.nuevaPregunta("pregunta1", ["opcion1", "opcion2"], "opcion1", 10);
-        // const textoDeLaPregunta = await smartContract.pregunta.call(pregunta).textoPregunta;
-        // assert.equal(100, balance)
+        smartContract = await Pregunta3.new();
+        await smartContract.cambiarEstado(Pregunta3.Estado.Activo);
+        assert.equal(await smartContract.estado.call(), 0);
     })
 
-    // it("sarasa", async () => {
-    //     var alguien = await smartContract.getSender()
-    //     console.log(alguien)
-    //     assert.equal(alguien, "");
-    // })
+    it("Alguien que no es el owner no puede cambiar el estado", async() => {
+        let alguien = usuarios[5] // El owner es usuarios[0]
+        let nuevoEstado = Pregunta3.Estado.Activo // 0
+        let err = null
 
-    // it("sarasa2", async () => {
-    //     var unEstado = await smartContract.getEnum()
-    //     assert.equal(unEstado, "");
-    // })
+        try {
+            await smartContract.cambiarEstado(nuevoEstado, {from: alguien})
+        } catch (error) {
+            err = error
+        }
 
-    it("Cambio de estado por un usuario X", async() => {
-        var alguien = usuarios[0] // 0xC9EE4f93134C0161fF79eA2C85AC29eb7Fb93752 //
-        await smartContract.cambiarEstado(await smartContract.getEnum());
-        assert.equal(await smartContract.estado.call(), 1); 
+        assert.ok(err instanceof Error)
     })
 
-    // it('should allow to withdraw money if there is enough', async () => {
-    //     await walletSmartContract.withdraw(theAccount, 20);
-    //     const balance = await walletSmartContract.wallet.call(theAccount);
-    //     assert.equal(balance, 80);
+    it("El owner puede cambiar el estado", async() => {
+        let nuevoEstado = Pregunta3.Estado.Bootstrap // Corresponde al número 3
+        await smartContract.cambiarEstado(nuevoEstado);
+        assert.equal(await smartContract.estado.call(), 3); 
+    })
+
+    // it("Crear una nueva pregunta", async() => {
+    //     let pregunta;
+    //     let unAutor = usuarios[2];
+    //     let textoPregunta = "¿Será la primera pregunta?";
+    //     let opciones = ["Si", "No", "No sabe no contesta"];
+    //     let respuesta = "Si";
+    //     let puntos = 10;
+
+    //     await smartContract.nuevaPregunta(unAutor, textoPregunta, opciones, respuesta, puntos);
+    //     pregunta = await smartContract.obtenerPregunta(1);
+
+    //     assert.equal(pregunta.textoPregunta, textoPregunta);
     // })
+
+    // it("El promedio de puntos de un usuario que no respondió nada", async() => {
+    //     let usuario = usuarios[9];
+    //     let promedio = await smartContract.promedioRespuestas(usuario);
+
+    //     assert.equal(promedio, 0);
+    // })
+
+    
 })

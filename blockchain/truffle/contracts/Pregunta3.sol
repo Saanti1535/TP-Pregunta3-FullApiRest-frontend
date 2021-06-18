@@ -11,31 +11,26 @@ contract Pregunta3 {
     }
 
     struct Pregunta {
-        int8 id;
         address autor;
         string textoPregunta;
         string[] opciones;
         string respuestaCorrecta;
-        int8 puntaje;
+        uint8 puntaje;
     }
 
-    Pregunta[] public preguntas;
+    mapping(int8 => Pregunta) public pregunta;
 
     struct Respuesta {
-        // address usuario;
         int8 idPregunta;
         string textoRespuesta;
-        int8 puntaje;
+        uint256 puntaje;
     }
 
-    mapping(address => int256[]) public puntaje;
-
-    Respuesta[] public respuestas;
-
+    mapping(address => Respuesta[]) public respuestas;
 
     enum Estado {Activo , Lectura , Responder , Bootstrap } Estado public estado;
 
-    int8 contadorIds = 0;
+    int8 contadorIds = 1;
 
     modifier esDuenio() {
         require(msg.sender == owner, "No tiene permisos");
@@ -74,50 +69,48 @@ contract Pregunta3 {
         return estado;
     }
 
-    // No está probado
-    // Si es un mapa... guiño guiño mapping(id, pregunta)
-    // preguntas[idPregunta]
     function obtenerPregunta(int8 idPregunta) public puedeConsultar() returns (Pregunta memory) {
-        for(uint256 i = 0; i < preguntas.length; i++) {
-            if(preguntas[i].id == idPregunta){
-                return preguntas[i];
-            }
-        }
+        return pregunta[idPregunta];
     }
 
-    // No está probado
-    function nuevaPregunta(string memory texto, string[] memory _opciones, string memory respuesta, int8 puntos) public puedeCrear{
+    function nuevaPregunta(address _autor, string memory texto, string[] memory _opciones, string memory respuesta, uint8 puntos) public puedeCrear{
+        Pregunta memory _pregunta;
+
+        _pregunta.autor = _autor;
+        _pregunta.textoPregunta = texto;
+        _pregunta.opciones = _opciones;
+        _pregunta.respuestaCorrecta = respuesta;
+        _pregunta.puntaje = puntos;
+
+        pregunta[contadorIds] = _pregunta;
         contadorIds++;
-        pregunta.id = contadorIds;
-        pregunta.autor = msg.sender;
-        pregunta.textoPregunta = texto;
-        pregunta.opciones = _opciones;
-        pregunta.respuestaCorrecta = respuesta;
-        pregunta.puntaje = puntos;
-        preguntas.push(pregunta);
     }
 
-    // Si es un mapa... guiño guiño mapping(id, respuesta)
-    // Ver mapas/listas respuestas
     function responderPregunta(int8 idPregunta, string memory respuesta) public puedeResponder noEsAutor(idPregunta){
-        int8 puntosObtenidos;
+        uint8 puntosObtenidos;
         Pregunta memory laPregunta = obtenerPregunta(idPregunta);
+
         if (keccak256(abi.encodePacked((laPregunta.respuestaCorrecta))) == keccak256(abi.encodePacked((respuesta)))){
             puntosObtenidos = laPregunta.puntaje;
         }else{
             puntosObtenidos = 0;
         }
-        respuestas.push(Respuesta(msg.sender, idPregunta, respuesta, puntosObtenidos));
+
+        respuestas[msg.sender].push(Respuesta(idPregunta, respuesta, puntosObtenidos));
     }
 
-    
-    function promedioRespuestas() returns (int8){
-        int256 acumulador=0;
-        for(int256 i = 0; i < puntaje[msg.sender].length; i++) {
-            acumulador += puntaje[msg.sender][i]
+    function promedioRespuestas(address usuario) public returns (uint256){
+        uint256 acumulador=0;
+
+        if(respuestas[usuario].length == 0){
+            return 0;
         }
+
+        for(uint256 i = 0; i < respuestas[usuario].length; i++) {
+            acumulador += respuestas[usuario][i].puntaje;
         }
-        return acumulador/puntaje[msg.sender].length
+        
+        return acumulador/respuestas[usuario].length;
     } 
     
 }
