@@ -91,26 +91,27 @@ contract('Falopa', async (usuarios) => {
 
         assert.equal(promedio, 0);
     })
+    
 
-    // it("El promedio de puntos de un usuario que respondio dos preguntas", async() => {
-    //     let unAutor = usuarios[2];
-    //     let textoPregunta = "¿Cuanto es 2+2?";
-    //     let opciones = ["5", "4", "3"];
-    //     let respuesta = "4";
-    //     let puntos = 5;
+    it("El promedio de puntos de un usuario que respondio dos preguntas", async() => {
+        let unAutor = usuarios[2];
+        let textoPregunta = "¿Cuanto es 2+2?";
+        let opciones = ["5", "4", "3"];
+        let respuesta = "4";
+        let puntos = 5;
 
-    //     await smartContract.nuevaPregunta(unAutor, textoPregunta, opciones, respuesta, puntos);
-    //     await smartContract.nuevaPregunta(unAutor, "¿Cuanto es 10 + 10", ["5", "4", "20"], "20", 15);
+        await smartContract.nuevaPregunta(unAutor, textoPregunta, opciones, respuesta, puntos);
+        await smartContract.nuevaPregunta(unAutor, "¿Cuanto es 10 + 10", ["5", "4", "20"], "20", 15);
 
-    //     let usuario = usuarios[9];
-    //     await smartContract.responderPregunta(1, "4")
-    //     await smartContract.responderPregunta(2, "20")
+        let usuario = usuarios[0];
+        await smartContract.responderPregunta(1, "4")
+        await smartContract.responderPregunta(2, "20")
 
-    //     let promedioEsperado = 10
-    //     let promedio = await smartContract.promedioRespuestas.call(usuario); // Ver por que el promedio no devuelve un numero, seguro
-    //                                                                         // sea por el usuario 
-    //     assert.equal(promedio, promedioEsperado);
-    // })
+        let promedioEsperado = 10
+        let promedio = await smartContract.promedioRespuestas.call(usuario); // Ver por que el promedio no devuelve un numero, seguro
+                                                                            // sea por el usuario 
+        assert.equal(promedio, promedioEsperado);
+    })
 
     
 })

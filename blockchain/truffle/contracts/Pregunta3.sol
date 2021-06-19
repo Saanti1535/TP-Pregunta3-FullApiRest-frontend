@@ -16,6 +16,7 @@ contract Pregunta3 {
         string[] opciones;
         string respuestaCorrecta;
         uint8 puntaje;
+        uint fechaCreacion;
     }
 
     mapping(int8 => Pregunta) public pregunta;
@@ -57,6 +58,10 @@ contract Pregunta3 {
         _;
     }
 
+    modifier estaActiva(int8 idPregunta) {
+        require(((block.timestamp - obtenerPregunta(idPregunta).fechaCreacion) / 60) < 5, "La pregunta no se encuentra activa");
+        _;
+    }
 
 
     /* FUNCIONES */
@@ -81,12 +86,13 @@ contract Pregunta3 {
         _pregunta.opciones = _opciones;
         _pregunta.respuestaCorrecta = respuesta;
         _pregunta.puntaje = puntos;
+        _pregunta.fechaCreacion = block.timestamp; 
 
         pregunta[contadorIds] = _pregunta;
         contadorIds++;
     }
 
-    function responderPregunta(int8 idPregunta, string memory respuesta) public puedeResponder noEsAutor(idPregunta){
+    function responderPregunta(int8 idPregunta, string memory respuesta) public puedeResponder noEsAutor(idPregunta) estaActiva(idPregunta) {
         uint8 puntosObtenidos;
         Pregunta memory laPregunta = obtenerPregunta(idPregunta);
 
