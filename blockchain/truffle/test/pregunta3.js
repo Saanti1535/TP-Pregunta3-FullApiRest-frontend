@@ -31,25 +31,85 @@ contract('Falopa', async (usuarios) => {
         assert.equal(await smartContract.estado.call(), 3); 
     })
 
-    // it("Crear una nueva pregunta", async() => {
-    //     let pregunta;
+    it("Crear una nueva pregunta", async() => {
+        let pregunta;
+        let unAutor = usuarios[2];
+        let textoPregunta = "¿Será la primera pregunta?";
+        let opciones = ["Si", "No", "No sabe no contesta"];
+        let respuesta = "Si";
+        let puntos = 10;
+
+        await smartContract.nuevaPregunta(unAutor, textoPregunta, opciones, respuesta, puntos);
+        pregunta = await smartContract.obtenerPregunta.call(1);
+
+        assert.equal(pregunta.textoPregunta, textoPregunta);
+    })
+
+    it("Un usuario responde una pregunta de forma correcta", async() => {
+        let pregunta;
+        let unAutor = usuarios[2];
+        let textoPregunta = "¿Cuanto es 2+2?";
+        let opciones = ["5", "4", "3"];
+        let respuesta = "4";
+        let puntos = 5;
+
+        await smartContract.nuevaPregunta(unAutor, textoPregunta, opciones, respuesta, puntos);
+        pregunta = await smartContract.obtenerPregunta.call(1);
+        
+        let respuestaDelUsuario = "4"
+
+        await smartContract.responderPregunta(1, respuestaDelUsuario)
+
+        assert.equal(pregunta.respuestaCorrecta, respuestaDelUsuario);
+    })
+
+    it("No se puede responder una pregunta estando el contrato en modo bootstrap", async() => {
+        let unAutor = usuarios[2];
+        let textoPregunta = "¿Cuanto es 2+2?";
+        let opciones = ["5", "4", "3"];
+        let respuesta = "4";
+        let puntos = 5;
+
+        await smartContract.cambiarEstado(3)
+        await smartContract.nuevaPregunta(unAutor, textoPregunta, opciones, respuesta, puntos);
+        
+        let respuestaDelUsuario = "4"
+
+        try {
+            await smartContract.responderPregunta(1, respuestaDelUsuario)
+        } catch (error) {
+            err = error
+        }
+
+        assert.ok(err instanceof Error)
+        assert(err, "No puede realizarse")
+    })
+
+    it("El promedio de puntos de un usuario que no respondió nada", async() => {
+        let usuario = usuarios[9];
+        let promedio = await smartContract.promedioRespuestas.call(usuario);
+
+        assert.equal(promedio, 0);
+    })
+
+    // it("El promedio de puntos de un usuario que respondio dos preguntas", async() => {
     //     let unAutor = usuarios[2];
-    //     let textoPregunta = "¿Será la primera pregunta?";
-    //     let opciones = ["Si", "No", "No sabe no contesta"];
-    //     let respuesta = "Si";
-    //     let puntos = 10;
+    //     let textoPregunta = "¿Cuanto es 2+2?";
+    //     let opciones = ["5", "4", "3"];
+    //     let respuesta = "4";
+    //     let puntos = 5;
 
     //     await smartContract.nuevaPregunta(unAutor, textoPregunta, opciones, respuesta, puntos);
-    //     pregunta = await smartContract.obtenerPregunta(1);
+    //     await smartContract.nuevaPregunta(unAutor, "¿Cuanto es 10 + 10", ["5", "4", "20"], "20", 15);
 
-    //     assert.equal(pregunta.textoPregunta, textoPregunta);
-    // })
-
-    // it("El promedio de puntos de un usuario que no respondió nada", async() => {
     //     let usuario = usuarios[9];
-    //     let promedio = await smartContract.promedioRespuestas(usuario);
+    //     await smartContract.responderPregunta(1, "4")
+    //     await smartContract.responderPregunta(2, "20")
 
-    //     assert.equal(promedio, 0);
+    //     let promedioEsperado = 10
+    //     let promedio = await smartContract.promedioRespuestas.call(usuario); // Ver por que el promedio no devuelve un numero, seguro
+    //                                                                         // sea por el usuario 
+    //     assert.equal(promedio, promedioEsperado);
     // })
 
     
