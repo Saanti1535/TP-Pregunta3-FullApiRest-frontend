@@ -1,0 +1,77 @@
+=============== Jun 16, 2021 (-03) ===============
+17:49:49.438209 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+17:49:49.445859 db@open opening
+17:49:49.447462 version@stat F·[] S·0B[] Sc·[]
+17:49:49.450931 db@janitor F·2 G·0
+17:49:49.451471 db@open done T·5.6118ms
+17:49:49.453797 db@close closing
+17:49:49.454400 db@close done T·602.8µs
+=============== Jun 16, 2021 (-03) ===============
+17:51:30.640976 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+17:51:30.641553 version@stat F·[] S·0B[] Sc·[]
+17:51:30.641553 db@open opening
+17:51:30.642110 journal@recovery F·1
+17:51:30.645454 journal@recovery recovering @1
+17:51:30.651112 memdb@flush created L0@2 N·10 S·568B "H\xfb\xb8..+\xaaY,v3":"r\x00\x00..+\xaaY,v5"
+17:51:30.654253 version@stat F·[1] S·568B[568B] Sc·[0.25]
+17:51:30.664557 db@janitor F·3 G·0
+17:51:30.664557 db@open done T·23.0035ms
+18:36:16.374106 db@close closing
+18:36:16.375100 db@close done T·993.7µs
+=============== Jun 16, 2021 (-03) ===============
+20:56:12.851173 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+20:56:12.863075 version@stat F·[1] S·568B[568B] Sc·[0.25]
+20:56:12.863075 db@open opening
+20:56:12.863695 journal@recovery F·1
+20:56:12.864206 journal@recovery recovering @3
+20:56:13.021142 memdb@flush created L0@5 N·26712 S·1MiB "\x00\x03\x98..:<F,v13692":"\xff\xfa\xab..\x05\x9bS,v19291"
+20:56:13.021707 version@stat F·[2] S·1MiB[1MiB] Sc·[0.50]
+20:56:13.110013 db@janitor F·4 G·0
+20:56:13.110013 db@open done T·246.9383ms
+20:56:13.118404 db@close closing
+20:56:13.118404 db@close done T·0s
+=============== Jun 16, 2021 (-03) ===============
+20:57:12.772206 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+20:57:12.772874 version@stat F·[2] S·1MiB[1MiB] Sc·[0.50]
+20:57:12.772874 db@open opening
+20:57:12.772874 journal@recovery F·1
+20:57:12.775256 journal@recovery recovering @6
+20:57:12.791327 memdb@flush created L0@8 N·1 S·304B "eth..+\xaaY,v26725":"eth..+\xaaY,v26725"
+20:57:12.793600 version@stat F·[3] S·1MiB[1MiB] Sc·[0.75]
+20:57:12.842974 db@janitor F·5 G·0
+20:57:12.843594 db@open done T·70.7197ms
+21:58:30.149521 db@close closing
+21:58:30.239162 db@close done T·89.6408ms
+=============== Jun 16, 2021 (-03) ===============
+21:59:04.644112 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+21:59:04.644112 version@stat F·[3] S·1MiB[1MiB] Sc·[0.75]
+21:59:04.645112 db@open opening
+21:59:04.645112 journal@recovery F·1
+21:59:04.645112 journal@recovery recovering @9
+21:59:04.705091 memdb@flush created L0@11 N·5976 S·296KiB "\x00%\xdd..\xef]\x0e,v31122":"\xfe\u007f\x0f..\xcch\x0e,v31078"
+21:59:04.706268 version@stat F·[4] S·1MiB[1MiB] Sc·[1.00]
+21:59:04.806308 db@janitor F·6 G·0
+21:59:04.806308 db@open done T·161.1952ms
+21:59:04.808308 db@close closing
+21:59:04.808308 db@close done T·0s
+=============== Jun 16, 2021 (-03) ===============
+21:59:56.241727 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+21:59:56.241727 version@stat F·[4] S·1MiB[1MiB] Sc·[1.00]
+21:59:56.241727 db@open opening
+21:59:56.241727 journal@recovery F·1
+21:59:56.245725 journal@recovery recovering @12
+21:59:56.283132 memdb@flush created L0@14 N·1 S·304B "eth..+\xaaY,v32704":"eth..+\xaaY,v32704"
+21:59:56.286919 version@stat F·[5] S·1MiB[1MiB] Sc·[1.25]
+21:59:56.362766 db@janitor F·7 G·0
+21:59:56.362766 db@open done T·121.0395ms
+21:59:56.365281 table@compaction L0·5 -> L1·0 S·1MiB Q·32705
+21:59:56.595106 table@build created L1@17 N·20801 S·1MiB "\x00\x03\x98..:<F,v13692":"\xff\xfa\xab..\x05\x9bS,v19291"
+21:59:56.595106 version@stat F·[0 1] S·1MiB[0B 1MiB] Sc·[0.00 0.01]
+21:59:56.627446 table@compaction committed F-4 S-394KiB Ke·0 D·11899 T·262.1658ms
+21:59:56.629072 table@remove removed @11
+21:59:56.629072 table@remove removed @8
+21:59:56.630173 table@remove removed @5
+21:59:56.630173 table@remove removed @2
+=============== Jun 17, 2021 (-03) ===============
+00:58:13.623985 db@close closing
+00:58:13.664986 db@close done T·41.0009ms
