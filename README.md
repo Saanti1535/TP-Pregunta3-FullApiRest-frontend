@@ -1,27 +1,28 @@
+# UNIVERSIDAD NACIONAL DE SAN MARTÍN - PROGRAMACIÓN CON HERRAMIENTAS MODERNAS - 2021
+Subject's website: https://phm.uqbar-project.org/
+
+## Members:
+<ul>
+  <li>    Lopez Roth, Santiago   &nbsp; - &emsp; <a href="https://github.com/Saanti1535">Github Profile</a> &ensp;  |&ensp; <a href="https://www.linkedin.com/in/dev-lopezroth/">LinkedIn</a></li>
+  
+<li>Lorenzo, Santiago&emsp;&ensp;&nbsp;&nbsp; - &emsp; <a href="https://github.com/santil99">Github Profile</a> &ensp; |&ensp; <a href="https://www.linkedin.com/in/santiagolorenzo99/">LinkedIn</a></li>
+  
+<li>Ramos, Nahuel &emsp;&emsp;&emsp;        -  &emsp; <a href="https://github.com/Naahueeh">Github Profile</a>
+</ul>
+
+## Checkpoints requests (each identified by it's tag) 
+<ul>
+  <li>'Entrega 0' -> https://docs.google.com/document/d/1rznl18Ft-x85S7plUFmvDEis0WYSAR6uK4gBM6ehwqY/edit</li>
+  <li>'Entraga 1' -> https://docs.google.com/document/d/1pcsJ1ghQIYqNFoPyk0xtxPk_D2ma0y1Ua1qHCppri4c/edit</li>
+  <li>'Entrega 2' -> https://docs.google.com/document/d/1PJEMJ11ogegNrRAH6WeboImPkzM24sqBrPoCl2NEsJI/edit</li>
+  <li>'Entrega 3' -> https://docs.google.com/document/d/10ImEtGNmvEEl1NPrZmTTorHhfAvKOFnpEEgj2Kx-R5Y/edit</li>
+  <li>'Entrega 4' -> https://docs.google.com/document/d/1IhT_WR9Fpwn0q-aJyoBfLD6RwAcGimx6574-h1xzUxk/edit</li>
+</ul>
+
+## What is in here
+~ Coming soon... 
+
+
+
 # Pregunta3
-
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.4.
-
-## Development server
-
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
