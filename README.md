@@ -5,9 +5,9 @@ Subject's website: https://phm.uqbar-project.org/
 <ul>
   <li>    Lopez Roth, Santiago   &nbsp; - &emsp; <a href="https://github.com/Saanti1535">Github Profile</a> &ensp;  |&ensp; <a href="https://www.linkedin.com/in/dev-lopezroth/">LinkedIn</a></li>
   
-<li>Lorenzo, Santiago&emsp;&ensp;&nbsp;&nbsp; - &emsp; <a href="https://github.com/santil99">Github Profile</a> &ensp; |&ensp; <a href="https://www.linkedin.com/in/santiagolorenzo99/">LinkedIn</a></li>
+  <li>Lorenzo, Santiago&emsp;&ensp;&nbsp;&nbsp; - &emsp; <a href="https://github.com/santil99">Github Profile</a> &ensp; |&ensp; <a href="https://www.linkedin.com/in/santiagolorenzo99/">LinkedIn</a></li>
   
-<li>Ramos, Nahuel &emsp;&emsp;&emsp;        -  &emsp; <a href="https://github.com/Naahueeh">Github Profile</a>
+  <li>Ramos, Nahuel &emsp;&emsp;&emsp;        -  &emsp; <a href="https://github.com/Naahueeh">Github Profile</a>
 </ul>
 
 ## Checkpoints requests (each identified by it's tag) 
@@ -20,9 +20,48 @@ Subject's website: https://phm.uqbar-project.org/
 </ul>
 
 ## What is in here
-~ Coming soon... 
+This is the client side of a full rest-api application. Here is the [server side.](https://github.com/Saanti1535/TP-Pregunta3-FullApiRest-backend)
+
+### Welcome to Pregunta3 | Introduction
+In this app, you can create and edit your own questions. Even answer someone else's questions.\
+You can't create or delete users. To do this, you should make it in 'bootstrap' file on the server-side repository.
+
+In each tag, you can find different requirements.  
+The most important one, for this side of the app, is 'Entrega 0'. There it was defined how the app ought to look.
+
+#### Here we have differents views:
+- Login
+- Home (where questions are showed)
+- User profile
+- Answer question 
+- New/edit question  
+
+Each one has its own components in order to reuse them when it is necessary.  
 
 
+#### In addition, there are different services to manage communication with the server:
+- 'Usuario service' 
+- 'Pregunta service'
+- 'Log modificaciones service'
 
-# Pregunta3
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.4.
+
+## How to run the app
+### Client side
+Clonning the app
+```
+git clone https://github.com/Saanti1535/TP-Pregunta3-FullApiRest-frontend.git
+```
+
+
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.4. In order to run it, you must open a new terminal, go to the project root folder and type: 
+```
+npm install
+ng s -o 
+```
+
+### Server side
+Check it out in the [server-side repository.](https://github.com/Saanti1535/TP-Pregunta3-FullApiRest-backend)
+\
+\
+\
+You're ready to go. Try it yourself! 
